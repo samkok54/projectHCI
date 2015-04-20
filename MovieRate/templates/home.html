@@ -23,6 +23,12 @@
                      <input type="hidden" value="send_more..." name="send_view_detail_{{ movie.id }}" >
                      {% csrf_token %}        
                  </form>
+                  <FORM method="POST" action="/">
+                     <INPUT Type="submit" VALUE="delete" id="button_d" >      
+                     <INPUT Type = "hidden" value ="delete" name = 'delete'>
+                     <INPUT Type = "hidden" value ="{{ movie.id }}" name = 'id_delete'>
+                     {% csrf_token %}
+                 </FORM>
                 </td>
                 {% if forloop.counter|divisibleby:5 %}
                 </tr><tr>

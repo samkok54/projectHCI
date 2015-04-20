@@ -17,6 +17,11 @@ def home_page(request):
         return redirect('/')
     if (request.method == 'POST' and request.POST.get('send_add_data','') == 'send_Add Movie' ):
         return redirect('/')
+    if(request.method == 'POST' and request.POST.get(
+                                    'delete', '') == 'delete'):
+        id_data = request.POST['id_delete']
+        Movie.objects.get(pk=id_data).delete()
+        return redirect('/')
     movies = Movie.objects.all()
     return render(request, 'home.html', {
         'movies': movies,
