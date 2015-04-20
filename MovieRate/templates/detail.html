@@ -23,5 +23,11 @@ Rate:    {{ movie_.rate }}
 	    <br>
             {% csrf_token %}
         </form>
+         <form method="POST" action="/movie/{{movie_.id}}/edit/">
+            <input type="submit" value="edit" id="Edit" >
+            <input type="hidden" value="send_edit" name="send_Edit" >
+	    <br>
+            {% csrf_token %}
+        </form>
     </body>
 </html>

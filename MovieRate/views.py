@@ -27,6 +27,11 @@ def home_page(request):
         'movies': movies,
                   })
 
+def edit_page(request, movie_id):
+    if (request.method == 'POST' and request.POST.get('send_Edit','') == 'send_edit'):
+        movie_ = Movie.objects.get(id=movie_id)
+        return render(request, 'edit.html', {'movie_': movie_})
+    return redirect('/detail')
 def add_page(request):
 
     if request.method == 'POST':

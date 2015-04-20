@@ -17,7 +17,7 @@
             {% for movie in movies %}
                 {% if forloop.counter|divisibleby:5 %}
                 {% endif%}
-                <td> <img src=" {{ movie.poster }} " width=200 > <br>{{ movie.name }} <br>{{ movie.rate }}
+                <td> <img src=" {{ movie.poster }} " width=200 height=300> <br>{{ movie.name }} <br>{{ movie.rate }}
                  <form method="POST" action="/movie_detail/{{ movie.id }}/">
                      <input type="submit" value="more..." id="view_detail_{{ movie.id }}" >
                      <input type="hidden" value="send_more..." name="send_view_detail_{{ movie.id }}" >
