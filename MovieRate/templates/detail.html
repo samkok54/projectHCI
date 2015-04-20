@@ -18,7 +18,8 @@ Add Date:    {{ movie_.add_date }}
 Rate:    {{ movie_.rate }}
 <br>
         <form method="POST" action="/">
-            <input id="back" type="submit" value="Back">
+            <input type="submit" value="Back" id="back" >
+            <input type="hidden" value="Back_send" name="back_send" >
 	    <br>
             {% csrf_token %}
         </form>

@@ -2,7 +2,7 @@ from django.shortcuts import redirect, render
 from MovieRate.models import Movie
 
 def home_page(request):
-    if request.method == 'POST' and request.POST.get('submit_data','') == 'Add Detail' :
+    if (request.method == 'POST' and request.POST.get('Add_send_Detail','') == 'submit_send_data'):
         if request.POST['name_text'] != '' :
             Movie.objects.create(name=request.POST['name_text'],
                              detail=request.POST['detail_text'],
@@ -13,7 +13,9 @@ def home_page(request):
                              add_date='',
                               )
         return redirect('/')
-    if request.method == 'POST':
+    if (request.method == 'POST' and request.POST.get('back_send','') == 'Back_send' ):
+        return redirect('/')
+    if (request.method == 'POST' and request.POST.get('send_add_data','') == 'send_Add Movie' ):
         return redirect('/')
     movies = Movie.objects.all()
     return render(request, 'home.html', {

@@ -6,7 +6,8 @@
         <h1>Movie Rate</h1>
         <form method="POST" action="/add_movie">
             <!-- <input name="name_text" id="id_new_name" placeholder="New Movie Name" /> -->
-            <input id="add_data" type="submit" value="Add Movie">
+            <input type="submit" value="Add Movie" id="add_data" >
+            <input type="hidden" value="send_Add Movie" name="send_add_data" >
 	    <br>
             {% csrf_token %}
         </form>
@@ -18,7 +19,8 @@
                 {% endif%}
                 <td> <img src=" {{ movie.poster }} " width=200 > <br>{{ movie.name }} <br>{{ movie.rate }}
                  <form method="POST" action="/movie_detail/{{ movie.id }}/">
-                     <input id="view_detail" type="submit" value="more...">
+                     <input type="submit" value="more..." id="view_detail_{{ movie.id }}" >
+                     <input type="hidden" value="send_more..." name="send_view_detail_{{ movie.id }}" >
                      {% csrf_token %}        
                  </form>
                 </td>

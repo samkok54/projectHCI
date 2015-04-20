@@ -14,12 +14,14 @@ Detail:    <input name="detail_text" id="id_new_detail" placeholder="Add Details
 <br>
 Poster Image URL:    <input name="poster_url" id="id_new_detail" placeholder="Add Poster URL" />
 <br>
-            <input id="submit_data" type="submit" value="Add Detail">
+            <input type="submit" value="Add Detail"        id="submit_data"  >
+            <input type="hidden" value="submit_send_data"  name="Add_send_Detail">
 	    <br>
             {% csrf_token %}
         </form>
         <form method="POST" action="/">
-            <input id="back" type="submit" value="Back">
+            <input type="submit" value="Back" id="back" >
+            <input type="hidden" value="Back_send" name="back_send" >
 	    <br>
             {% csrf_token %}
         </form>
