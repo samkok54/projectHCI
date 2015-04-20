@@ -1,0 +1,26 @@
+<html>
+    <head>
+        <title>Movie Rate App</title>
+    </head>
+    <body>
+        <h1>Detail of {{ movie_.name }} </h1>
+
+Name:  {{ movie_.name }}
+<br>
+Release Date:    {{ movie_.release_date }}
+<br>
+Detail:    {{ movie_.detail }}
+<br>
+Poster Image URL:    <img src=" {{ movie_.poster }} " width=200 >
+<br>
+Add Date:    {{ movie_.add_date }}
+<br>
+Rate:    {{ movie_.rate }}
+<br>
+        <form method="POST" action="/">
+            <input id="back" type="submit" value="Back">
+	    <br>
+            {% csrf_token %}
+        </form>
+    </body>
+</html>

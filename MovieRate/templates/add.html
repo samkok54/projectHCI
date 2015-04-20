@@ -1,0 +1,27 @@
+<html>
+    <head>
+        <title>Movie Rate App</title>
+    </head>
+    <body>
+        <h1>Add New Movie</h1>
+
+        <form method="POST" action="/">
+Name:   <input name="name_text" id="id_new_name" placeholder="New Movie Name" />
+<br>
+Release Date:    <input name="date_text" id="id_new_date" placeholder="Add Release Date" />
+<br>
+Detail:    <input name="detail_text" id="id_new_detail" placeholder="Add Details" />
+<br>
+Poster Image URL:    <input name="poster_url" id="id_new_detail" placeholder="Add Poster URL" />
+<br>
+            <input id="submit_data" type="submit" value="Add Detail">
+	    <br>
+            {% csrf_token %}
+        </form>
+        <form method="POST" action="/">
+            <input id="back" type="submit" value="Back">
+	    <br>
+            {% csrf_token %}
+        </form>
+    </body>
+</html>
