@@ -6,7 +6,7 @@
         <h1>Movie Rate</h1>
         <form method="POST" action="/add_movie">
             <!-- <input name="name_text" id="id_new_name" placeholder="New Movie Name" /> -->
-            <input id="submit_data" type="submit" value="Add Movie">
+            <input id="add_data" type="submit" value="Add Movie">
 	    <br>
             {% csrf_token %}
         </form>
@@ -16,8 +16,12 @@
             {% for movie in movies %}
                 {% if forloop.counter|divisibleby:5 %}
                 {% endif%}
-                <td> <img src=" {{ movie.poster }} " width=200 > <br>{{ movie.name }} <br>{{ movie.rate }} </td>
-
+                <td> <img src=" {{ movie.poster }} " width=200 > <br>{{ movie.name }} <br>{{ movie.rate }}
+                 <form method="POST" action="/movie_detail/{{ movie.id }}/">
+                     <input id="view_detail" type="submit" value="more...">
+                     {% csrf_token %}        
+                 </form>
+                </td>
                 {% if forloop.counter|divisibleby:5 %}
                 </tr><tr>
                 {% endif%}
