@@ -22,8 +22,9 @@ Detail:    <input name="detail_text" id="id_new_detail" placeholder="{{movie_.de
 <br>
 Poster Image URL:    <input name="poster_url" id="id_new_pic" placeholder="{{movie_.poster}}" />
 <br>
-            <input type="submit" value="Add Detail"        id="submit_data"  >
-            <input type="hidden" value="submit_send_data"  name="Add_send_Detail">
+            <input type="submit" value="Update"        id="submit_update_data"  >
+            <input type="hidden" value="submit_send_update"  name="Update_send_Detail">
+            <INPUT Type = "hidden" value ="{{ movie_.id }}" name = 'id_update'>
 	    <br>
             {% csrf_token %}
         </form>
