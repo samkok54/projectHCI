@@ -42,6 +42,7 @@ def add_page(request):
 def movie_detail_page(request, movie_id):
     movie_ = Movie.objects.get(id=movie_id)
     comments = Comment.objects.filter(movie=movie_)
+    # กรณีใส่คอมเมนต์
     if (request.method == 'POST' and request.POST.get('send_comment','') == 'send_Comment'):
         Comment.objects.create(
                                       user = request.POST['user_name'],
@@ -49,6 +50,14 @@ def movie_detail_page(request, movie_id):
                                       date = datetime.now(),
                                       like = 0, 
                                       movie = movie_,)
+        return redirect('/movie_detail/%d' % int(movie_id))
+    # กรณีกดไลค์
+    if(request.method == 'POST' and request.POST.get('send_like', '') == 'submit_like'):
+        id_comment = request.POST['id_send_like']
+        comment_ = Comment.objects.get(id=id_comment)
+        add_like = int(comment_.like) + 1
+        comment_.like = add_like
+        comment_.save()
         return redirect('/movie_detail/%d' % int(movie_id))
     return render(request, 'detail.html', {'movie_': movie_,'comments': comments})
 

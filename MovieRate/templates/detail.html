@@ -25,9 +25,12 @@ Rate:    {{ movie_.rate }}
                 comment: {{ comment.comment_text }}<br>
                 date: {{ comment.date }}<br>
                 Like: {{ comment.like }}<br>
-                
+        <form method="POST" action="/movie_detail/{{movie_.id}}/">
             <input type="submit" value="LIKE"        id="submit_like"  >
             <input type="hidden" value="submit_like"  name="send_like">
+            <input type="hidden" value="{{ comment.id }}"  name="id_send_like">
+            {% csrf_token %}
+        </form>
 <br><br>
             {% endfor %}
         {% endif%}
