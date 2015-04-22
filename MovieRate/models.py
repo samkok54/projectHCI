@@ -1,4 +1,5 @@
 from django.db import models
+from datetime import datetime
 
 class Movie(models.Model):
     name = models.TextField(default='')
@@ -8,3 +9,11 @@ class Movie(models.Model):
     viewer = models.IntegerField(default=0)
     poster = models.URLField(default='')
     add_date = models.TextField(default='')
+
+
+class Comment(models.Model):
+    movie = models.ForeignKey(Movie,default=None)
+    user = models.TextField(default='')
+    comment_text = models.TextField(default='')
+    date = models.DateTimeField(default=datetime.now, blank=True)
+    like = models.IntegerField(default=0)

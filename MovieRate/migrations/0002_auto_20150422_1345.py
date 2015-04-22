@@ -2,6 +2,7 @@
 from __future__ import unicode_literals
 
 from django.db import models, migrations
+import datetime
 
 
 class Migration(migrations.Migration):
@@ -11,6 +12,20 @@ class Migration(migrations.Migration):
     ]
 
     operations = [
+        migrations.CreateModel(
+            name='Comment',
+            fields=[
+                ('id', models.AutoField(primary_key=True, serialize=False, verbose_name='ID', auto_created=True)),
+                ('user', models.TextField(default='')),
+                ('comment_text', models.TextField(default='')),
+                ('date', models.DateTimeField(default=datetime.datetime.now, blank=True)),
+                ('like', models.IntegerField(default=0)),
+                ('movie', models.ForeignKey(default=None, to='MovieRate.Movie')),
+            ],
+            options={
+            },
+            bases=(models.Model,),
+        ),
         migrations.AddField(
             model_name='movie',
             name='add_date',

@@ -1,5 +1,6 @@
 from django.shortcuts import redirect, render
-from MovieRate.models import Movie
+from MovieRate.models import Movie,Comment
+from datetime import datetime 
 
 def home_page(request):
     if (request.method == 'POST' and request.POST.get('Add_send_Detail','') == 'submit_send_data'):
@@ -32,13 +33,22 @@ def edit_page(request, movie_id):
         movie_ = Movie.objects.get(id=movie_id)
         return render(request, 'edit.html', {'movie_': movie_})
     return redirect('/detail')
-def add_page(request):
 
+def add_page(request):
     if request.method == 'POST':
         return redirect('/add_movie')
     return render(request, 'add.html',)
 
 def movie_detail_page(request, movie_id):
     movie_ = Movie.objects.get(id=movie_id)
-    return render(request, 'detail.html', {'movie_': movie_})
+    comments = Comment.objects.filter(movie=movie_)
+    if (request.method == 'POST' and request.POST.get('send_comment','') == 'send_Comment'):
+        Comment.objects.create(
+                                      user = request.POST['user_name'],
+                                      comment_text = request.POST['comment_text'],
+                                      date = datetime.now(),
+                                      like = 0, 
+                                      movie = movie_,)
+        return redirect('/movie_detail/%d' % int(movie_id))
+    return render(request, 'detail.html', {'movie_': movie_,'comments': comments})
 

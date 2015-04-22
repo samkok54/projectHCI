@@ -17,6 +17,32 @@ Add Date:    {{ movie_.add_date }}
 <br>
 Rate:    {{ movie_.rate }}
 <br>
+
+        <h2>COMMENTS</h2>
+        {% if comments != None %}
+            {% for comment in comments %}
+                Name: {{ comment.user }}<br>
+                comment: {{ comment.comment_text }}<br>
+                date: {{ comment.date }}<br>
+                Like: {{ comment.like }}<br>
+                
+            <input type="submit" value="LIKE"        id="submit_like"  >
+            <input type="hidden" value="submit_like"  name="send_like">
+<br><br>
+            {% endfor %}
+        {% endif%}
+
+        <form method="POST" action="/movie_detail/{{movie_.id}}/">
+            Name:<input name="user_name" id="id_user_name" placeholder="Your Name" />
+            <br>
+            comment:<input name="comment_text" id="id_new_date" placeholder="Comment this movie" />
+            <br>
+            <input type="submit" value="Comment"        id="id_comment"  >
+            <input type="hidden" value="send_Comment"  name="send_comment">
+	    <br>
+            {% csrf_token %}
+        </form>
+
         <form method="POST" action="/">
             <input type="submit" value="Back" id="back" >
             <input type="hidden" value="Back_send" name="back_send" >
