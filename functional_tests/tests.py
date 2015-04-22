@@ -52,7 +52,9 @@ class NewVisitorTest(LiveServerTestCase):
         )
         # input data of movie Fast And Furious 7
         inputname.send_keys('Fast And Furious 7')
-        #inputdate.click()
+        inputdate.click()
+        inputdate.send_keys(Keys.ESCAPE)
+        inputdate.send_keys('04/01/2015')
         inputdetail.send_keys('action')
         inputURL.send_keys('http://www.majorcineplex.com/uploads/movie/868/thumb_868.jpg')
         self.browser.find_element_by_id('submit_data').click()
@@ -60,7 +62,7 @@ class NewVisitorTest(LiveServerTestCase):
         # back to homepage
         header_text = self.browser.find_element_by_tag_name('h1').text
         self.assertIn('Movie Rate', header_text)
-        self.check_for_row('Fast And Furious 7', 'id_list_table')
+        self.check_for_row('Fast And Furious 7\n0.0', 'id_list_table')
 
 if __name__ == '__main__':
     unittest.main(warnings='ignore')
