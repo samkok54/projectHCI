@@ -32,6 +32,7 @@ def edit_page(request, movie_id):
     if (request.method == 'POST' and request.POST.get('send_Edit','') == 'send_edit'):
         movie_ = Movie.objects.get(id=movie_id)
         return render(request, 'edit.html', {'movie_': movie_})
+    # แก้ไข รายละเอียดหนัง
     if (request.method == 'POST' and request.POST.get('Update_send_Detail','') == 'submit_send_update'):
         #movie_id = request.POST['id_update']
         movie_ = Movie.objects.get(id=movie_id)
