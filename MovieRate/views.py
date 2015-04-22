@@ -2,6 +2,7 @@ from django.shortcuts import redirect, render
 from MovieRate.models import Movie,Comment
 from datetime import datetime 
 from MovieRate.forms import MovieForm
+
 def home_page(request):
     if (request.method == 'POST' and request.POST.get('Add_send_Detail','') == 'submit_send_data'):
         if request.POST['name_text'] != '' :
@@ -11,7 +12,7 @@ def home_page(request):
                              rate=0,
                              viewer=0,
                              poster=request.POST['poster_url'],
-                             add_date='',
+                             add_date=datetime.now(),
                               )
         return redirect('/')
     if (request.method == 'POST' and request.POST.get('back_send','') == 'Back_send' ):
@@ -36,12 +37,16 @@ def edit_page(request, movie_id):
     if (request.method == 'POST' and request.POST.get('Update_send_Detail','') == 'submit_send_update'):
         #movie_id = request.POST['id_update']
         movie_ = Movie.objects.get(id=movie_id)
-        movie_.name = request.POST['name_text']
-        movie_.detail = request.POST['detail_text']
-        movie_.release_date=request.POST['date_text']
-        movie_.poster=request.POST['poster_url']
+        if request.POST['name_text'] != '':
+            movie_.name = request.POST['name_text']
+        if request.POST['detail_text'] != '':
+            movie_.detail = request.POST['detail_text']
+        if request.POST['date_text'] != '':
+            movie_.release_date=request.POST['date_text']
+        if request.POST['poster_url'] != '':
+            movie_.poster=request.POST['poster_url']
         movie_.save()
-        return redirect('/detail')
+        return redirect('/movie_detail/%d' % int(movie_.id))
     return redirect('/detail')
 
 def add_page(request):
@@ -54,13 +59,14 @@ def movie_detail_page(request, movie_id):
     comments = Comment.objects.filter(movie=movie_)
     # กรณีใส่คอมเมนต์
     if (request.method == 'POST' and request.POST.get('send_comment','') == 'send_Comment'):
-        Comment.objects.create(
+        if request.POST['user_name'] != '' and request.POST['comment_text'] != '' :
+            Comment.objects.create(
                                       user = request.POST['user_name'],
                                       comment_text = request.POST['comment_text'],
                                       date = datetime.now(),
                                       like = 0, 
                                       movie = movie_,)
-        return redirect('/movie_detail/%d' % int(movie_id))
+            return redirect('/movie_detail/%d' % int(movie_id))
     # กรณีกดไลค์
     if(request.method == 'POST' and request.POST.get('send_like', '') == 'submit_like'):
         id_comment = request.POST['id_send_like']

@@ -8,7 +8,7 @@ class Movie(models.Model):
     rate = models.FloatField(default=0)
     viewer = models.IntegerField(default=0)
     poster = models.URLField(default='')
-    add_date = models.TextField(default='')
+    add_date = models.DateTimeField(default=datetime.now, blank=True)
 
 
 class Comment(models.Model):
