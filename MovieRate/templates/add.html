@@ -1,9 +1,18 @@
 <html>
     <head>
         <title>Movie Rate App</title>
+        <link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery-ui.css" rel="stylesheet" type="text/css"/>
+        <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
+        <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js"></script>
+        <script>
+            $(document).ready(function() {
+                  $("#id_new_date").datepicker();
+            });
+        </script>
     </head>
     <body>
         <h1>Add New Movie</h1>
+
 
         <form method="POST" action="/">
 Name:   <input name="name_text" id="id_new_name" placeholder="New Movie Name" />
