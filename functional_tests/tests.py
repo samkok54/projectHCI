@@ -12,9 +12,9 @@ class NewVisitorTest(LiveServerTestCase):
     def tearDown(self):
         self.browser.quit()
 
-    def check_for_row(self, row_text, idT):
+    def check_for_row(self, row_text, idT,tag):
         table = self.browser.find_element_by_id(idT)
-        rows = table.find_elements_by_tag_name('td')
+        rows = table.find_elements_by_tag_name(tag)
         self.assertIn(row_text, [row.text for row in rows])
 
     def test_add_new_movie_and_view_movie_detail_page(self):
@@ -62,7 +62,14 @@ class NewVisitorTest(LiveServerTestCase):
         # back to homepage
         header_text = self.browser.find_element_by_tag_name('h1').text
         self.assertIn('Movie Rate', header_text)
-        self.check_for_row('Fast And Furious 7\n0.0', 'id_list_table')
+        self.check_for_row('Fast And Furious 7\n0.0', 'id_list_table','td')
+        self.browser.find_element_by_id('view_detail_1').click()
+        
+        header_text = self.browser.find_element_by_tag_name('h1').text
+        self.assertIn('Detail of Fast And Furious 7', header_text)
+        self.check_for_row('Name: Fast And Furious 7', 'id_list_table','tr')
+        self.check_for_row('Release Date: 04/01/2015', 'id_list_table','tr')
+        self.check_for_row('Detail: action', 'id_list_table','tr')
 
 if __name__ == '__main__':
     unittest.main(warnings='ignore')

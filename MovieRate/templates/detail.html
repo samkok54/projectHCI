@@ -4,19 +4,20 @@
     </head>
     <body>
         <h1>Detail of {{ movie_.name }} </h1>
-
-Name:  {{ movie_.name }}
-<br>
-Release Date:    {{ movie_.release_date }}
-<br>
-Detail:    {{ movie_.detail }}
-<br>
-Poster Image URL:    <img src=" {{ movie_.poster }} " width=200 >
-<br>
-Add Date:    {{ movie_.add_date }}
-<br>
-Rate:    {{ movie_.rate }}
-<br>
+<table id="id_list_table" align="center">
+<tr><td>
+Name: </td><td> {{ movie_.name }}</td></tr>
+<tr><td>
+Release Date:  </td><td>  {{ movie_.release_date }}</td></tr>
+<tr><td>
+Detail:  </td><td>  {{ movie_.detail }}</td></tr>
+<tr><td>
+Poster Image URL:  </td><td>  <img src=" {{ movie_.poster }} " width=200 ></td></tr>
+<tr><td>
+Add Date: </td><td>   {{ movie_.add_date }}</td></tr>
+<tr><td>
+Rate:  </td><td>  {{ movie_.rate }}</td></tr>
+</table>
 
         <h2>COMMENTS</h2>
         {% if comments != None %}
@@ -25,9 +26,12 @@ Rate:    {{ movie_.rate }}
                 comment: {{ comment.comment_text }}<br>
                 date: {{ comment.date }}<br>
                 Like: {{ comment.like }}<br>
-                
+        <form method="POST" action="/movie_detail/{{movie_.id}}/">
             <input type="submit" value="LIKE"        id="submit_like"  >
             <input type="hidden" value="submit_like"  name="send_like">
+            <input type="hidden" value="{{ comment.id }}"  name="id_send_like">
+            {% csrf_token %}
+        </form>
 <br><br>
             {% endfor %}
         {% endif%}
