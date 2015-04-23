@@ -14,14 +14,10 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Comment',
             fields=[
-<<<<<<< HEAD
-                ('id', models.AutoField(verbose_name='ID', serialize=False, primary_key=True, auto_created=True)),
-=======
-                ('id', models.AutoField(serialize=False, verbose_name='ID', primary_key=True, auto_created=True)),
->>>>>>> 3cab9eeaeae40875ccc08874ebbcd5bb706e8204
+                ('id', models.AutoField(primary_key=True, auto_created=True, serialize=False, verbose_name='ID')),
                 ('user', models.TextField(default='')),
                 ('comment_text', models.TextField(default='')),
-                ('date', models.DateTimeField(default=datetime.datetime.now, blank=True)),
+                ('date', models.DateTimeField(blank=True, default=datetime.datetime.now)),
                 ('like', models.IntegerField(default=0)),
             ],
             options={
@@ -31,18 +27,14 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Movie',
             fields=[
-<<<<<<< HEAD
-                ('id', models.AutoField(verbose_name='ID', serialize=False, primary_key=True, auto_created=True)),
-=======
-                ('id', models.AutoField(serialize=False, verbose_name='ID', primary_key=True, auto_created=True)),
->>>>>>> 3cab9eeaeae40875ccc08874ebbcd5bb706e8204
+                ('id', models.AutoField(primary_key=True, auto_created=True, serialize=False, verbose_name='ID')),
                 ('name', models.TextField(default='')),
                 ('detail', models.TextField(default='')),
                 ('release_date', models.TextField(default='')),
                 ('rate', models.FloatField(default=0)),
                 ('viewer', models.IntegerField(default=0)),
                 ('poster', models.URLField(default='')),
-                ('add_date', models.DateTimeField(default=datetime.datetime.now, blank=True)),
+                ('add_date', models.DateTimeField(blank=True, default=datetime.datetime.now)),
             ],
             options={
             },

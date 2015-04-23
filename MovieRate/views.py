@@ -62,7 +62,7 @@ def movie_detail_page(request, movie_id):
         star = float(request.POST.get('star',0))
         point = int(movie_.viewer)*float(movie_.rate)
         movie_.viewer=int(movie_.viewer)+1
-        movie_.rate=float(format(((point+star)/movie_.viewer),'.2f'))
+        movie_.rate=float(format(((point+star)/movie_.viewer),'.1f'))
         movie_.save()
 
     # กรณีใส่คอมเมนต์
