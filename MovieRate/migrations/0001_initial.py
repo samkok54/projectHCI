@@ -14,7 +14,11 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Comment',
             fields=[
+<<<<<<< HEAD
                 ('id', models.AutoField(verbose_name='ID', serialize=False, primary_key=True, auto_created=True)),
+=======
+                ('id', models.AutoField(serialize=False, verbose_name='ID', primary_key=True, auto_created=True)),
+>>>>>>> 3cab9eeaeae40875ccc08874ebbcd5bb706e8204
                 ('user', models.TextField(default='')),
                 ('comment_text', models.TextField(default='')),
                 ('date', models.DateTimeField(default=datetime.datetime.now, blank=True)),
@@ -27,7 +31,11 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Movie',
             fields=[
+<<<<<<< HEAD
                 ('id', models.AutoField(verbose_name='ID', serialize=False, primary_key=True, auto_created=True)),
+=======
+                ('id', models.AutoField(serialize=False, verbose_name='ID', primary_key=True, auto_created=True)),
+>>>>>>> 3cab9eeaeae40875ccc08874ebbcd5bb706e8204
                 ('name', models.TextField(default='')),
                 ('detail', models.TextField(default='')),
                 ('release_date', models.TextField(default='')),
@@ -43,7 +51,7 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='comment',
             name='movie',
-            field=models.ForeignKey(default=None, to='MovieRate.Movie'),
+            field=models.ForeignKey(to='MovieRate.Movie', default=None),
             preserve_default=True,
         ),
     ]
