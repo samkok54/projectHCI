@@ -22,14 +22,16 @@ Rate:  </td><td>  {{ movie_.rate }}</td></tr>
         <h2>COMMENTS</h2>
         {% if comments != None %}
             {% for comment in comments %}
+                <p1 id=comment_{{ comment.id }}>
                 Name: {{ comment.user }}<br>
                 comment: {{ comment.comment_text }}<br>
                 date: {{ comment.date }}<br>
                 Like: {{ comment.like }}<br>
         <form method="POST" action="/movie_detail/{{movie_.id}}/">
-            <input type="submit" value="LIKE"        id="submit_like"  >
+            <input type="submit" value="LIKE"        id="submit_like_{{ comment.id }}"  >
             <input type="hidden" value="submit_like"  name="send_like">
             <input type="hidden" value="{{ comment.id }}"  name="id_send_like">
+                </p1>
             {% csrf_token %}
         </form>
 <br><br>
@@ -39,7 +41,7 @@ Rate:  </td><td>  {{ movie_.rate }}</td></tr>
         <form method="POST" action="/movie_detail/{{movie_.id}}/">
             Name:<input name="user_name" id="id_user_name" placeholder="Your Name" />
             <br>
-            comment:<input name="comment_text" id="id_new_date" placeholder="Comment this movie" />
+            comment:<input name="comment_text" id="id_comment_text" placeholder="Comment this movie" />
             <br>
             <input type="submit" value="Comment"        id="id_comment"  >
             <input type="hidden" value="send_Comment"  name="send_comment">
