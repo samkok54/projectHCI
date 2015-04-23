@@ -58,6 +58,7 @@ def add_page(request):
 def movie_detail_page(request, movie_id):
     movie_ = Movie.objects.get(id=movie_id)
     comments = Comment.objects.filter(movie=movie_)
+    # rating
     if (request.method == 'POST'):
         star = float(request.POST.get('rating', '1'))
         movie_.rate=float(movie_.rate)+star
