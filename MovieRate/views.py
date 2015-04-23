@@ -45,6 +45,7 @@ def edit_page(request, movie_id):
             movie_.release_date=request.POST['date_text']
         if request.POST['poster_url'] != '':
             movie_.poster=request.POST['poster_url']
+        movie_.add_date = movie_.add_date
         movie_.save()
         return redirect('/movie_detail/%d' % int(movie_.id))
     return redirect('/detail')
