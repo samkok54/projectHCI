@@ -77,8 +77,8 @@ Rate:  </td><td>  {{ movie_.rate }}</td></tr>
     <span><input type="radio" name="rating" id="str2" value="2"><label for="str2"></label></span>
     <span><input type="radio" name="rating" id="str1" value="1"><label for="str1"></label></span>
 </div>
-            <input type="submit" value="Comment"        id="id_comment"  >
-            <input type="hidden" value="send_Comment"  name="send_comment">
+            <input type="submit" value="rate"        id="id_rate"  >
+            <input type="hidden" value="send_rate"  name="send_rate">
 	    <br>
             {% csrf_token %}
         </form>
@@ -88,17 +88,13 @@ Rate:  </td><td>  {{ movie_.rate }}</td></tr>
         <h2>COMMENTS</h2>
         {% if comments != None %}
             {% for comment in comments %}
-                <p1 id=comment_{{ comment.id }}>
+                <p1 id="comment_{{ comment.id }}">
                 Name: {{ comment.user }}<br>
                 comment: {{ comment.comment_text }}<br>
                 date: {{ comment.date }}<br>
                 Like: {{ comment.like }}<br>
         <form method="POST" action="/movie_detail/{{movie_.id}}/">
-<<<<<<< HEAD
             <input type="submit" value="LIKE"        id="submit_like_{{ comment.id }}"  >
-=======
-     <input type="submit" value="LIKE"        id="submit_like"  >
->>>>>>> 720544da2899472354c39e83435b28347b004a1f
             <input type="hidden" value="submit_like"  name="send_like">
             <input type="hidden" value="{{ comment.id }}"  name="id_send_like">
                 </p1>
@@ -111,13 +107,12 @@ Rate:  </td><td>  {{ movie_.rate }}</td></tr>
         <form method="POST" action="/movie_detail/{{movie_.id}}/">
             Name:<input name="user_name" id="id_user_name" placeholder="Your Name" />
             <br>
-<<<<<<< HEAD
+
             comment:<input name="comment_text" id="id_comment_text" placeholder="Comment this movie" />
             <br>
-=======
-            comment:<input name="comment_text" id="id_new_date" placeholder="Comment this movie" />
-            <br>       
->>>>>>> 720544da2899472354c39e83435b28347b004a1f
+
+
+
             <input type="submit" value="Comment"        id="id_comment"  >
             <input type="hidden" value="send_Comment"  name="send_comment">
 	    <br>

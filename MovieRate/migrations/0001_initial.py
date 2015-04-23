@@ -14,49 +14,36 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Comment',
             fields=[
-<<<<<<< HEAD
                 ('id', models.AutoField(primary_key=True, serialize=False, verbose_name='ID', auto_created=True)),
-=======
-<<<<<<< HEAD
-                ('id', models.AutoField(primary_key=True, verbose_name='ID', auto_created=True, serialize=False)),
-=======
-                ('id', models.AutoField(auto_created=True, serialize=False, primary_key=True, verbose_name='ID')),
->>>>>>> 461e29b1ecbdd95a334905cb145b12c2beeda2af
->>>>>>> 720544da2899472354c39e83435b28347b004a1f
                 ('user', models.TextField(default='')),
                 ('comment_text', models.TextField(default='')),
-                ('date', models.DateTimeField(default=datetime.datetime.now, blank=True)),
+                ('date', models.DateTimeField(blank=True, default=datetime.datetime.now)),
                 ('like', models.IntegerField(default=0)),
             ],
+            options={
+            },
+            bases=(models.Model,),
         ),
         migrations.CreateModel(
             name='Movie',
             fields=[
-<<<<<<< HEAD
                 ('id', models.AutoField(primary_key=True, serialize=False, verbose_name='ID', auto_created=True)),
-=======
-<<<<<<< HEAD
-                ('id', models.AutoField(primary_key=True, verbose_name='ID', auto_created=True, serialize=False)),
-=======
-                ('id', models.AutoField(auto_created=True, serialize=False, primary_key=True, verbose_name='ID')),
->>>>>>> 461e29b1ecbdd95a334905cb145b12c2beeda2af
->>>>>>> 720544da2899472354c39e83435b28347b004a1f
                 ('name', models.TextField(default='')),
                 ('detail', models.TextField(default='')),
                 ('release_date', models.TextField(default='')),
                 ('rate', models.FloatField(default=0)),
                 ('viewer', models.IntegerField(default=0)),
                 ('poster', models.URLField(default='')),
-                ('add_date', models.DateTimeField(default=datetime.datetime.now, blank=True)),
+                ('add_date', models.DateTimeField(blank=True, default=datetime.datetime.now)),
             ],
+            options={
+            },
+            bases=(models.Model,),
         ),
         migrations.AddField(
             model_name='comment',
             name='movie',
             field=models.ForeignKey(default=None, to='MovieRate.Movie'),
-<<<<<<< HEAD
             preserve_default=True,
-=======
->>>>>>> 461e29b1ecbdd95a334905cb145b12c2beeda2af
         ),
     ]
