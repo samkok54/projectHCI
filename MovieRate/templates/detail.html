@@ -1,6 +1,57 @@
 <html>
     <head>
         <title>Movie Rate App</title>
+<style>
+		.rating {
+    float:left;
+    width:300px;
+}
+.rating span { float:right; position:relative; }
+.rating span input {
+    position:absolute;
+    top:0px;
+    left:0px;
+    opacity:0;
+}
+.rating span label {
+    display:inline-block;
+    width:30px;
+    height:30px;
+    text-align:center;
+    color:#FFF;
+    background:#ccc;
+    font-size:30px;
+    margin-right:2px;
+    line-height:30px;
+    border-radius:50%;
+    -webkit-border-radius:50%;
+}
+.rating span:hover ~ span label,
+.rating span:hover label,
+.rating span.checked label,
+.rating span.checked ~ span label {
+    background:#F90;
+    color:#FFF;
+}
+	</style>
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4/jquery.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+//  Check Radio-box
+    $(".rating input:radio").attr("checked", false);
+    $('.rating input').click(function () {
+        $(".rating span").removeClass('checked');
+        $(this).parent().addClass('checked');
+    });
+
+    $('input:radio').change(
+    function(){
+        var userRating = this.value;
+        alert(userRating);
+        
+    }); 
+});
+</script>
     </head>
     <body>
         <h1>Detail of {{ movie_.name }} </h1>
@@ -18,6 +69,21 @@ Add Date: </td><td>   {{ movie_.add_date }}</td></tr>
 <tr><td>
 Rate:  </td><td>  {{ movie_.rate }}</td></tr>
 </table>
+        <form method="POST" action="/movie_detail/{{movie_.id}}/">
+ <div class="rating">
+    <span><input type="radio" name="rating" id="str5" value="5"><label for="str5"></label></span>
+    <span><input type="radio" name="rating" id="str4" value="4"><label for="str4"></label></span>
+    <span><input type="radio" name="rating" id="str3" value="3"><label for="str3"></label></span>
+    <span><input type="radio" name="rating" id="str2" value="2"><label for="str2"></label></span>
+    <span><input type="radio" name="rating" id="str1" value="1"><label for="str1"></label></span>
+</div>
+            <input type="submit" value="Comment"        id="id_comment"  >
+            <input type="hidden" value="send_Comment"  name="send_comment">
+	    <br>
+            {% csrf_token %}
+        </form>
+
+
 
         <h2>COMMENTS</h2>
         {% if comments != None %}
@@ -28,7 +94,11 @@ Rate:  </td><td>  {{ movie_.rate }}</td></tr>
                 date: {{ comment.date }}<br>
                 Like: {{ comment.like }}<br>
         <form method="POST" action="/movie_detail/{{movie_.id}}/">
+<<<<<<< HEAD
             <input type="submit" value="LIKE"        id="submit_like_{{ comment.id }}"  >
+=======
+     <input type="submit" value="LIKE"        id="submit_like"  >
+>>>>>>> 720544da2899472354c39e83435b28347b004a1f
             <input type="hidden" value="submit_like"  name="send_like">
             <input type="hidden" value="{{ comment.id }}"  name="id_send_like">
                 </p1>
@@ -41,8 +111,13 @@ Rate:  </td><td>  {{ movie_.rate }}</td></tr>
         <form method="POST" action="/movie_detail/{{movie_.id}}/">
             Name:<input name="user_name" id="id_user_name" placeholder="Your Name" />
             <br>
+<<<<<<< HEAD
             comment:<input name="comment_text" id="id_comment_text" placeholder="Comment this movie" />
             <br>
+=======
+            comment:<input name="comment_text" id="id_new_date" placeholder="Comment this movie" />
+            <br>       
+>>>>>>> 720544da2899472354c39e83435b28347b004a1f
             <input type="submit" value="Comment"        id="id_comment"  >
             <input type="hidden" value="send_Comment"  name="send_comment">
 	    <br>

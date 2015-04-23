@@ -45,6 +45,7 @@ def edit_page(request, movie_id):
             movie_.release_date=request.POST['date_text']
         if request.POST['poster_url'] != '':
             movie_.poster=request.POST['poster_url']
+        movie_.add_date = movie_.add_date
         movie_.save()
         return redirect('/movie_detail/%d' % int(movie_.id))
     return redirect('/detail')
@@ -57,6 +58,11 @@ def add_page(request):
 def movie_detail_page(request, movie_id):
     movie_ = Movie.objects.get(id=movie_id)
     comments = Comment.objects.filter(movie=movie_)
+    # rating
+    #if (request.method == 'POST'):
+    #    star = float(request.POST.get('rating', '1'))
+    #    movie_.rate=float(movie_.rate)+star
+
     # กรณีใส่คอมเมนต์
     if (request.method == 'POST' and request.POST.get('send_comment','') == 'send_Comment'):
         if request.POST['user_name'] != '' and request.POST['comment_text'] != '' :
