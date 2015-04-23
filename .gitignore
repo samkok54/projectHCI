@@ -5,3 +5,4 @@ __pycache__
 *.html~
 README.md~
 README.md
+MovieRate/migrations/.py
