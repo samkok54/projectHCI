@@ -1,7 +1,6 @@
 from django.shortcuts import redirect, render
 from MovieRate.models import Movie,Comment
 from datetime import datetime 
-from MovieRate.forms import MovieForm
 
 def home_page(request):
     if (request.method == 'POST' and request.POST.get('Add_send_Detail','') == 'submit_send_data'):
