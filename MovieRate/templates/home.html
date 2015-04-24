@@ -25,18 +25,18 @@
             {% csrf_token %}
             or &nbsp;
         </form>
-
-
 {% endif %}
 
-        <form method="POST" action="/add_movie">
+        {% if user.is_authenticated %}
+        <form method="POST" action="/add_movie" style="float:right;">
             <!-- <input name="name_text" id="id_new_name" placeholder="New Movie Name" /> -->
             <input type="submit" value="Add Movie" id="add_data" >
             <input type="hidden" value="send_Add Movie" name="send_add_data" >
 	    <br>
             {% csrf_token %}
         </form>
-
+        {% endif %}
+<br><br><br>
         <table id="id_list_table" align="center">
             <tr>
             {% for movie in movies %}
@@ -45,13 +45,14 @@
                 <td><a href="/movie_detail/{{ movie.id }}/" id="view_detail_pic_{{ movie.id }}"> <img src=" {{ movie.poster }} " width=200 height=300> </a><br>
                     <a href="/movie_detail/{{ movie.id }}/" id="view_detail_{{ movie.id }}" >  {{ movie.name }} </a><br>
                       {{ movie.rate }}
-  
+                 {% if user.is_authenticated %}
                   <FORM method="POST" action="/">
                      <INPUT Type="submit" VALUE="delete" id="button_d" >      
                      <INPUT Type = "hidden" value ="delete" name = 'delete'>
                      <INPUT Type = "hidden" value ="{{ movie.id }}" name = 'id_delete'>
                      {% csrf_token %}
                  </FORM>
+                 {% endif %}
                 </td>
                 {% if forloop.counter|divisibleby:5 %}
                 </tr><tr>

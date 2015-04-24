@@ -118,11 +118,13 @@ Rate:  </td><td>  {{ movie_.rate }}</td></tr>
 	    <br>
             {% csrf_token %}
         </form>
+         {% if user.is_authenticated %}
          <form method="POST" action="/movie/{{movie_.id}}/edit/">
             <input type="submit" value="edit" id="Edit" >
             <input type="hidden" value="send_edit" name="send_Edit" >
 	    <br>
             {% csrf_token %}
         </form>
+        {% endif%}
     </body>
 </html>
