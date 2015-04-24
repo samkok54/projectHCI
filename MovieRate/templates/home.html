@@ -13,8 +13,8 @@
         </form></p>
 {% else %}
 
-        <form method="POST" action="/" style="float:right;">
-            <input type="submit" value="registration" id="registration" >
+        <form method="POST" action="/accounts/registration/" style="float:right;">
+            <input type="submit" value="signup" id="registration" >
             <input type="hidden" value="go_regis" name="submit_regis_page" >
             {% csrf_token %}
         </form>

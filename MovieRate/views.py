@@ -3,6 +3,7 @@ from MovieRate.models import Movie,Comment
 from datetime import datetime 
 from django.contrib import auth
 from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.models import User
 
 def home_page(request):
     if (request.method == 'POST' and request.POST.get('Add_send_Detail','') == 'submit_send_data'):
@@ -26,8 +27,7 @@ def home_page(request):
         Movie.objects.get(pk=id_data).delete()
         return redirect('/')
 
-    # กดปุ่ม login
-    username = ''
+    # login
     if(request.method == 'POST' and request.POST.get('send_login', '') == 'send'):
         username = request.POST['username']
         password = request.POST['password']
@@ -35,14 +35,26 @@ def home_page(request):
         if user is not None:
             auth.login(request, user)
 
-    # กดปุ่ม logout
+    # logout
     if(request.method == 'POST' and request.POST.get('submit_logout_page', '') == 'go_logout'):
         auth.logout(request)
 
+    # register
+    if(request.method == 'POST' and request.POST.get('send_register', '') == 'send'):
+        username = request.POST['username']
+        password = request.POST['password1']
+        password2 = request.POST['password2']
+        email = request.POST['email']
+        if request.POST['password1'] == request.POST['password2']:
+            if User.objects.filter(username=username).count() == 0:
+                new_user = User.objects.create_user(username, email, password)
+                new_user.is_staff = True
+                new_user.save()
+                
 
     movies = Movie.objects.all()
     return render(request, 'home.html', {
-        'movies': movies,'name':username,
+        'movies': movies,
                   })
 
 def edit_page(request, movie_id):
@@ -106,3 +118,8 @@ def login_page(request):
     if(request.method == 'POST' and request.POST.get('submit_login_page', '') == 'go_login'):
         return redirect('/accounts/login/')
     return render(request, 'registration/login.html')
+
+def register_page(request):
+    if(request.method == 'POST' and request.POST.get('submit_regis_page', '') == 'go_regis'):
+        return redirect('/accounts/registration/')
+    return render(request, 'registration/registration_form.html')

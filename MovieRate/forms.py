@@ -10,3 +10,5 @@ class MovieForm(ModelForm):
 
         fields=['name','detail','release_date','rate','viewer','poster','add_date']
 
+
+
