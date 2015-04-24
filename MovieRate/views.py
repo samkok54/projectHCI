@@ -1,6 +1,8 @@
 from django.shortcuts import redirect, render
 from MovieRate.models import Movie,Comment
 from datetime import datetime 
+from django.contrib import auth
+from django.contrib.auth.forms import UserCreationForm
 
 def home_page(request):
     if (request.method == 'POST' and request.POST.get('Add_send_Detail','') == 'submit_send_data'):
@@ -23,9 +25,24 @@ def home_page(request):
         id_data = request.POST['id_delete']
         Movie.objects.get(pk=id_data).delete()
         return redirect('/')
+
+    # กดปุ่ม login
+    username = ''
+    if(request.method == 'POST' and request.POST.get('send_login', '') == 'send'):
+        username = request.POST['username']
+        password = request.POST['password']
+        user = auth.authenticate(username=username, password=password)
+        if user is not None:
+            auth.login(request, user)
+
+    # กดปุ่ม logout
+    if(request.method == 'POST' and request.POST.get('submit_logout_page', '') == 'go_logout'):
+        auth.logout(request)
+
+
     movies = Movie.objects.all()
     return render(request, 'home.html', {
-        'movies': movies,
+        'movies': movies,'name':username,
                   })
 
 def edit_page(request, movie_id):
@@ -85,3 +102,7 @@ def movie_detail_page(request, movie_id):
         return redirect('/movie_detail/%d' % int(movie_id))
     return render(request, 'detail.html', {'movie_': movie_,'comments': comments})
 
+def login_page(request):
+    if(request.method == 'POST' and request.POST.get('submit_login_page', '') == 'go_login'):
+        return redirect('/accounts/login/')
+    return render(request, 'registration/login.html')

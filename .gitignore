@@ -8,3 +8,5 @@ README.md
 MovieRate/migrations/.py
 MovieRate/migrations/.py
 MovieRate/migrations/*.py
+MovieRate/templates/registration/*.html~
+registration/
