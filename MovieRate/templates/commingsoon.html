@@ -1,10 +1,19 @@
 <html>
     <head>
         <title>Movie Rate App</title>
+<meta http-equiv="Content-type" content="text/html; charset=utf-8" />
     <link href="/static/style/style.css" rel="stylesheet" media="screen">
+<script type="text/javascript" src="js/jquery-1.4.2.min.js"></script>
+	<script type="text/javascript" src="js/jquery-func.js"></script>
     </head>
     <body>
+
+<!-- Shell -->
+<div id="shell">
         <h1>Movie Rate : Comming soon</h1>
+<!-- Header -->
+	<div id="header">
+		
 {% if user.is_authenticated %}
         <form method="POST" action="/">
             <p align="right">Welcome, {{ user.get_username }}.
@@ -27,7 +36,29 @@
             or &nbsp;
         </form>
 {% endif %}
+		<!-- Navigation -->
+		<div id="navigation">
+			<ul>
+			    <li><a  href="/">HOME</a></li>
+			    <li><a href="/movie_now">IN THEATERS</a></li>
+			    <li><a href="/movie_comming">COMING SOON</a></li>
+			</ul>
 
+		</div>
+		<!-- end Navigation -->
+<!-- Sub-menu -->
+		<div id="sub-navigation">
+			<ul>
+			    <li><a href="#">SHOW ALL</a></li>
+			    <li><a href="#">LATEST TRAILERS</a></li>
+			    <li><a href="#">TOP RATED</a></li>
+			    <li><a href="#">MOST COMMENTED</a></li>
+			</ul>
+			</div>
+		<!-- end Sub-Menu -->
+
+</div>
+	<!-- end Header -->
        
 <br><br><br>
   <div class="head">
@@ -137,6 +168,8 @@
         </tr>
         </table>
 
+</div>
+<!-- end Shell -->
 
     </body>
 </html>

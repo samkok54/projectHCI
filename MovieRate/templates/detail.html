@@ -1,11 +1,67 @@
 <html>
     <head>
         <title>Movie Rate App</title>
+<meta http-equiv="Content-type" content="text/html; charset=utf-8" />
 <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
     <link href="/static/style/style.css" rel="stylesheet" media="screen">
     <link href="/static/style/star.css" rel="stylesheet" media="screen">
+
+	<script type="text/javascript" src="js/jquery-1.4.2.min.js"></script>
+	<script type="text/javascript" src="js/jquery-func.js"></script>
+
     </head>
     <body>
+<!-- Shell -->
+<div id="shell">
+
+<!-- Header -->
+	<div id="header">
+		
+{% if user.is_authenticated %}
+        <form method="POST" action="/">
+            <p align="right">Welcome, {{ user.get_username }}.
+            <input type="submit" value="logout" id="logout" >
+            <input type="hidden" value="go_logout" name="submit_logout_page" >
+            {% csrf_token %}
+        </form></p>
+{% else %}
+
+        <form method="POST" action="/accounts/registration/" style="float:right;">
+            <input type="submit" value="signup" id="registration" >
+            <input type="hidden" value="go_regis" name="submit_regis_page" >
+            {% csrf_token %}
+        </form>
+        <form method="POST" action="/accounts/login/" style="float:right;">
+            Welcome, new user. Please 
+            <input type="submit" value="login" id="login" >
+            <input type="hidden" value="go_login" name="submit_login_page" >
+            {% csrf_token %}
+            or &nbsp;
+        </form>
+{% endif %}
+		<!-- Navigation -->
+		<div id="navigation">
+			<ul>
+			    <li><a href="/">HOME</a></li>
+			    <li><a href="/movie_now">IN THEATERS</a></li>
+			    <li><a href="/movie_comming">COMING SOON</a></li>
+			</ul>
+
+		</div>
+		<!-- end Navigation -->
+<!-- Sub-menu -->
+		<div id="sub-navigation">
+			<ul>
+			    <li><a href="#">SHOW ALL</a></li>
+			    <li><a href="#">LATEST TRAILERS</a></li>
+			    <li><a href="#">TOP RATED</a></li>
+			    <li><a href="#">MOST COMMENTED</a></li>
+			</ul>
+			</div>
+		<!-- end Sub-Menu -->
+
+</div>
+	<!-- end Header -->
         <h1>Detail of {{ movie_.name }} </h1>
 <table id="id_list_table" align="center">
 <tr><td>
@@ -92,5 +148,7 @@ Rate:  </td><td>  {{ movie_.rate }}</td></tr>
             {% csrf_token %}
         </form>
         {% endif%}
+</div>
+<!-- end Shell -->
     </body>
 </html>
