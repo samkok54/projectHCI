@@ -24,12 +24,14 @@ div.stars {
 	  transition: all .25s;
 	}
 	 
-	input.star-5:checked ~ label.star:before {
-	  color: #FE7;
+	input.star-1:checked ~ label.star:before { color: #FF0000; }
+	input.star-2:checked ~ label.star:before { color: #FF8000; }
+	input.star-3:checked ~ label.star:before { color: #FFBF00;}
+	input.star-4:checked ~ label.star:before { color: #FFFF00;}
+        input.star-5:checked ~ label.star:before {
+	  color: #40FF00;
 	  text-shadow: 0 0 20px #952;
 	}
-	 
-	input.star-1:checked ~ label.star:before { color: #F62; }
 	 
 	label.star:hover { transform: rotate(-15deg) scale(1.3); }
 	 
