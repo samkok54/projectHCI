@@ -4,7 +4,7 @@
     <link href="/static/style/style.css" rel="stylesheet" media="screen">
     </head>
     <body>
-        <h1>Movie Rate</h1>
+        <h1>Movie Rate : Now</h1>
 {% if user.is_authenticated %}
         <form method="POST" action="/">
             <p align="right">Welcome, {{ user.get_username }}.
@@ -28,128 +28,16 @@
         </form>
 {% endif %}
 
-        {% if user.is_authenticated %}
-        <form method="POST" action="/add_movie" style="float:right;">
-            <!-- <input name="name_text" id="id_new_name" placeholder="New Movie Name" /> -->
-            <input type="submit" value="Add Movie" id="add_data" >
-            <input type="hidden" value="send_Add Movie" name="send_add_data" >
+        
+<br><br><br>
+  <div class="head">
+	<h2>Now</h2>
+<form method="POST" action="/">
+            <input type="submit" value="Back" id="back" >
+            <input type="hidden" value="Back_send" name="back_send" >
 	    <br>
             {% csrf_token %}
         </form>
-        {% endif %}
-<br><br><br>
-<!-- Box -->
-<div class="box">
-  <div class="head">
-	<h2>Comming Soon</h2>
-        <p class="text-right"><a href="/movie_comming">See all</a></p>
-  </div>
-
-        <table id="id_list_table" align="center">
-            <tr>
-            {% for movie in movies %}
-{% for ids in IDcomming %}
-{% if movie.id == ids and  forloop.counter <= 5 %} 
-                <td><a href="/movie_detail/{{ movie.id }}/" id="view_detail_pic_{{ movie.id }}"> <img src=" {{ movie.poster }} " width=200 height=300> </a><br>
-                    <a href="/movie_detail/{{ movie.id }}/" id="view_detail_{{ movie.id }}" >{{ movie.name }} </a><br>
-                      {{ movie.rate }} 
- {% if movie.rate == 0.0 %} <!--17=0 16=0.5 15=1-->
-<img src="http://png.findicons.com/files/icons/2181/34al_volume_3_2_se/24/001_17.png" width=15 height=15>
-<img src="http://png.findicons.com/files/icons/2181/34al_volume_3_2_se/24/001_17.png" width=15 height=15>
-<img src="http://png.findicons.com/files/icons/2181/34al_volume_3_2_se/24/001_17.png" width=15 height=15>
-<img src="http://png.findicons.com/files/icons/2181/34al_volume_3_2_se/24/001_17.png" width=15 height=15>
-<img src="http://png.findicons.com/files/icons/2181/34al_volume_3_2_se/24/001_17.png" width=15 height=15>
-{% elif movie.rate <= 0.5 %} 
-<img src="http://png.findicons.com/files/icons/2181/34al_volume_3_2_se/24/001_16.png" width=15 height=15>
-<img src="http://png.findicons.com/files/icons/2181/34al_volume_3_2_se/24/001_17.png" width=15 height=15>
-<img src="http://png.findicons.com/files/icons/2181/34al_volume_3_2_se/24/001_17.png" width=15 height=15>
-<img src="http://png.findicons.com/files/icons/2181/34al_volume_3_2_se/24/001_17.png" width=15 height=15>
-<img src="http://png.findicons.com/files/icons/2181/34al_volume_3_2_se/24/001_17.png" width=15 height=15>
-{% elif movie.rate <= 1.0 %} 
-<img src="http://png.findicons.com/files/icons/2181/34al_volume_3_2_se/24/001_15.png" width=15 height=15>
-<img src="http://png.findicons.com/files/icons/2181/34al_volume_3_2_se/24/001_17.png" width=15 height=15>
-<img src="http://png.findicons.com/files/icons/2181/34al_volume_3_2_se/24/001_17.png" width=15 height=15>
-<img src="http://png.findicons.com/files/icons/2181/34al_volume_3_2_se/24/001_17.png" width=15 height=15>
-<img src="http://png.findicons.com/files/icons/2181/34al_volume_3_2_se/24/001_17.png" width=15 height=15>
-{% elif movie.rate <= 1.5 %} 
-<img src="http://png.findicons.com/files/icons/2181/34al_volume_3_2_se/24/001_15.png" width=15 height=15>
-<img src="http://png.findicons.com/files/icons/2181/34al_volume_3_2_se/24/001_16.png" width=15 height=15>
-<img src="http://png.findicons.com/files/icons/2181/34al_volume_3_2_se/24/001_17.png" width=15 height=15>
-<img src="http://png.findicons.com/files/icons/2181/34al_volume_3_2_se/24/001_17.png" width=15 height=15>
-<img src="http://png.findicons.com/files/icons/2181/34al_volume_3_2_se/24/001_17.png" width=15 height=15>
-{% elif movie.rate <= 2.0 %} 
-<img src="http://png.findicons.com/files/icons/2181/34al_volume_3_2_se/24/001_15.png" width=15 height=15>
-<img src="http://png.findicons.com/files/icons/2181/34al_volume_3_2_se/24/001_15.png" width=15 height=15>
-<img src="http://png.findicons.com/files/icons/2181/34al_volume_3_2_se/24/001_17.png" width=15 height=15>
-<img src="http://png.findicons.com/files/icons/2181/34al_volume_3_2_se/24/001_17.png" width=15 height=15>
-<img src="http://png.findicons.com/files/icons/2181/34al_volume_3_2_se/24/001_17.png" width=15 height=15>
-{% elif movie.rate <= 2.5 %} 
-<img src="http://png.findicons.com/files/icons/2181/34al_volume_3_2_se/24/001_15.png" width=15 height=15>
-<img src="http://png.findicons.com/files/icons/2181/34al_volume_3_2_se/24/001_15.png" width=15 height=15>
-<img src="http://png.findicons.com/files/icons/2181/34al_volume_3_2_se/24/001_16.png" width=15 height=15>
-<img src="http://png.findicons.com/files/icons/2181/34al_volume_3_2_se/24/001_17.png" width=15 height=15>
-<img src="http://png.findicons.com/files/icons/2181/34al_volume_3_2_se/24/001_17.png" width=15 height=15>
-{% elif movie.rate <= 3.0 %} 
-<img src="http://png.findicons.com/files/icons/2181/34al_volume_3_2_se/24/001_15.png" width=15 height=15>
-<img src="http://png.findicons.com/files/icons/2181/34al_volume_3_2_se/24/001_15.png" width=15 height=15>
-<img src="http://png.findicons.com/files/icons/2181/34al_volume_3_2_se/24/001_15.png" width=15 height=15>
-<img src="http://png.findicons.com/files/icons/2181/34al_volume_3_2_se/24/001_17.png" width=15 height=15>
-<img src="http://png.findicons.com/files/icons/2181/34al_volume_3_2_se/24/001_17.png" width=15 height=15>
-{% elif movie.rate <= 3.5 %} 
-<img src="http://png.findicons.com/files/icons/2181/34al_volume_3_2_se/24/001_15.png" width=15 height=15>
-<img src="http://png.findicons.com/files/icons/2181/34al_volume_3_2_se/24/001_15.png" width=15 height=15>
-<img src="http://png.findicons.com/files/icons/2181/34al_volume_3_2_se/24/001_15.png" width=15 height=15>
-<img src="http://png.findicons.com/files/icons/2181/34al_volume_3_2_se/24/001_16.png" width=15 height=15>
-<img src="http://png.findicons.com/files/icons/2181/34al_volume_3_2_se/24/001_17.png" width=15 height=15>
-{% elif movie.rate <= 4.0 %} 
-<img src="http://png.findicons.com/files/icons/2181/34al_volume_3_2_se/24/001_15.png" width=15 height=15>
-<img src="http://png.findicons.com/files/icons/2181/34al_volume_3_2_se/24/001_15.png" width=15 height=15>
-<img src="http://png.findicons.com/files/icons/2181/34al_volume_3_2_se/24/001_15.png" width=15 height=15>
-<img src="http://png.findicons.com/files/icons/2181/34al_volume_3_2_se/24/001_15.png" width=15 height=15>
-<img src="http://png.findicons.com/files/icons/2181/34al_volume_3_2_se/24/001_17.png" width=15 height=15>
-{% elif movie.rate <= 4.5 %} 
-<img src="http://png.findicons.com/files/icons/2181/34al_volume_3_2_se/24/001_15.png" width=15 height=15>
-<img src="http://png.findicons.com/files/icons/2181/34al_volume_3_2_se/24/001_15.png" width=15 height=15>
-<img src="http://png.findicons.com/files/icons/2181/34al_volume_3_2_se/24/001_15.png" width=15 height=15>
-<img src="http://png.findicons.com/files/icons/2181/34al_volume_3_2_se/24/001_15.png" width=15 height=15>
-<img src="http://png.findicons.com/files/icons/2181/34al_volume_3_2_se/24/001_16.png" width=15 height=15>
-{% elif movie.rate <= 5.0 %} 
-<img src="http://png.findicons.com/files/icons/2181/34al_volume_3_2_se/24/001_15.png" width=15 height=15>
-<img src="http://png.findicons.com/files/icons/2181/34al_volume_3_2_se/24/001_15.png" width=15 height=15>
-<img src="http://png.findicons.com/files/icons/2181/34al_volume_3_2_se/24/001_15.png" width=15 height=15>
-<img src="http://png.findicons.com/files/icons/2181/34al_volume_3_2_se/24/001_15.png" width=15 height=15>
-<img src="http://png.findicons.com/files/icons/2181/34al_volume_3_2_se/24/001_15.png" width=15 height=15>
- {% endif %}
-
-<span class="comments">{{ movie.countcom }}</span>
-
-                 {% if user.is_authenticated %}
-                  <FORM method="POST" action="/">
-                     <INPUT Type="submit" VALUE="delete" id="button_d" >      
-                     <INPUT Type = "hidden" value ="delete" name = 'delete'>
-                     <INPUT Type = "hidden" value ="{{ movie.id }}" name = 'id_delete'>
-                     {% csrf_token %}
-                 </FORM>
-                 {% endif %}
-                </td>
-                {% if forloop.counter|divisibleby:5 %}
-                </tr><tr>
-                {% endif%}
-
-{% endif %}
-{% endfor %}
-            {% endfor %}
-
-        </tr>
-        </table>
-</div>
-<!--END Box -->
-
-<!-- Box -->
-<div class="box">
-  <div class="head">
-	<h2>Now</h2>
-        <p class="text-right"><a href="/movie_now">See all</a></p>
   </div>
 
         <table id="id_list_table" align="center">
@@ -157,8 +45,7 @@
 
             {% for movie in movies %}
 {% for ids in IDnow %}
-{% if movie.id == ids and  forloop.counter <= 5  %} 
-
+{% if movie.id == ids %} 
 
                 <td><a href="/movie_detail/{{ movie.id }}/" id="view_detail_pic_{{ movie.id }}"> <img src=" {{ movie.poster }} " width=200 height=300> </a><br>
                     <a href="/movie_detail/{{ movie.id }}/" id="view_detail_{{ movie.id }}" >{{ movie.name }} </a><br>
@@ -251,8 +138,6 @@
 
         </tr>
         </table>
-</div>
-<!--END Box -->
 
 
     </body>

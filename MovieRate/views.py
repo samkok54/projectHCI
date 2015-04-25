@@ -142,3 +142,49 @@ def register_page(request):
     if(request.method == 'POST' and request.POST.get('submit_regis_page', '') == 'go_regis'):
         return redirect('/accounts/registration/')
     return render(request, 'registration/registration_form.html')
+
+def movie_comming(request):
+    movies = Movie.objects.all()
+    Day = int(time.strftime("%Y%m%d"))
+    IDcomming=[]
+    IDnow=[]
+    if Movie.objects.count() != 0:
+        for movie in movies:
+            if str(movie.release_date) != "" :
+                date=str(movie.release_date).split("-")
+                F=""
+                for j in range (len(date)) :
+                    F=F+str(date[j])
+                dates=int(F)
+            else :
+                dates=Day
+            if Day<dates :
+                IDcomming.append(movie.id)
+
+    return render(request, 'commingsoon.html', {
+        'movies': movies,'IDcomming':IDcomming
+                  })
+
+def movie_now(request):
+    movies = Movie.objects.all()
+    Day = int(time.strftime("%Y%m%d"))
+    IDcomming=[]
+    IDnow=[]
+    if Movie.objects.count() != 0:
+        for movie in movies:
+            if str(movie.release_date) != "" :
+                date=str(movie.release_date).split("-")
+                F=""
+                for j in range (len(date)) :
+                    F=F+str(date[j])
+                dates=int(F)
+            else :
+                dates=Day
+            if Day>=dates :
+                IDnow.append(movie.id)
+
+    return render(request, 'movienow.html', {
+        'movies': movies,'IDnow':IDnow
+                  })
+
+
