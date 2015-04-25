@@ -4,7 +4,7 @@ from datetime import datetime
 from django.contrib import auth
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
-
+import time 
 def home_page(request):
     if (request.method == 'POST' and request.POST.get('Add_send_Detail','') == 'submit_send_data'):
         if request.POST['name_text'] != '' :
@@ -49,13 +49,27 @@ def home_page(request):
             if User.objects.filter(username=username).count() == 0:
                 new_user = User.objects.create_user(username, email, password)
                 new_user.is_staff = True
-                new_user.save()
-                
-
+                new_user.save() 
     movies = Movie.objects.all()
+    Day = int(time.strftime("%Y%m%d"))
+    ID=[]
+    if Movie.objects.count() != 0:
+        for movie in movies:
+            if str(movie.release_date) != "" :
+                date=str(movie.release_date).split("-")
+                F=""
+                for j in range (len(date)) :
+                    F=F+str(date[j])
+                dates=int(F)
+            else :
+                dates=Day
+            if Day<dates :
+                ID.append(movie.id)
+
     return render(request, 'home.html', {
-        'movies': movies, 
+        'movies': movies,'ID':ID
                   })
+
 
 def edit_page(request, movie_id):
     if (request.method == 'POST' and request.POST.get('send_Edit','') == 'send_edit'):
