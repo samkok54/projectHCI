@@ -52,7 +52,8 @@ def home_page(request):
                 new_user.save() 
     movies = Movie.objects.all()
     Day = int(time.strftime("%Y%m%d"))
-    ID=[]
+    IDcomming=[]
+    IDnow=[]
     if Movie.objects.count() != 0:
         for movie in movies:
             if str(movie.release_date) != "" :
@@ -64,10 +65,12 @@ def home_page(request):
             else :
                 dates=Day
             if Day<dates :
-                ID.append(movie.id)
+                IDcomming.append(movie.id)
+            else :
+                IDnow.append(movie.id)
 
     return render(request, 'home.html', {
-        'movies': movies,'ID':ID
+        'movies': movies,'IDcomming':IDcomming,'IDnow':IDnow
                   })
 
 
