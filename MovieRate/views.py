@@ -87,7 +87,7 @@ def movie_detail_page(request, movie_id):
     movie_ = Movie.objects.get(id=movie_id)
     comments = Comment.objects.filter(movie=movie_)
     # rating
-    if (request.method == 'POST'):
+    if (request.method == 'POST' and request.POST.get('send_rate','') == 'send_rate'):
         star = float(request.POST.get('star',0))
         point = int(movie_.viewer)*float(movie_.rate)
         movie_.viewer=int(movie_.viewer)+1
