@@ -54,7 +54,7 @@ def home_page(request):
 
     movies = Movie.objects.all()
     return render(request, 'home.html', {
-        'movies': movies,
+        'movies': movies, 
                   })
 
 def edit_page(request, movie_id):
@@ -103,6 +103,8 @@ def movie_detail_page(request, movie_id):
                                       date = datetime.now(),
                                       like = 0, 
                                       movie = movie_,)
+            movie_.countcom=int(movie_.countcom)+1
+            movie_.save()
             return redirect('/movie_detail/%d' % int(movie_id))
     # กรณีกดไลค์
     if(request.method == 'POST' and request.POST.get('send_like', '') == 'submit_like'):

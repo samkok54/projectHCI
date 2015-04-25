@@ -9,6 +9,7 @@ class Movie(models.Model):
     viewer = models.IntegerField(default=0)
     poster = models.URLField(default='')
     add_date = models.DateTimeField(default=datetime.now, blank=True)
+    countcom=models.IntegerField(default=0)
 
 
 class Comment(models.Model):
