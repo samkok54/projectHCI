@@ -44,6 +44,40 @@ class HomePageTest(TestCase):
          'https://siam-movie.com/wp-content/uploads/2014/05/1395818775261.jpg')
                          )
 
+    def test_home_page_only_saves_movie_when_necessary(self):
+        request = HttpRequest()
+        home_page(request)
+
+    def test_home_page_displays_all_list_movies(self):
+        Movie.objects.create(name='X-men 2')
+        Movie.objects.create(name='Captian America')
+
+        request = HttpRequest()
+        response = home_page(request)
+
+        self.assertIn('X-men 2', response.content.decode())
+        self.assertIn('Captian America', response.content.decode())
+
+
+class MovieModelTest(TestCase):
+
+    def test_saving_and_retrieving_movies(self):
+        first_movie = Movie()
+        first_movie.name = 'The first (ever) list movie'
+        first_movie.save()
+
+        second_movie = Movie()
+        second_movie.name = 'The second movie'
+        second_movie.save()
+
+        saved_movies = Movie.objects.all()
+        self.assertEqual(saved_movies.count(), 2)
+
+        first_saved_movie = saved_movies[0]
+        second_saved_movie = saved_movies[1]
+        self.assertEqual(first_saved_movie.name, 'The first (ever) list movie')
+        self.assertEqual(second_saved_movie.name, 'The second movie')
+
 
 class TestCodeFormat(TestCase):
 
