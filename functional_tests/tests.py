@@ -12,7 +12,7 @@ class NewVisitorTest(LiveServerTestCase):
     def tearDown(self):
         self.browser.quit()
 
-    def check_for_row(self, row_text, idT,tag):
+    def check_for_row(self, row_text, idT, tag):
         table = self.browser.find_element_by_id(idT)
         rows = table.find_elements_by_tag_name(tag)
         self.assertIn(row_text, [row.text for row in rows])
@@ -56,23 +56,24 @@ class NewVisitorTest(LiveServerTestCase):
         inputdate.send_keys(Keys.ESCAPE)
         inputdate.send_keys('04/01/2015')
         inputdetail.send_keys('action')
-        inputURL.send_keys('http://www.majorcineplex.com/uploads/movie/868/thumb_868.jpg')
+        inputURL.send_keys(
+         'http://www.majorcineplex.com/uploads/movie/868/thumb_868.jpg')
         self.browser.find_element_by_id('submit_data').click()
 
         # back to homepage can see Fast And Furious 7
         header_text = self.browser.find_element_by_tag_name('h1').text
         self.assertIn('Movie Rate', header_text)
-        self.check_for_row('Fast And Furious 7\n0.0', 'id_list_table','td')
+        self.check_for_row('Fast And Furious 7\n0.0', 'id_list_table', 'td')
 
         # click at Fast And Furious 7 go to the movie's detail
         self.browser.find_element_by_id('view_detail_1').click()
         header_text = self.browser.find_element_by_tag_name('h1').text
         self.assertIn('Detail of Fast And Furious 7', header_text)
-        self.check_for_row('Name: Fast And Furious 7', 'id_list_table','tr')
-        self.check_for_row('Release Date: 04/01/2015', 'id_list_table','tr')
-        self.check_for_row('Detail: action', 'id_list_table','tr')
+        self.check_for_row('Name: Fast And Furious 7', 'id_list_table', 'tr')
+        self.check_for_row('Release Date: 04/01/2015', 'id_list_table', 'tr')
+        self.check_for_row('Detail: action', 'id_list_table', 'tr')
 
-        # test edit detail of Fast And Furious 7 (action change to action and racing)
+        # test edit detail of Fast 7 (action change to action and racing)
         self.browser.find_element_by_id('Edit').click()
         header_text = self.browser.find_element_by_tag_name('h1').text
         self.assertIn('Edit Fast And Furious 7', header_text)
@@ -87,7 +88,7 @@ class NewVisitorTest(LiveServerTestCase):
         # redirect to Fast And Furious 7's detail page after edit
         header_text = self.browser.find_element_by_tag_name('h1').text
         self.assertIn('Detail of Fast And Furious 7', header_text)
-        self.check_for_row('Detail: action and racing', 'id_list_table','tr')
+        self.check_for_row('Detail: action and racing', 'id_list_table', 'tr')
 
         # test comment
         inputcomment_user = self.browser.find_element_by_id('id_user_name')

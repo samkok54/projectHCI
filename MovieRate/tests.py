@@ -3,6 +3,7 @@ from django.test import TestCase
 from MovieRate.views import home_page
 import pep8
 
+
 class HomePageTest(TestCase):
 
     def test_root_url_resolves_to_home_page_view(self):

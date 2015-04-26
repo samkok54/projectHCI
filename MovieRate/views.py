@@ -1,10 +1,12 @@
 from django.shortcuts import redirect, render
 from MovieRate.models import Movie,Comment
-from datetime import datetime 
+from datetime import datetime
 from django.contrib import auth
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
-import time 
+import time
+
+
 def home_page(request):
     if (request.method == 'POST' and request.POST.get('Add_send_Detail','') == 'submit_send_data'):
         if request.POST['name_text'] != '' :
@@ -26,7 +28,6 @@ def home_page(request):
         id_data = request.POST['id_delete']
         Movie.objects.get(pk=id_data).delete()
         return redirect('/')
-
     # login
     if(request.method == 'POST' and request.POST.get('send_login', '') == 'send'):
         username = request.POST['username']
@@ -34,11 +35,9 @@ def home_page(request):
         user = auth.authenticate(username=username, password=password)
         if user is not None:
             auth.login(request, user)
-
     # logout
     if(request.method == 'POST' and request.POST.get('submit_logout_page', '') == 'go_logout'):
         auth.logout(request)
-
     # register
     if(request.method == 'POST' and request.POST.get('send_register', '') == 'send'):
         username = request.POST['username']
@@ -49,7 +48,7 @@ def home_page(request):
             if User.objects.filter(username=username).count() == 0:
                 new_user = User.objects.create_user(username, email, password)
                 new_user.is_staff = True
-                new_user.save() 
+                new_user.save()
     movies = Movie.objects.all()
     Day = int(time.strftime("%Y%m%d"))
     IDcomming=[]
@@ -72,7 +71,6 @@ def home_page(request):
     return render(request, 'home.html', {
         'movies': movies,'IDcomming':IDcomming,'IDnow':IDnow
                   })
-
 
 def edit_page(request, movie_id):
     if (request.method == 'POST' and request.POST.get('send_Edit','') == 'send_edit'):
@@ -118,7 +116,7 @@ def movie_detail_page(request, movie_id):
                                       user = request.POST['user_name'],
                                       comment_text = request.POST['comment_text'],
                                       date = datetime.now(),
-                                      like = 0, 
+                                      like = 0,
                                       movie = movie_,)
             movie_.countcom=int(movie_.countcom)+1
             movie_.save()
@@ -186,5 +184,3 @@ def movie_now(request):
     return render(request, 'movienow.html', {
         'movies': movies,'IDnow':IDnow
                   })
-
-
