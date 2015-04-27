@@ -2,6 +2,7 @@
 
 <h1>Login</h1><br>
         <form method="post" action="/">
+        <p style="color:red">{{ alarm }}</p>
                 {% csrf_token %}
 Username:<input type="username" name="username" id="id_username" placeholder="" /><br>
 Password:<input type="password" name="password" id="id_password" placeholder="" /><br>

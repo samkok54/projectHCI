@@ -1,5 +1,16 @@
 {% block body_block %}
 <h1>Registration Complete</h1>
         <p>You are now registered</p>
+        <form method="POST" action="/accounts/login/" style="float:right;">
+            <input type="submit" value="login" id="login" >
+            <input type="hidden" value="go_login" name="submit_login_page" >
+            {% csrf_token %}
+        </form>
+        <form method="POST" action="/" style="float:right;">
+            <input type="submit" value="go to homepage" id="tohome" >
+            <input type="hidden" value="go_home" name="submit_homepage" >
+            {% csrf_token %}
+            or &nbsp;
+        </form>
 {% endblock %}
 

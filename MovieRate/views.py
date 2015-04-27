@@ -40,22 +40,15 @@ def home_page(request):
         user = auth.authenticate(username=username, password=password)
         if user is not None:
             auth.login(request, user)
+        else:
+            alarm = 'error. please try again.'
+            return render(request, 'registration/login.html',{'alarm':alarm})
+
     # logout
     if(request.method == 'POST' and request.POST.get(
       'submit_logout_page', '') == 'go_logout'):
         auth.logout(request)
-    # register
-    if(request.method == 'POST' and request.POST.get(
-      'send_register', '') == 'send'):
-        username = request.POST['username']
-        password = request.POST['password1']
-        password2 = request.POST['password2']
-        email = request.POST['email']
-        if request.POST['password1'] == request.POST['password2']:
-            if User.objects.filter(username=username).count() == 0:
-                new_user = User.objects.create_user(username, email, password)
-                new_user.is_staff = True
-                new_user.save()
+
     movies = Movie.objects.all()
     Day = int(time.strftime("%Y%m%d"))
     IDcomming = []
@@ -161,6 +154,30 @@ def register_page(request):
       'submit_regis_page', '') == 'go_regis'):
         return redirect('/accounts/registration/')
     return render(request, 'registration/registration_form.html')
+
+def register_complete_page(request):
+    # register
+    alarm =''
+    if(request.method == 'POST' and request.POST.get(
+      'send_register', '') == 'send'):
+        username = request.POST['username']
+        password = request.POST['password1']
+        password2 = request.POST['password2']
+        email = request.POST['email']
+        alarm = ''
+        if request.POST['password1'] == request.POST['password2'] and username != '' and    request.POST['password1'] != '':
+            if User.objects.filter(username=username).count() == 0:
+                new_user = User.objects.create_user(username, email, password)
+                new_user.is_staff = True
+                new_user.save()
+                return redirect('/accounts/registration_complete/')
+            else:
+                alarm = "already have this username."
+        else:
+            alarm = "error. please try again"
+
+        return render(request, 'registration/registration_form.html',{'alarm':alarm})
+    return render(request, 'registration/registration_complete.html')
 
 
 def movie_comming(request):

@@ -24,6 +24,22 @@ class NewVisitorTest(LiveServerTestCase):
         header_text = self.browser.find_element_by_tag_name('h1').text
         self.assertIn('Movie Rate', header_text)
 
+        # register
+        self.browser.find_element_by_id('registration').click()
+        header_text = self.browser.find_element_by_tag_name('h1').text
+        self.assertIn('Register Here', header_text)
+        inputusername = self.browser.find_element_by_id('id_username')
+        inputemail = self.browser.find_element_by_id('id_email')
+        inputpassword = self.browser.find_element_by_id('id_password1')
+        inputpassword2 = self.browser.find_element_by_id('id_password2')
+        inputusername.send_keys('somchai')
+        inputemail.send_keys('somchai@email.com')
+        inputpassword.send_keys('123456')
+        inputpassword2.send_keys('123456')
+        self.browser.find_element_by_id('regis').click()
+        header_text = self.browser.find_element_by_tag_name('h1').text
+        self.assertIn('Movie Rate', header_text)
+
         # click add movie and go to add page(add.html)
         self.browser.find_element_by_id('add_data').click()
         header_text = self.browser.find_element_by_tag_name('h1').text
@@ -54,7 +70,7 @@ class NewVisitorTest(LiveServerTestCase):
         inputname.send_keys('Fast And Furious 7')
         inputdate.click()
         inputdate.send_keys(Keys.ESCAPE)
-        inputdate.send_keys('04/01/2015')
+        inputdate.send_keys('2015-04-01')
         inputdetail.send_keys('action')
         inputURL.send_keys(
          'http://www.majorcineplex.com/uploads/movie/868/thumb_868.jpg')

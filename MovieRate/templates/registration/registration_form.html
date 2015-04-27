@@ -1,13 +1,14 @@
 
 {% block body_block %}
 <h1>Register Here</h1>
-        <form method="post" action="/">
+        <p style="color:red">{{ alarm }}</p>
+        <form method="post" action="/accounts/registration_complete/">
             {% csrf_token %}
-        Username:<input type="username" name="username" id="id_username" placeholder="" /><br>
+        Username<a style="color:red">*</a>:<input type="username" name="username" id="id_username" placeholder="" /><br>
         e-mail:<input type="e-mail" name="email" id="id_email" placeholder="" /><br>
-        Password:<input type="password" name="password1" id="id_password1" placeholder="" /><br>
-        Password again:<input type="password" name="password2" id="id_password2" placeholder="" /><br>
-                <input type="submit" value="Submit" />
+        Password<a style="color:red">*</a>:<input type="password" name="password1" id="id_password1" placeholder="" /><br>
+        Password again<a style="color:red">*</a>:<input type="password" name="password2" id="id_password2" placeholder="" /><br>
+                <input type="submit" value="Submit" id="regis"/>
                 <input type="hidden" name="send_register" value="send" />
         </form>
 {% endblock %}
