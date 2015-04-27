@@ -58,6 +58,34 @@ class HomePageTest(TestCase):
         self.assertIn('X-men 2', response.content.decode())
         self.assertIn('Captian America', response.content.decode())
 
+    def test_edit_movie(self):
+        movie_ = Movie()
+        movie_.name = 'X-men'
+        movie_.detail = ''
+        movie_.release_date = '2015-04-21'
+        movie_.poster = 'http://upic.me/i/6r/wallpaper3.jpg'
+        movie_.save()
+        movie = Movie.objects.first()
+        movie_id = movie.id
+        request = HttpRequest()
+        request.method = 'POST'
+        request.POST['name_text'] = 'Kamenraider'
+        request.POST['detail_text'] = '3D/IMAX'
+        request.POST['date_text'] = '2015-04-01'
+        request.POST['poster_url'] = (
+         'http://upic.me/i/6r/wallpaper3.jpg')
+        request.POST['Update_send_Detail'] = 'submit_send_update'
+
+        response = edit_page(request, movie_id)
+
+        edit_movie = Movie.objects.first()
+        self.assertEqual(edit_movie.name, 'Kamenraider')
+        self.assertEqual(edit_movie.release_date, '2015-04-01')
+        self.assertEqual(edit_movie.detail, '3D/IMAX')
+        self.assertEqual(edit_movie.poster, (
+         'http://upic.me/i/6r/wallpaper3.jpg')
+                         )
+
 
 class MovieModelTest(TestCase):
 
