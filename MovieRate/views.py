@@ -60,6 +60,8 @@ def home_page(request):
     Day = int(time.strftime("%Y%m%d"))
     IDcomming = []
     IDnow = []
+    Datecomming=[]
+    Datenow=[]
     if Movie.objects.count() != 0:
         for movie in movies:
             if str(movie.release_date) != "":
@@ -72,11 +74,33 @@ def home_page(request):
                 dates = Day
             if Day < dates:
                 IDcomming.append(movie.id)
+                Datecomming.append(dates)
+                for i in range(len(Datecomming)):
+                    for j in range(len(Datecomming)):
+                       if Datecomming[i] <= Datecomming[j] :
+                           tempd=Datecomming[j]
+                           Datecomming[j]=Datecomming[i]
+                           Datecomming[i]=tempd
+
+                           temp=IDcomming[j]
+                           IDcomming[j]=IDcomming[i]
+                           IDcomming[i]=temp
             else:
                 IDnow.append(movie.id)
+                Datenow.append(dates)
+                for i in range(len(Datenow)):
+                    for j in range(len(Datenow)):
+                       if Datenow[i] >= Datenow[j] :
+                           tempd=Datenow[j]
+                           Datenow[j]=Datenow[i]
+                           Datenow[i]=tempd
+
+                           temp=IDnow[j]
+                           IDnow[j]=IDnow[i]
+                           IDnow[i]=temp
 
     return render(request, 'home.html', {
-        'movies': movies, 'IDcomming': IDcomming, 'IDnow': IDnow
+        'movies': movies, 'IDcomming': IDcomming, 'IDnow': IDnow,'Datenow':Datenow
                   })
 
 
@@ -209,17 +233,9 @@ def movie_now(request):
 
 def show_all(request):
     movies = Movie.objects.all()
-    return render(request, 'showall.html', {
-        'movies': movies
-                  })
-
-def last_movie(request):
-    movies = Movie.objects.all()
     Day = int(time.strftime("%Y%m%d"))
-    IDlast = []
+    IDall = []
     Date=[]
-    D1=[]
-    D2=[]
     if Movie.objects.count() != 0:
         for movie in movies:
             if str(movie.release_date) != "":
@@ -231,7 +247,7 @@ def last_movie(request):
             else:
                 dates = Day
             Date.append(dates)
-            IDlast.append(movie.id)
+            IDall.append(movie.id)
             for i in range(len(Date)):
                 for j in range(len(Date)):
                     if Date[i] >= Date[j] :
@@ -239,32 +255,88 @@ def last_movie(request):
                        Date[j]=Date[i]
                        Date[i]=tempd
 
-                       temp=IDlast[j]
-                       IDlast[j]=IDlast[i]
-                       IDlast[i]=temp
-        #Date.sort(reverse=True) 
-        
-       # for i in range(len(Date)):
-           # for movie in movies:
-              #  if str(movie.release_date) != "":
-               #     date = str(movie.release_date).split("-")
-               #     F = ""
-               #     for j in range(len(date)):
-               #         F = F+str(date[j])
-                #    dates = int(F)
-                #else:
-                 #   dates = Day   
-               # if dates == Date[i] :
-                #    IDlast.append(movie.id)  #แก้ เช็คไอดีด้วย กรณีวันตรงกัน
-                 #   break
+                       temp=IDall[j]
+                       IDall[j]=IDall[i]
+                       IDall[i]=temp
+    return render(request, 'showall.html', {
+        'movies': movies, 'IDall': IDall
+                  })
+
+def last_movie(request):
+    movies = Movie.objects.all()
+    Day = int(time.strftime("%Y%m%d"))
+    IDlast = []
+    Date=[]
+    if Movie.objects.count() != 0:
+        for movie in movies:
+            if str(movie.release_date) != "":
+                date = str(movie.release_date).split("-")
+                F = ""
+                for j in range(len(date)):
+                    F = F+str(date[j])
+                dates = int(F)
+            else:
+                dates = Day
+            
+            if Day >= dates:
+                Date.append(dates)
+                IDlast.append(movie.id)
+                for i in range(len(Date)):
+                    for j in range(len(Date)):
+                        if Date[i] >= Date[j] :
+                            tempd=Date[j]
+                            Date[j]=Date[i]
+                            Date[i]=tempd
+
+                            temp=IDlast[j]
+                            IDlast[j]=IDlast[i]
+                            IDlast[i]=temp
     return render(request, 'lastmovie.html', {
-        'movies': movies, 'IDlast': IDlast,'Date':Date,
+        'movies': movies, 'IDlast': IDlast
                   })
 
 def top_rate(request):
-    return render(request, 'toprate.html')
+    movies = Movie.objects.all()
+    IDrate = []
+    Rate=[]
+    if Movie.objects.count() != 0:
+        for movie in movies:
+            Rate.append(movie.rate)
+            IDrate.append(movie.id)
+            for i in range(len(Rate)):
+                for j in range(len(Rate)):
+                    if Rate[i] >= Rate[j] :
+                       tempr=Rate[j]
+                       Rate[j]=Rate[i]
+                       Rate[i]=tempr
+
+                       temp=IDrate[j]
+                       IDrate[j]=IDrate[i]
+                       IDrate[i]=temp
+    return render(request, 'toprate.html', {
+        'movies': movies, 'IDrate': IDrate
+                  })
 
 def most_comment(request):
-    return render(request, 'mostcomment.html')
+    movies = Movie.objects.all()
+    IDcomm = []
+    Com=[]
+    if Movie.objects.count() != 0:
+        for movie in movies:
+            Com.append(movie.countcom)
+            IDcomm.append(movie.id)
+            for i in range(len(Com)):
+                for j in range(len(Com)):
+                    if Com[i] >= Com[j] :
+                       tempc=Com[j]
+                       Com[j]=Com[i]
+                       Com[i]=tempc
+
+                       temp=IDcomm[j]
+                       IDcomm[j]=IDcomm[i]
+                       IDcomm[i]=temp
+    return render(request, 'mostcomment.html', {
+        'movies': movies, 'IDcomm': IDcomm
+                  })
 
 

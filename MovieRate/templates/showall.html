@@ -69,7 +69,9 @@
 <br>
         <table id="id_list_table" align="center">
             <tr>
+{% for ID in IDall %}
             {% for movie in movies %}
+{% if movie.id == ID%} 
                 <td><a href="/movie_detail/{{ movie.id }}/" id="view_detail_pic_{{ movie.id }}"> <img src=" {{ movie.poster }} " width=200 height=300> </a><br>
                     <a href="/movie_detail/{{ movie.id }}/" id="view_detail_{{ movie.id }}" >{{ movie.name }} </a><br>
                       {{ movie.rate }} 
@@ -152,7 +154,10 @@
                  </FORM>
                  {% endif %}
                 </td>
-                {% if forloop.counter|divisibleby:5 %}
+           
+{% endif %}
+{% endfor %}
+{% if forloop.counter|divisibleby:5 %}
                 </tr><tr>
                 {% endif%}
             {% endfor %}
