@@ -2,24 +2,15 @@
     <head>
         <title>Movie Rate App</title>
 <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
-        <link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery-ui.css" rel="stylesheet" type="text/css"/>
-        <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
-        <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js"></script>
     <link href="/static/style/style.css" rel="stylesheet" media="screen">
 
 	<script type="text/javascript" src="js/jquery-1.4.2.min.js"></script>
 	<script type="text/javascript" src="js/jquery-func.js"></script>
-        <script>
-            $(document).ready(function() {
-                  $("#id_new_date").datepicker({ dateFormat: 'yy-mm-dd' });
-            });
-        </script>
     </head>
     <body>
-
 <!-- Shell -->
 <div id="shell">
-        <h1>Edit {{movie_.name}}</h1>
+        <h1>Movie Rate</h1>
 
 <!-- Header -->
 	<div id="header">
@@ -69,28 +60,16 @@
 
 </div>
 	<!-- end Header -->
-
-        <form method="POST" action="/movie/{{movie_.id}}/edit/">
-Name:   <input name="name_text" id="id_new_name" placeholder="{{movie_.name}}" />
+<br><br><br>
+<!-- Box -->
+<div class="box">
+  <div class="head">
+	<h2>Top Rated</h2>
+  </div>
 <br>
-Release Date:    <input name="date_text" id="id_new_date" placeholder="{{movie_.release_date}}" />
-<br>
-Detail:    <input name="detail_text" id="id_new_detail" placeholder="{{movie_.detail}}" />
-<br>
-Poster Image URL:    <input name="poster_url" id="id_new_pic" placeholder="{{movie_.poster}}" />
-<br>
-            <input type="submit" value="Update"        id="submit_update_data"  >
-            <input type="hidden" value="submit_send_update"  name="Update_send_Detail">
-            <INPUT Type = "hidden" value ="{{ movie_.id }}" name = 'id_update'>
-	    <br>
-            {% csrf_token %}
-        </form>
-        <form method="POST" action="/">
-            <input type="submit" value="Back" id="back" >
-            <input type="hidden" value="Back_send" name="back_send" >
-	    <br>
-            {% csrf_token %}
-        </form>
+       
+</div>
+<!--END Box -->
 </div>
 <!-- end Shell -->
     </body>

@@ -206,3 +206,65 @@ def movie_now(request):
     return render(request, 'movienow.html', {
         'movies': movies, 'IDnow': IDnow
                   })
+
+def show_all(request):
+    movies = Movie.objects.all()
+    return render(request, 'showall.html', {
+        'movies': movies
+                  })
+
+def last_movie(request):
+    movies = Movie.objects.all()
+    Day = int(time.strftime("%Y%m%d"))
+    IDlast = []
+    Date=[]
+    D1=[]
+    D2=[]
+    if Movie.objects.count() != 0:
+        for movie in movies:
+            if str(movie.release_date) != "":
+                date = str(movie.release_date).split("-")
+                F = ""
+                for j in range(len(date)):
+                    F = F+str(date[j])
+                dates = int(F)
+            else:
+                dates = Day
+            Date.append(dates)
+            IDlast.append(movie.id)
+            for i in range(len(Date)):
+                for j in range(len(Date)):
+                    if Date[i] >= Date[j] :
+                       tempd=Date[j]
+                       Date[j]=Date[i]
+                       Date[i]=tempd
+
+                       temp=IDlast[j]
+                       IDlast[j]=IDlast[i]
+                       IDlast[i]=temp
+        #Date.sort(reverse=True) 
+        
+       # for i in range(len(Date)):
+           # for movie in movies:
+              #  if str(movie.release_date) != "":
+               #     date = str(movie.release_date).split("-")
+               #     F = ""
+               #     for j in range(len(date)):
+               #         F = F+str(date[j])
+                #    dates = int(F)
+                #else:
+                 #   dates = Day   
+               # if dates == Date[i] :
+                #    IDlast.append(movie.id)  #แก้ เช็คไอดีด้วย กรณีวันตรงกัน
+                 #   break
+    return render(request, 'lastmovie.html', {
+        'movies': movies, 'IDlast': IDlast,'Date':Date,
+                  })
+
+def top_rate(request):
+    return render(request, 'toprate.html')
+
+def most_comment(request):
+    return render(request, 'mostcomment.html')
+
+

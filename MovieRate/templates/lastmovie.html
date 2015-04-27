@@ -3,14 +3,15 @@
         <title>Movie Rate App</title>
 <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
     <link href="/static/style/style.css" rel="stylesheet" media="screen">
-<script type="text/javascript" src="js/jquery-1.4.2.min.js"></script>
+
+	<script type="text/javascript" src="js/jquery-1.4.2.min.js"></script>
 	<script type="text/javascript" src="js/jquery-func.js"></script>
     </head>
     <body>
-
 <!-- Shell -->
 <div id="shell">
-        <h1>Movie Rate : Comming soon</h1>
+        <h1>Movie Rate</h1>
+
 <!-- Header -->
 	<div id="header">
 		
@@ -39,7 +40,7 @@
 		<!-- Navigation -->
 		<div id="navigation">
 			<ul>
-			    <li><a  href="/">HOME</a></li>
+			    <li><a href="/">HOME</a></li>
 			    <li><a href="/movie_now">IN THEATERS</a></li>
 			    <li><a href="/movie_comming">COMING SOON</a></li>
 			</ul>
@@ -59,24 +60,20 @@
 
 </div>
 	<!-- end Header -->
-       
 <br><br><br>
+<!-- Box -->
+<div class="box">
   <div class="head">
-	<h2>Comming Soon</h2>
-<form method="POST" action="/">
-            <input type="submit" value="Back" id="back" >
-            <input type="hidden" value="Back_send" name="back_send" >
-	    <br>
-            {% csrf_token %}
-        </form>
+	<h2>Latest Trailers</h2>
   </div>
-        <table id="id_list_table" align="center">
+<br>
+<table id="id_list_table" align="center">
             <tr>
             {% for movie in movies %}
-{% for ids in IDcomming %}
-{% if movie.id == ids  %} 
+{% for ID in IDlast %}
+{% if movie.id == ID%} 
                 <td><a href="/movie_detail/{{ movie.id }}/" id="view_detail_pic_{{ movie.id }}"> <img src=" {{ movie.poster }} " width=200 height=300> </a><br>
-                    <a href="/movie_detail/{{ movie.id }}/" id="view_detail_{{ movie.id }}" >{{ movie.name }} </a><br>
+                    <a href="/movie_detail/{{ movie.id }}/" id="view_detail_{{ movie.id }}" >{{forloop.counter}}{{ movie.name }} </a><br>
                       {{ movie.rate }} 
  {% if movie.rate == 0.0 %} <!--17=0 16=0.5 15=1-->
 <img src="http://png.findicons.com/files/icons/2181/34al_volume_3_2_se/24/001_17.png" width=15 height=15>
@@ -157,11 +154,11 @@
                  </FORM>
                  {% endif %}
                 </td>
+                
 
 {% endif %}
 {% endfor %}
-
-                {% if forloop.counter|divisibleby:5 %}
+{% if forloop.counter|divisibleby:5 %}
                 </tr><tr>
                 {% endif%}
             {% endfor %}
@@ -169,8 +166,17 @@
         </tr>
         </table>
 
+
+
+
+
+
+
+
+
+</div>
+<!--END Box -->
 </div>
 <!-- end Shell -->
-
     </body>
 </html>
