@@ -23,6 +23,8 @@ class NewVisitorTest(LiveServerTestCase):
         self.assertIn('Movie Rate App', self.browser.title)
         header_text = self.browser.find_element_by_tag_name('h1').text
         self.assertIn('Movie Rate', header_text)
+        header_text = self.browser.find_element_by_tag_name('div').text
+        self.assertIn('Welcome, new user. Please ', header_text)
 
         # register
         self.browser.find_element_by_id('registration').click()
@@ -38,12 +40,35 @@ class NewVisitorTest(LiveServerTestCase):
         inputpassword2.send_keys('123456')
         self.browser.find_element_by_id('regis').click()
         header_text = self.browser.find_element_by_tag_name('h1').text
+        self.assertIn('Registration Complete', header_text)
+        self.browser.find_element_by_id('login').click()
+ 
+        # login wrong username
+        header_text = self.browser.find_element_by_tag_name('h1').text
+        self.assertIn('Login', header_text)
+        inputusername = self.browser.find_element_by_id('id_username')
+        inputpassword = self.browser.find_element_by_id('id_password')
+        inputusername.send_keys('somsak')
+        inputpassword.send_keys('123456')
+        self.browser.find_element_by_id('login').click()
+        header_text = self.browser.find_element_by_tag_name('p').text
+        self.assertIn('error. please try again.', header_text)
+
+        # login correct username
+        inputusername = self.browser.find_element_by_id('id_username')
+        inputpassword = self.browser.find_element_by_id('id_password')
+        inputusername.send_keys('somchai')
+        inputpassword.send_keys('123456')
+        self.browser.find_element_by_id('login').click()
+        header_text = self.browser.find_element_by_tag_name('h1').text
         self.assertIn('Movie Rate', header_text)
 
         # click add movie and go to add page(add.html)
         self.browser.find_element_by_id('add_data').click()
         header_text = self.browser.find_element_by_tag_name('h1').text
         self.assertIn('Add New Movie', header_text)
+        header_text = self.browser.find_element_by_tag_name('div').text
+        self.assertIn('Welcome, somchai.', header_text)
 
         inputname = self.browser.find_element_by_id('id_new_name')
         inputdate = self.browser.find_element_by_id('id_new_date')
@@ -79,14 +104,14 @@ class NewVisitorTest(LiveServerTestCase):
         # back to homepage can see Fast And Furious 7
         header_text = self.browser.find_element_by_tag_name('h1').text
         self.assertIn('Movie Rate', header_text)
-        self.check_for_row('Fast And Furious 7\n0.0', 'id_list_table', 'td')
+        self.check_for_row('Fast And Furious 7\n0.0 0', 'id_now_table', 'td')
 
         # click at Fast And Furious 7 go to the movie's detail
         self.browser.find_element_by_id('view_detail_1').click()
         header_text = self.browser.find_element_by_tag_name('h1').text
         self.assertIn('Detail of Fast And Furious 7', header_text)
         self.check_for_row('Name: Fast And Furious 7', 'id_list_table', 'tr')
-        self.check_for_row('Release Date: 04/01/2015', 'id_list_table', 'tr')
+        self.check_for_row('Release Date: 2015-04-01', 'id_list_table', 'tr')
         self.check_for_row('Detail: action', 'id_list_table', 'tr')
 
         # test edit detail of Fast 7 (action change to action and racing)
@@ -130,6 +155,36 @@ class NewVisitorTest(LiveServerTestCase):
         self.browser.find_element_by_id('submit_like_1').click()
         comment = self.browser.find_element_by_id('comment_1').text
         self.assertIn('Like: 1', comment)
+
+        # click 5 stars rate
+        self.browser.find_element_by_id('star-5').click()
+        self.browser.find_element_by_id('id_rate').click()
+        self.check_for_row('Rate: 5.0', 'id_list_table', 'tr')
+
+        # logout
+        self.browser.find_element_by_id('back').click()
+        header_text = self.browser.find_element_by_tag_name('h1').text
+        self.assertIn('Movie Rate', header_text)
+        self.browser.find_element_by_id('logout').click()
+        header_text = self.browser.find_element_by_tag_name('div').text
+        self.assertIn('Welcome, new user. Please ', header_text)
+
+        # register same username
+        self.browser.find_element_by_id('registration').click()
+        header_text = self.browser.find_element_by_tag_name('h1').text
+        self.assertIn('Register Here', header_text)
+        inputusername = self.browser.find_element_by_id('id_username')
+        inputemail = self.browser.find_element_by_id('id_email')
+        inputpassword = self.browser.find_element_by_id('id_password1')
+        inputpassword2 = self.browser.find_element_by_id('id_password2')
+        inputusername.send_keys('somchai')
+        inputemail.send_keys('somchai@email.com')
+        inputpassword.send_keys('123456')
+        inputpassword2.send_keys('123456')
+        self.browser.find_element_by_id('regis').click()
+        header_text = self.browser.find_element_by_tag_name('h1').text
+        header_text = self.browser.find_element_by_tag_name('p').text
+        self.assertIn('already have this username.', header_text)
 
 if __name__ == '__main__':
     unittest.main(warnings='ignore')
