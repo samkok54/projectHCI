@@ -14,6 +14,7 @@ class Movie(models.Model):
     poster = models.URLField(default='')
     add_date = models.DateTimeField(default=datetime.now, blank=True)
     countcom = models.IntegerField(default=0)
+    clip = models.TextField(default='')
 
 
 class Comment(models.Model):

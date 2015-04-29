@@ -21,6 +21,7 @@ def home_page(request):
                              rate=0,
                              viewer=0,
                              poster=request.POST['poster_url'],
+                             clip = request.POST['clip_url'],
                              add_date=datetime.now(),
                                  )
         return redirect('/')
@@ -122,6 +123,8 @@ def edit_page(request, movie_id):
             movie_.release_date = request.POST['director_text']
         if request.POST['genre_text'] != '':
             movie_.release_date = request.POST['genre_text']
+        if request.POST['clip_url'] != '':
+            movie_.release_date = request.POST['clip_url']
         if request.POST['poster_url'] != '':
             movie_.poster = request.POST['poster_url']
         movie_.add_date = movie_.add_date
