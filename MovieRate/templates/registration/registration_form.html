@@ -1,33 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
 
-{% block body_block %}
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Registration</title>
+    <link href="/static/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/static/base.css" rel="stylesheet">
+</head>
+
+<body>
+<br><br><br><br><br><br><br>
+<div class="container">
+
+    <div class="row">
+        <div class="col-md-6 col-md-offset-3">
+            <div class="text-center">
+
 <h1>Register Here</h1>
         <p style="color:red">{{ alarm }}</p>
         <form method="post" action="/accounts/registration_complete/">
             {% csrf_token %}
 
-        Username<h style="color:red">*</h>:<input type="username" name="username" id="id_username" placeholder="" required
+<table class="table">
+<tr><td>
+        Username<h style="color:red">*</h>:
+</td><td>
+<input type="username" name="username"    id="id_username" placeholder="" required
     oninvalid="this.setCustomValidity('Please Enter your username')"
-    oninput="setCustomValidity('')"/><br>
-
-        e-mail<h style="color:red">*</h>:<input type="e-mail" name="email" id="id_email" placeholder="" required
+    oninput="setCustomValidity('')"
+    class="form-control input-sm"/>
+</td></tr>
+<tr><td>
+        e-mail<h style="color:red">*</h>:
+</td><td>
+<input type="e-mail" name="email" id="id_email" placeholder="" required
     oninvalid="this.setCustomValidity('Please Enter your e-mail')"
-    oninput="setCustomValidity('')"/><br>
-
-        Password<h style="color:red">*</h>:<input type="password" name="password1" id="id_password1" placeholder="" required
+    oninput="setCustomValidity('')"
+    class="form-control input-sm"/>
+</td></tr>
+<tr><td>
+        Password<h style="color:red">*</h>:
+</td><td>
+<input type="password" name="password1" id="id_password1" placeholder="" required
     oninvalid="this.setCustomValidity('Please Enter your password')"
-    oninput="setCustomValidity('')"/><br>
-
-        Password again<h style="color:red">*</h>:<input type="password" name="password2" id="id_password2" placeholder="" required
+    oninput="setCustomValidity('')"
+    class="form-control input-sm"/>
+</td></tr>
+<tr><td>
+        Password again<h style="color:red">*</h>:
+</td><td>
+<input type="password" name="password2" id="id_password2" placeholder="" required
     oninvalid="this.setCustomValidity('Please Enter your password again')"
-    oninput="setCustomValidity('')"/><br>
-
-                <input type="submit" value="Submit" id="regis"/>
+    oninput="setCustomValidity('')"
+    class="form-control input-sm"/>
+<tr><td colspan="2">
+                <input type="submit" value="Submit" id="regis" style="float:center;"/>
                 <input type="hidden" name="send_register" value="send" />
         </form>
-        <form method="POST" action="/">
-            <input type="submit" value="Back" id="back" >
+        <form method="POST" action="/" style="float:right;">
+            <input type="submit" value="Back" id="back">
             <input type="hidden" value="Back_send" name="back_send" >
 	    <br>
             {% csrf_token %}
         </form>
-{% endblock %}
+</td></tr>
+</table>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
