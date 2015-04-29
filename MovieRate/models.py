@@ -5,6 +5,9 @@ from datetime import datetime
 class Movie(models.Model):
     name = models.TextField(default='')
     detail = models.TextField(default='')
+    lead_actors = models.TextField(default='')
+    director = models.TextField(default='')
+    genre = models.TextField(default='')
     release_date = models.TextField(default='')
     rate = models.FloatField(default=0)
     viewer = models.IntegerField(default=0)
