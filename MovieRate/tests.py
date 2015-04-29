@@ -109,6 +109,25 @@ class HomePageTest(TestCase):
         found = resolve('/movie_detail/1/')
         self.assertEqual(found.func, movie_detail_page)
 
+    def test_rating_movie(self):
+        movie_ = Movie()
+        movie_.name = 'X-men'
+        movie_.detail = ''
+        movie_.release_date = '2015-04-21'
+        movie_.poster = 'http://upic.me/i/6r/wallpaper3.jpg'
+        movie_.save()
+        movie = Movie.objects.first()
+        movie_id = movie.id
+        request = HttpRequest()
+        request.method = 'POST'
+        request.POST['star'] = '3'
+        request.POST['send_rate'] = 'send_rate'
+
+        response = movie_detail_page(request, movie_id)
+
+        edit_movie = Movie.objects.first()
+        self.assertEqual(edit_movie.rate, 3.0)
+
 
 class MovieModelTest(TestCase):
 
