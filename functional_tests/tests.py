@@ -42,7 +42,7 @@ class NewVisitorTest(LiveServerTestCase):
         header_text = self.browser.find_element_by_tag_name('h1').text
         self.assertIn('Registration Complete', header_text)
         self.browser.find_element_by_id('login').click()
- 
+
         # login wrong username
         header_text = self.browser.find_element_by_tag_name('h1').text
         self.assertIn('Login', header_text)

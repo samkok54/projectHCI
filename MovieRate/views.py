@@ -42,7 +42,7 @@ def home_page(request):
             auth.login(request, user)
         else:
             alarm = 'error. please try again.'
-            return render(request, 'registration/login.html',{'alarm':alarm})
+            return render(request, 'registration/login.html', {'alarm': alarm})
 
     # logout
     if(request.method == 'POST' and request.POST.get(
@@ -53,8 +53,8 @@ def home_page(request):
     Day = int(time.strftime("%Y%m%d"))
     IDcomming = []
     IDnow = []
-    Datecomming=[]
-    Datenow=[]
+    Datecomming = []
+    Datenow = []
     if Movie.objects.count() != 0:
         for movie in movies:
             if str(movie.release_date) != "":
@@ -70,30 +70,31 @@ def home_page(request):
                 Datecomming.append(dates)
                 for i in range(len(Datecomming)):
                     for j in range(len(Datecomming)):
-                       if Datecomming[i] <= Datecomming[j] :
-                           tempd=Datecomming[j]
-                           Datecomming[j]=Datecomming[i]
-                           Datecomming[i]=tempd
+                        if Datecomming[i] <= Datecomming[j]:
+                            tempd = Datecomming[j]
+                            Datecomming[j] = Datecomming[i]
+                            Datecomming[i] = tempd
 
-                           temp=IDcomming[j]
-                           IDcomming[j]=IDcomming[i]
-                           IDcomming[i]=temp
+                            temp = IDcomming[j]
+                            IDcomming[j] = IDcomming[i]
+                            IDcomming[i] = temp
             else:
                 IDnow.append(movie.id)
                 Datenow.append(dates)
                 for i in range(len(Datenow)):
                     for j in range(len(Datenow)):
-                       if Datenow[i] >= Datenow[j] :
-                           tempd=Datenow[j]
-                           Datenow[j]=Datenow[i]
-                           Datenow[i]=tempd
+                        if Datenow[i] >= Datenow[j]:
+                            tempd = Datenow[j]
+                            Datenow[j] = Datenow[i]
+                            Datenow[i] = tempd
 
-                           temp=IDnow[j]
-                           IDnow[j]=IDnow[i]
-                           IDnow[i]=temp
+                            temp = IDnow[j]
+                            IDnow[j] = IDnow[i]
+                            IDnow[i] = temp
 
     return render(request, 'home.html', {
-        'movies': movies, 'IDcomming': IDcomming, 'IDnow': IDnow,'Datenow':Datenow
+        'movies': movies, 'IDcomming': IDcomming, 'IDnow': IDnow,
+        'Datenow': Datenow
                   })
 
 
@@ -179,9 +180,10 @@ def register_page(request):
         return redirect('/accounts/registration/')
     return render(request, 'registration/registration_form.html')
 
+
 def register_complete_page(request):
     # register
-    alarm =''
+    alarm = ''
     if(request.method == 'POST' and request.POST.get(
       'send_register', '') == 'send'):
         username = request.POST['username']
@@ -189,7 +191,8 @@ def register_complete_page(request):
         password2 = request.POST['password2']
         email = request.POST['email']
         alarm = ''
-        if request.POST['password1'] == request.POST['password2'] and username != '' and    request.POST['password1'] != '':
+        if (request.POST['password1'] == request.POST['password2'] and
+           username != '' and request.POST['password1'] != ''):
             if User.objects.filter(username=username).count() == 0:
                 new_user = User.objects.create_user(username, email, password)
                 new_user.is_staff = True
@@ -200,7 +203,8 @@ def register_complete_page(request):
         else:
             alarm = "error. please try again"
 
-        return render(request, 'registration/registration_form.html',{'alarm':alarm})
+        return render(request,
+                      'registration/registration_form.html', {'alarm': alarm})
     return render(request, 'registration/registration_complete.html')
 
 
@@ -243,16 +247,16 @@ def movie_now(request):
                 dates = Day
             if Day >= dates:
                 IDnow.append(movie.id)
-
     return render(request, 'movienow.html', {
         'movies': movies, 'IDnow': IDnow
                   })
+
 
 def show_all(request):
     movies = Movie.objects.all()
     Day = int(time.strftime("%Y%m%d"))
     IDall = []
-    Date=[]
+    Date = []
     if Movie.objects.count() != 0:
         for movie in movies:
             if str(movie.release_date) != "":
@@ -267,23 +271,24 @@ def show_all(request):
             IDall.append(movie.id)
             for i in range(len(Date)):
                 for j in range(len(Date)):
-                    if Date[i] >= Date[j] :
-                       tempd=Date[j]
-                       Date[j]=Date[i]
-                       Date[i]=tempd
+                    if Date[i] >= Date[j]:
+                        tempd = Date[j]
+                        Date[j] = Date[i]
+                        Date[i] = tempd
 
-                       temp=IDall[j]
-                       IDall[j]=IDall[i]
-                       IDall[i]=temp
+                        temp = IDall[j]
+                        IDall[j] = IDall[i]
+                        IDall[i] = temp
     return render(request, 'showall.html', {
         'movies': movies, 'IDall': IDall
                   })
+
 
 def last_movie(request):
     movies = Movie.objects.all()
     Day = int(time.strftime("%Y%m%d"))
     IDlast = []
-    Date=[]
+    Date = []
     if Movie.objects.count() != 0:
         for movie in movies:
             if str(movie.release_date) != "":
@@ -294,66 +299,64 @@ def last_movie(request):
                 dates = int(F)
             else:
                 dates = Day
-            
             if Day >= dates:
                 Date.append(dates)
                 IDlast.append(movie.id)
                 for i in range(len(Date)):
                     for j in range(len(Date)):
-                        if Date[i] >= Date[j] :
-                            tempd=Date[j]
-                            Date[j]=Date[i]
-                            Date[i]=tempd
+                        if Date[i] >= Date[j]:
+                            tempd = Date[j]
+                            Date[j] = Date[i]
+                            Date[i] = tempd
 
-                            temp=IDlast[j]
-                            IDlast[j]=IDlast[i]
-                            IDlast[i]=temp
+                            temp = IDlast[j]
+                            IDlast[j] = IDlast[i]
+                            IDlast[i] = temp
     return render(request, 'lastmovie.html', {
         'movies': movies, 'IDlast': IDlast
                   })
 
+
 def top_rate(request):
     movies = Movie.objects.all()
     IDrate = []
-    Rate=[]
+    Rate = []
     if Movie.objects.count() != 0:
         for movie in movies:
             Rate.append(movie.rate)
             IDrate.append(movie.id)
             for i in range(len(Rate)):
                 for j in range(len(Rate)):
-                    if Rate[i] >= Rate[j] :
-                       tempr=Rate[j]
-                       Rate[j]=Rate[i]
-                       Rate[i]=tempr
+                    if Rate[i] >= Rate[j]:
+                        tempr = Rate[j]
+                        Rate[j] = Rate[i]
+                        Rate[i] = tempr
 
-                       temp=IDrate[j]
-                       IDrate[j]=IDrate[i]
-                       IDrate[i]=temp
+                        temp = IDrate[j]
+                        IDrate[j] = IDrate[i]
+                        IDrate[i] = temp
     return render(request, 'toprate.html', {
         'movies': movies, 'IDrate': IDrate
                   })
 
+
 def most_comment(request):
     movies = Movie.objects.all()
     IDcomm = []
-    Com=[]
+    Com = []
     if Movie.objects.count() != 0:
         for movie in movies:
             Com.append(movie.countcom)
             IDcomm.append(movie.id)
             for i in range(len(Com)):
                 for j in range(len(Com)):
-                    if Com[i] >= Com[j] :
-                       tempc=Com[j]
-                       Com[j]=Com[i]
-                       Com[i]=tempc
-
-                       temp=IDcomm[j]
-                       IDcomm[j]=IDcomm[i]
-                       IDcomm[i]=temp
+                    if Com[i] >= Com[j]:
+                        tempc = Com[j]
+                        Com[j] = Com[i]
+                        Com[i] = tempc
+                        temp = IDcomm[j]
+                        IDcomm[j] = IDcomm[i]
+                        IDcomm[i] = temp
     return render(request, 'mostcomment.html', {
         'movies': movies, 'IDcomm': IDcomm
                   })
-
-
