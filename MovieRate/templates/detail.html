@@ -62,7 +62,8 @@
 
 </div>
 	<!-- end Header -->
-        
+<div class="cleaner h40"></div>
+   <div class="test">     
 <table id="id_list_table" align="center">
 <tr><td>
 Name: </td><td> {{ movie_.name }}</td></tr>
@@ -71,7 +72,7 @@ Release Date:  </td><td>  {{ movie_.release_date }}</td></tr>
 <tr><td>
 Detail:  </td><td>  {{ movie_.detail }}</td></tr>
 <tr><td>
-Poster Image URL:  </td><td>  <img src=" {{ movie_.poster }} " width=200 ></td></tr>
+Poster Image URL:  </td><td>  <img src=" {{ movie_.poster }} "  ></td></tr>
 <tr><td>
 Add Date: </td><td>   {{ movie_.add_date }}</td></tr>
 <tr><td>
@@ -96,34 +97,50 @@ Rate:  </td><td>  {{ movie_.rate }}</td></tr>
             {% csrf_token %}
         </form></td></tr>
 </table>
-       
+  </div>     
 
 
+<div class="cleaner h40"></div>
+<div class="wTable">
+<table id="comment_text" align="center">
 
-        <h2>COMMENTS</h2>
-        {% if comments != None %}
+        {% if movie_.countcom != 0 %}
+           <h2>COMMENTS</h2>
             {% for comment in comments %}
                 <p1 id="comment_{{ comment.id }}">
-                Name: {{ comment.user }}<br>
-                comment: {{ comment.comment_text }}<br>
-                date: {{ comment.date }}<br>
-                Like: {{ comment.like }}<br>
-        <form method="POST" action="/movie_detail/{{movie_.id}}/">
+           <tr><td> <b> Name: </b>{{ comment.user }}</td></tr>
+               <tr><td><span class="date"> date:{{ comment.date }}<br></span></td></tr>
+               <tr><td><span class="comment"> <b>comment:</b> {{ comment.comment_text }}<br></span></td></tr>
+               <tr><td><span class="like"><b> Like:{{ comment.like }}<br></b></span></td></tr>
+       <tr><td> <form method="POST" action="/movie_detail/{{movie_.id}}/">
             <input type="submit" value="LIKE"        id="submit_like_{{ comment.id }}"  >
             <input type="hidden" value="submit_like"  name="send_like">
             <input type="hidden" value="{{ comment.id }}"  name="id_send_like">
                 </p1>
             {% csrf_token %}
-        </form>
-<br><br>
+        </form></td></tr>
+<tr><td> </td></tr>
+<tr><td> </td></tr>
+<tr><td><div class="cleaner h20"></div> </td></tr>
             {% endfor %}
         {% endif%}
+</table>
+</div>
 
-        <form method="POST" action="/movie_detail/{{movie_.id}}/">
-            Name:<input name="user_name" id="id_user_name" placeholder="Your Name" />
-            <br>
 
-            comment:<input name="comment_text" id="id_comment_text" placeholder="Comment this movie" />
+
+
+
+
+
+<div class="cleaner h40"></div>
+<div id="comment_form">
+<h3>Comment</h3>
+        <form method="POST" name="comment" action="/movie_detail/{{movie_.id}}/">
+           <div class="form_row"> <label for="text">name:</label><br/> <input name="user_name" id="id_user_name" placeholder="Your Name" /></div>
+            <br/>
+
+          <div class="form_row">  <label for="text">Message:</label> <br/><textarea name="comment_text" id="id_comment_text" placeholder="Comment this movie" class="validate-email required input_field" /></textarea></div>
             <br>
 
 
@@ -133,6 +150,10 @@ Rate:  </td><td>  {{ movie_.rate }}</td></tr>
 	    <br>
             {% csrf_token %}
         </form>
+
+</div>
+
+
 
         <form method="POST" action="/">
             <input type="submit" value="Back" id="back" >
@@ -152,3 +173,6 @@ Rate:  </td><td>  {{ movie_.rate }}</td></tr>
 <!-- end Shell -->
     </body>
 </html>
+
+
+

@@ -1,3 +1,4 @@
+
 * { margin: 0; padding: 0; outline:0; }
 
 body {
@@ -6,6 +7,7 @@ body {
     font-family: Arial, Helvetica, Sans-Serif;
     color: #ccc;
     background: url('images/body-bg.gif');
+    background-attachment:scroll;
 }
 
 a { color: #e7b038; text-decoration: underline; cursor:pointer; }
@@ -36,3 +38,130 @@ h2 { font-size:10px; color:#f2a223; font-weight:bold; }
 #navigation ul li a { font-size:14px; font-weight:bold; color:#fff; text-decoration:none; }
 #navigation ul li a.active,
 #navigation ul li a:hover { color:#d91d2a; }
+
+
+
+.cleaner { clear: both }
+.h20 { height: 20px }
+.h40 { height: 40px }
+
+#comment_form form {
+	padding: 20px;
+	background: #0c0c0c;
+	border: 1px solid #000;
+}
+
+#comment_form h3 {
+	font-size: 20px;
+	border-bottom: 1px dotted #666;
+	margin-bottom: 10px;
+	padding-bottom: 10px;
+}
+
+#comment_form form label {  }
+
+#comment_form textarea {
+	width: 500px; 
+	height: 200px; 
+	padding: 5px; 
+	color: #333; 
+	border: 1px solid #2b271d;  
+	background: #000; 
+	font-family: Tahoma, Geneva, sans-serif;
+	font-size: 12px;
+	margin-top: 5px;
+}
+
+#comment_form .form_row {
+	width: 100%;
+	margin-bottom: 15px;
+}
+
+#comment_form form input {
+	width: 270px; 
+	color: #333; 
+	padding: 5px; 
+	border: 1px solid #2b271d;  
+	background: #000; 
+	font-family: Tahoma, Geneva, sans-serif;
+	font-size: 12px;
+	margin-top: 5px;
+}
+
+#comment_form .submit_btn {
+	width: 80px;
+	margin: 10px 0px;
+	padding: 5px 14px;
+	background-color: #000;
+	color: #2b271d;
+	border: 1px solid #2b271d;
+	cursor: pointer;
+}
+
+	color: #333; 
+	border: 1px solid #2b271d;  
+	background: #000; 
+	font-family: Tahoma, Geneva, sans-serif;
+	font-size: 12px;
+	margin-top: 5px;
+}
+
+#comment_form form input {
+	margin: 10px 0px;
+	padding: 5px 14px;
+	background-color: #000;
+	color: #2b271d;
+	border: 1px solid #2b271d;
+}
+
+
+
+
+
+#comment_section {
+	clear: both;
+	margin-bottom: 60px;
+	width: 580px;
+}
+
+.first_level {
+	margin: 0; padding: 0;
+}
+
+.comments {
+	list-style: none; 
+}
+
+.comments li { 
+	margin-bottom: 10px; 
+	list-style:none; 
+}
+.comments li .commentbox1 { 
+	border: 1px solid #000;  
+	background: #000000; 
+}
+
+.comment_box .comment_text { 
+	margin: 0 0 0 65px; 
+}
+
+.test{
+background: rgba(150,150,150,0.5); 
+width:500px;
+text-shadow: 0 1px 0 rgba(0,0,0,.50);
+}
+.wTable table{
+width:200px;
+color : #5882FA;
+}
+.wTable .like{
+color : white;
+}
+.wTable .date{
+font-size: 12px;
+color : #FF8000;
+}
+.wTable .comment{
+color : #A4A4A4;
+}
+
