@@ -137,10 +137,14 @@ Rate:  </td><td>  {{ movie_.rate }}</td></tr>
 <div id="comment_form">
 <h3>Comment</h3>
         <form method="POST" name="comment" action="/movie_detail/{{movie_.id}}/">
-           <div class="form_row"> <label for="text">name:</label><br/> <input name="user_name" id="id_user_name" placeholder="Your Name" /></div>
+           <div class="form_row"> <label for="text">name<h style="color:red">*</h>:</label><br/> <input name="user_name" id="id_user_name" placeholder="Your Name" required
+    oninvalid="this.setCustomValidity('Please Enter your name')"
+    oninput="setCustomValidity('')"/></div>
             <br/>
 
-          <div class="form_row">  <label for="text">Message:</label> <br/><textarea name="comment_text" id="id_comment_text" placeholder="Comment this movie" class="validate-email required input_field" /></textarea></div>
+          <div class="form_row">  <label for="text">Message<h style="color:red">*</h>:</label> <br/><textarea name="comment_text" id="id_comment_text" placeholder="Comment this movie" class="validate-email required input_field" required
+    oninvalid="this.setCustomValidity('Please Enter some comment message')"
+    oninput="setCustomValidity('')"/></textarea></div>
             <br>
 
 

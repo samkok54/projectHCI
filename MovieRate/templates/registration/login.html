@@ -4,11 +4,21 @@
         <form method="post" action="/">
         <p style="color:red">{{ alarm }}</p>
                 {% csrf_token %}
-Username:<input type="username" name="username" id="id_username" placeholder="" /><br>
-Password:<input type="password" name="password" id="id_password" placeholder="" /><br>
+Username<h style="color:red">*</h>:<input type="username" name="username" id="id_username" placeholder=""  required
+    oninvalid="this.setCustomValidity('Please Enter your username')"
+    oninput="setCustomValidity('')"/><br>
+Password<h style="color:red">*</h>:<input type="password" name="password" id="id_password" placeholder="" required
+    oninvalid="this.setCustomValidity('Please Enter your password')"
+    oninput="setCustomValidity('')"/><br>
                 <input type="submit" value="Log in" id="login" />
                 <input type="hidden" name="send_login" value="send" />
                 </form>
+        <form method="POST" action="/">
+            <input type="submit" value="Back" id="back" >
+            <input type="hidden" value="Back_send" name="back_send" >
+	    <br>
+            {% csrf_token %}
+        </form>
 
 
 

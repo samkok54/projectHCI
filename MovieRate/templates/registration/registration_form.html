@@ -4,11 +4,30 @@
         <p style="color:red">{{ alarm }}</p>
         <form method="post" action="/accounts/registration_complete/">
             {% csrf_token %}
-        Username<a style="color:red">*</a>:<input type="username" name="username" id="id_username" placeholder="" /><br>
-        e-mail:<input type="e-mail" name="email" id="id_email" placeholder="" /><br>
-        Password<a style="color:red">*</a>:<input type="password" name="password1" id="id_password1" placeholder="" /><br>
-        Password again<a style="color:red">*</a>:<input type="password" name="password2" id="id_password2" placeholder="" /><br>
+
+        Username<h style="color:red">*</h>:<input type="username" name="username" id="id_username" placeholder="" required
+    oninvalid="this.setCustomValidity('Please Enter your username')"
+    oninput="setCustomValidity('')"/><br>
+
+        e-mail<h style="color:red">*</h>:<input type="e-mail" name="email" id="id_email" placeholder="" required
+    oninvalid="this.setCustomValidity('Please Enter your e-mail')"
+    oninput="setCustomValidity('')"/><br>
+
+        Password<h style="color:red">*</h>:<input type="password" name="password1" id="id_password1" placeholder="" required
+    oninvalid="this.setCustomValidity('Please Enter your password')"
+    oninput="setCustomValidity('')"/><br>
+
+        Password again<h style="color:red">*</h>:<input type="password" name="password2" id="id_password2" placeholder="" required
+    oninvalid="this.setCustomValidity('Please Enter your password again')"
+    oninput="setCustomValidity('')"/><br>
+
                 <input type="submit" value="Submit" id="regis"/>
                 <input type="hidden" name="send_register" value="send" />
+        </form>
+        <form method="POST" action="/">
+            <input type="submit" value="Back" id="back" >
+            <input type="hidden" value="Back_send" name="back_send" >
+	    <br>
+            {% csrf_token %}
         </form>
 {% endblock %}
