@@ -118,13 +118,13 @@ def edit_page(request, movie_id):
         if request.POST['date_text'] != '':
             movie_.release_date = request.POST['date_text']
         if request.POST['actor_text'] != '':
-            movie_.release_date = request.POST['actor_text']
+            movie_.lead_actors = request.POST['actor_text']
         if request.POST['director_text'] != '':
-            movie_.release_date = request.POST['director_text']
+            movie_.director = request.POST['director_text']
         if request.POST['genre_text'] != '':
-            movie_.release_date = request.POST['genre_text']
+            movie_.genre = request.POST['genre_text']
         if request.POST['clip_url'] != '':
-            movie_.release_date = request.POST['clip_url']
+            movie_.clip = request.POST['clip_url']
         if request.POST['poster_url'] != '':
             movie_.poster = request.POST['poster_url']
         movie_.add_date = movie_.add_date
