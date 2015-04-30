@@ -41,7 +41,9 @@ h2 { font-size:10px; color:#f2a223; font-weight:bold; }
 
 
 
-.cleaner { clear: both }
+.cleaner { clear: both   }
+.h10 { height: 10px }
+.h15 { height: 15px }
 .h20 { height: 20px }
 .h40 { height: 40px }
 

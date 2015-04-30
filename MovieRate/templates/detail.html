@@ -68,15 +68,89 @@
 <tr><td>
 Name: </td><td> {{ movie_.name }}</td></tr>
 <tr><td>
+<div class="cleaner h10"></div>  
+</td><td><div class="cleaner h10"></div> 
+</td></tr>
+
+<tr><td>
 Release Date:  </td><td>  {{ movie_.release_date }}</td></tr>
+
+<tr><td>
+<div class="cleaner h10"></div>  
+</td><td><div class="cleaner h10"></div> 
+</td></tr>
+
+<tr><td>
+Lead Actors:  </td><td>  {{ movie_.lead_actors }}</td></tr>
+
+<tr><td>
+<div class="cleaner h10"></div>  
+</td><td><div class="cleaner h10"></div> 
+</td></tr>
+
+<tr><td>
+Director:  </td><td>  {{ movie_.director }}</td></tr>
+
+<tr><td>
+<div class="cleaner h10"></div>  
+</td><td><div class="cleaner h10"></div> 
+</td></tr>
+
+<tr><td>
+Genre:  </td><td>  {{ movie_.genre }}</td></tr>
+
+<tr><td>
+<div class="cleaner h10"></div>  
+</td><td><div class="cleaner h10"></div> 
+</td></tr>
+
 <tr><td>
 Detail:  </td><td>  {{ movie_.detail }}</td></tr>
+
+<tr><td>
+<div class="cleaner h10"></div>  
+</td><td><div class="cleaner h10"></div> 
+</td></tr>
+
 <tr><td>
 Poster Image URL:  </td><td>  <img src=" {{ movie_.poster }} "  ></td></tr>
+
+
+<tr><td>
+<div class="cleaner h10"></div>  
+</td><td><div class="cleaner h10"></div> 
+</td></tr>
+
 <tr><td>
 Add Date: </td><td>   {{ movie_.add_date }}</td></tr>
+
+<tr><td>
+<div class="cleaner h10"></div>  
+</td><td><div class="cleaner h10"></div> 
+</td></tr>
+
 <tr><td>
 Rate:  </td><td>  {{ movie_.rate }}</td></tr>
+
+<tr><td>
+<div class="cleaner h40"></div>  
+</td><td><div class="cleaner h40"></div> 
+</td></tr>
+
+<tr><td>
+Clip : </td><td> 
+<iframe width="420" height="345"
+src="{{ movie_.clip }}">
+</iframe>
+
+</td></tr>
+
+
+<tr><td>
+<div class="cleaner h10"></div>  
+</td><td><div class="cleaner h10"></div> 
+</td></tr>
+
 <tr><td>
 </td><td>   <form method="POST" action="/movie_detail/{{movie_.id}}/">
 <div class="stars">
