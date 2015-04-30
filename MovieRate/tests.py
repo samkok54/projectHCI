@@ -142,6 +142,31 @@ class HomePageTest(TestCase):
         self.assertEqual(comment_movie.user, 'Poowapong')
         self.assertEqual(comment_movie.comment_text, 'Perfect')
 
+    def test_like_comment_movie(self):
+        movie_ = Movie()
+        movie_.name = 'X-men'
+        movie_.detail = ''
+        movie_.release_date = '2015-04-21'
+        movie_.poster = 'http://upic.me/i/6r/wallpaper3.jpg'
+        movie_.save()
+        movie = Movie.objects.first()
+        movie_id = movie.id
+        comment_ = Comment()
+        comment_.movie = movie
+        comment_.user = 'Poo'
+        comment_.comment_text = 'Great'
+        comment_.save()
+        request = HttpRequest()
+        request.method = 'POST'
+        request.POST['like'] = '1'
+        request.POST['id_send_like'] = '1'
+        request.POST['send_like'] = 'submit_like'
+
+        response = movie_detail_page(request, movie_id)
+
+        comment_movie = Comment.objects.first()
+        self.assertEqual(comment_movie.like, 1)
+
 
 class MovieModelTest(TestCase):
 
