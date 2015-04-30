@@ -163,10 +163,16 @@ class NewVisitorTest(LiveServerTestCase):
         self.browser.find_element_by_id('id_rate').click()
         self.check_for_row('Rate: 5.0', 'id_list_table', 'tr')
 
-        # logout
+        # delete Fast And Furious 7
         self.browser.find_element_by_id('back').click()
         header_text = self.browser.find_element_by_tag_name('h1').text
         self.assertIn('Movie Rate', header_text)
+        self.browser.find_element_by_id('button_d').click()
+        table = self.browser.find_element_by_id('id_now_table')
+        rows = table.find_elements_by_tag_name('td')
+        self.assertEqual([], rows)
+
+        # logout
         self.browser.find_element_by_id('logout').click()
         header_text = self.browser.find_element_by_tag_name('div').text
         self.assertIn('Welcome, new user. Please ', header_text)
