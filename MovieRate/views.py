@@ -14,14 +14,14 @@ def home_page(request):
             Movie.objects.create(
                              name=request.POST['name_text'],
                              detail=request.POST['detail_text'],
-                             lead_actors = request.POST['actor_text'],
-                             director = request.POST['director_text'],
-                             genre = request.POST['genre_text'],
+                             lead_actors=request.POST['actor_text'],
+                             director=request.POST['director_text'],
+                             genre=request.POST['genre_text'],
                              release_date=request.POST['date_text'],
                              rate=0,
                              viewer=0,
                              poster=request.POST['poster_url'],
-                             clip = request.POST['clip_url'],
+                             clip=request.POST['clip_url'],
                              add_date=datetime.now(),
                                  )
         return redirect('/')

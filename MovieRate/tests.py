@@ -28,6 +28,10 @@ class HomePageTest(TestCase):
         request = HttpRequest()
         request.method = 'POST'
         request.POST['name_text'] = 'X-men'
+        request.POST['actor_text'] = ''
+        request.POST['director_text'] = ''
+        request.POST['genre_text'] = ''
+        request.POST['clip_url'] = ''
         request.POST['detail_text'] = '3D/IMAX'
         request.POST['date_text'] = '2015-04-21'
         request.POST['poster_url'] = (
@@ -64,6 +68,10 @@ class HomePageTest(TestCase):
         movie_.detail = ''
         movie_.release_date = '2015-04-21'
         movie_.poster = 'http://upic.me/i/6r/wallpaper3.jpg'
+        movie_.lead_actors = ''
+        movie_.director = ''
+        movie_.genre = ''
+        movie_.clip = ''
         movie_.save()
         movie = Movie.objects.first()
         movie_id = movie.id
@@ -74,6 +82,10 @@ class HomePageTest(TestCase):
         request.POST['date_text'] = '2015-04-01'
         request.POST['poster_url'] = (
          'http://upic.me/i/6r/wallpaper3.jpg')
+        request.POST['actor_text'] = ''
+        request.POST['director_text'] = ''
+        request.POST['genre_text'] = ''
+        request.POST['clip_url'] = ''
         request.POST['Update_send_Detail'] = 'submit_send_update'
 
         response = edit_page(request, movie_id)
@@ -166,6 +178,22 @@ class HomePageTest(TestCase):
 
         comment_movie = Comment.objects.first()
         self.assertEqual(comment_movie.like, 1)
+
+    def test_delete_movie(self):
+        movie_ = Movie()
+        movie_.name = 'X-men'
+        movie_.detail = ''
+        movie_.release_date = '2015-04-21'
+        movie_.poster = 'http://upic.me/i/6r/wallpaper3.jpg'
+        movie_.save()
+        request = HttpRequest()
+        request.method = 'POST'
+        request.POST['id_delete'] = '1'
+        request.POST['delete'] = 'delete'
+
+        response = home_page(request)
+
+        self.assertEqual(Movie.objects.count(), 0)
 
 
 class MovieModelTest(TestCase):
