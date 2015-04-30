@@ -132,7 +132,7 @@ class NewVisitorTest(LiveServerTestCase):
         self.check_for_row('Detail: action and racing', 'id_list_table', 'tr')
 
         # test comment
-        inputcomment_user = self.browser.find_element_by_id('id_user_name')
+        inputcomment_user = self.browser.find_element_by_id('id_user_name_comment')
         inputcomment_text = self.browser.find_element_by_id('id_comment_text')
         self.assertEqual(
                 inputcomment_user.get_attribute('placeholder'),
@@ -146,15 +146,17 @@ class NewVisitorTest(LiveServerTestCase):
         inputcomment_text.send_keys('this is the greatest movie forever.')
         self.browser.find_element_by_id('id_comment').click()
 
-        comment = self.browser.find_element_by_id('comment_1').text
+        comment = self.browser.find_element_by_id('comment_1_name').text
         self.assertIn('Name: Alice', comment)
+        comment = self.browser.find_element_by_id('comment_1_comment').text
         self.assertIn('comment: this is the greatest movie forever.', comment)
-        self.assertIn('Like: 0', comment)
+        comment = self.browser.find_element_by_id('comment_1_like').text
+        self.assertIn('Like:0', comment)
 
         # test click LIKE
         self.browser.find_element_by_id('submit_like_1').click()
-        comment = self.browser.find_element_by_id('comment_1').text
-        self.assertIn('Like: 1', comment)
+        comment = self.browser.find_element_by_id('comment_1_like').text
+        self.assertIn('Like:1', comment)
 
         # click 5 stars rate
         self.browser.find_element_by_id('star-5').click()

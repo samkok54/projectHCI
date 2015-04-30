@@ -181,16 +181,16 @@ src="{{ movie_.clip }}">
         {% if movie_.countcom != 0 %}
            <h2>COMMENTS</h2>
             {% for comment in comments %}
-                <p1 id="comment_{{ comment.id }}">
-           <tr><td> <b> Name: </b>{{ comment.user }}</td></tr>
-               <tr><td><span class="date"> date:{{ comment.date }}<br></span></td></tr>
-               <tr><td><span class="comment"> <b>comment:</b> {{ comment.comment_text }}<br></span></td></tr>
-               <tr><td><span class="like"><b> Like:{{ comment.like }}<br></b></span></td></tr>
+
+           <tr id="comment_{{ comment.id }}_name"><td> <b>Name: </b>{{ comment.user }}</td></tr>
+           <tr id="comment_{{ comment.id }}_date"><td><span class="date"> date:{{ comment.date }}<br></span></td></tr>
+           <tr id="comment_{{ comment.id }}_comment"><td><span class="comment"> <b>comment:</b> {{ comment.comment_text }}<br></span></td></tr>
+           <tr id="comment_{{ comment.id }}_like"><td><span class="like"><b> Like:{{ comment.like }}<br></b></span></td></tr>
        <tr><td> <form method="POST" action="/movie_detail/{{movie_.id}}/">
             <input type="submit" value="LIKE"        id="submit_like_{{ comment.id }}"  >
             <input type="hidden" value="submit_like"  name="send_like">
             <input type="hidden" value="{{ comment.id }}"  name="id_send_like">
-                </p1>
+                
             {% csrf_token %}
         </form></td></tr>
 <tr><td> </td></tr>
@@ -211,7 +211,7 @@ src="{{ movie_.clip }}">
 <div id="comment_form">
 <h3>Comment</h3>
         <form method="POST" name="comment" action="/movie_detail/{{movie_.id}}/">
-           <div class="form_row"> <label for="text">name<h style="color:red">*</h>:</label><br/> <input name="user_name" id="id_user_name" placeholder="Your Name" required
+           <div class="form_row"> <label for="text">name<h style="color:red">*</h>:</label><br/> <input name="user_name" id="id_user_name_comment" placeholder="Your Name" required
     oninvalid="this.setCustomValidity('Please Enter your name')"
     oninput="setCustomValidity('')"/></div>
             <br/>
