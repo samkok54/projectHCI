@@ -1,9 +1,10 @@
 from django.shortcuts import redirect, render
-from MovieRate.models import Movie, Comment
+from MovieRate.models import Movie, Comment, Movie_xml
 from datetime import datetime
 from django.contrib import auth
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
+from django.core import serializers
 import time
 
 
@@ -24,6 +25,7 @@ def home_page(request):
                              clip=request.POST['clip_url'],
                              add_date=datetime.now(),
                                  )
+            Movie_xml()
         return redirect('/')
     if (request.method == 'POST' and request.POST.get(
       'back_send', '') == 'Back_send'):
@@ -35,6 +37,7 @@ def home_page(request):
       'delete', '') == 'delete'):
         id_data = request.POST['id_delete']
         Movie.objects.get(pk=id_data).delete()
+        Movie_xml()
         return redirect('/')
     # login
     if(request.method == 'POST' and request.POST.get(
@@ -129,6 +132,7 @@ def edit_page(request, movie_id):
             movie_.poster = request.POST['poster_url']
         movie_.add_date = movie_.add_date
         movie_.save()
+        Movie_xml()
         return redirect('/movie_detail/%d' % int(movie_.id))
     return redirect('/detail')
 

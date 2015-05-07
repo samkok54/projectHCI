@@ -11,3 +11,5 @@ MovieRate/migrations/*.py
 MovieRate/templates/registration/*.html~
 registration/
 MovieRate/static/base.css~
+MovieRate/*.zip
+MovieRate/*.xml~
