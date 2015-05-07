@@ -12,6 +12,7 @@ class NewVisitorTest(LiveServerTestCase):
     def tearDown(self):
         self.browser.quit()
 
+    # check data in row
     def check_for_row(self, row_text, idT, tag):
         table = self.browser.find_element_by_id(idT)
         rows = table.find_elements_by_tag_name(tag)
