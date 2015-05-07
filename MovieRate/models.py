@@ -2,6 +2,7 @@ from django.db import models
 from datetime import datetime
 from django.core import serializers
 
+
 class Movie(models.Model):
     name = models.TextField(default='')
     detail = models.TextField(default='')
@@ -24,10 +25,9 @@ class Comment(models.Model):
     date = models.DateTimeField(default=datetime.now, blank=True)
     like = models.IntegerField(default=0)
 
+
 def Movie_xml():
     XMLSerializer = serializers.get_serializer("xml")
     xml_serializer = XMLSerializer()
-    with open("/home/pongsarkorn/a2/assignment_ii/MovieRate/file.xml", "w") as out:
+    with open("MovieRate/file.xml", "w") as out:
         xml_serializer.serialize(Movie.objects.all(), stream=out)
-
-

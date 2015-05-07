@@ -221,27 +221,27 @@ class TestCodeFormat(TestCase):
     def test_functional_test(self):
         pep8style = pep8.StyleGuide(show_source=True)
         result = pep8style.check_files([
-                 '/home/poo/assignment_ii/functional_tests/tests.py'])
+                 'functional_tests/tests.py'])
         self.assertEqual(result.total_errors, 0,
-                         "Found code style errors (and warnings).")
+                         "FT found code style errors (and warnings).")
 
     def test_test(self):
         pep8style = pep8.StyleGuide(show_source=True)
         result = pep8style.check_files([
-                 '/home/poo/assignment_ii/MovieRate/tests.py'])
+                 'MovieRate/tests.py'])
         self.assertEqual(result.total_errors, 0,
-                         "Found code style errors (and warnings).")
+                         "UT found code style errors (and warnings).")
 
     def test_view(self):
         pep8style = pep8.StyleGuide(show_source=True)
         result = pep8style.check_files([
-                 '/home/poo/assignment_ii/MovieRate/views.py'])
+                 'MovieRate/views.py'])
         self.assertEqual(result.total_errors, 0,
-                         "Found code style errors (and warnings).")
+                         "views found code style errors (and warnings).")
 
     def test_model(self):
         pep8style = pep8.StyleGuide(show_source=True)
         result = pep8style.check_files([
-                 '/home/poo/assignment_ii/MovieRate/models.py'])
+                 'MovieRate/models.py'])
         self.assertEqual(result.total_errors, 0,
-                         "Found code style errors (and warnings).")
+                         "models found code style errors (and warnings).")

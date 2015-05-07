@@ -132,7 +132,8 @@ class NewVisitorTest(LiveServerTestCase):
         self.check_for_row('Detail: action and racing', 'id_list_table', 'tr')
 
         # test comment
-        inputcomment_user = self.browser.find_element_by_id('id_user_name_comment')
+        idcomm = id_user_name_comment
+        inputcomment_user = self.browser.find_element_by_id(idcomm)
         inputcomment_text = self.browser.find_element_by_id('id_comment_text')
         self.assertEqual(
                 inputcomment_user.get_attribute('placeholder'),
