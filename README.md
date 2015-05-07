@@ -74,6 +74,6 @@ Use cases
 
 models [[wiki]](https://bitbucket.org/cprekmutnbb2/assignment_ii/wiki/models)
 ------
-views  [[wiki]](https://bitbucket.org/cprekmutnbb2/assignment_ii/wiki/view)
+views  [[wiki]](https://bitbucket.org/cprekmutnbb2/assignment_ii/wiki/views)
 -----
 ------------
