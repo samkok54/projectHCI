@@ -210,12 +210,20 @@ src="{{ movie_.clip }}">
 <div class="cleaner h40"></div>
 <div id="comment_form">
 <h3>Comment</h3>
-        <form method="POST" name="comment" action="/movie_detail/{{movie_.id}}/">
+ <form method="POST" name="comment" action="/movie_detail/{{movie_.id}}/">
+{% if user.is_authenticated %}
+
+           <div class="form_row"> <label for="text">name<h style="color:red">*</h>: {{ user.get_username }}</label><br/> 
+<input name="user_name" id="id_user_name_comment" value="{{ user.get_username }}" type="hidden"></div>
+
+            <br/>
+{% else %}
+
            <div class="form_row"> <label for="text">name<h style="color:red">*</h>:</label><br/> <input name="user_name" id="id_user_name_comment" placeholder="Your Name" required
     oninvalid="this.setCustomValidity('Please Enter your name')"
     oninput="setCustomValidity('')"/></div>
             <br/>
-
+{% endif%}
           <div class="form_row">  <label for="text">Message<h style="color:red">*</h>:</label> <br/><textarea name="comment_text" id="id_comment_text" placeholder="Comment this movie" class="validate-email required input_field" required
     oninvalid="this.setCustomValidity('Please Enter some comment message')"
     oninput="setCustomValidity('')"/></textarea></div>

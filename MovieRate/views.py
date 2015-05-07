@@ -228,7 +228,7 @@ def movie_comming(request):
     movies = Movie.objects.all()
     Day = int(time.strftime("%Y%m%d"))
     IDcomming = []
-    IDnow = []
+    Datecomming = []
     if Movie.objects.count() != 0:
         for movie in movies:
             if str(movie.release_date) != "":
@@ -241,6 +241,17 @@ def movie_comming(request):
                 dates = Day
             if Day < dates:
                 IDcomming.append(movie.id)
+                Datecomming.append(dates)
+                for i in range(len(Datecomming)):
+                    for j in range(len(Datecomming)):
+                        if Datecomming[i] <= Datecomming[j]:
+                            tempd = Datecomming[j]
+                            Datecomming[j] = Datecomming[i]
+                            Datecomming[i] = tempd
+
+                            temp = IDcomming[j]
+                            IDcomming[j] = IDcomming[i]
+                            IDcomming[i] = temp
     return render(request, 'commingsoon.html', {
         'movies': movies, 'IDcomming': IDcomming
                   })
@@ -249,8 +260,8 @@ def movie_comming(request):
 def movie_now(request):
     movies = Movie.objects.all()
     Day = int(time.strftime("%Y%m%d"))
-    IDcomming = []
     IDnow = []
+    Date = []
     if Movie.objects.count() != 0:
         for movie in movies:
             if str(movie.release_date) != "":
@@ -262,7 +273,18 @@ def movie_now(request):
             else:
                 dates = Day
             if Day >= dates:
+                Date.append(dates)
                 IDnow.append(movie.id)
+                for i in range(len(Date)):
+                    for j in range(len(Date)):
+                        if Date[i] >= Date[j]:
+                            tempd = Date[j]
+                            Date[j] = Date[i]
+                            Date[i] = tempd
+
+                            temp = IDnow[j]
+                            IDnow[j] = IDnow[i]
+                            IDnow[i] = temp
     return render(request, 'movienow.html', {
         'movies': movies, 'IDnow': IDnow
                   })
@@ -315,12 +337,12 @@ def last_movie(request):
                 dates = int(F)
             else:
                 dates = Day
-            if Day >= dates:
-                Date.append(dates)
+            if Day < dates:
                 IDlast.append(movie.id)
+                Date.append(dates)
                 for i in range(len(Date)):
                     for j in range(len(Date)):
-                        if Date[i] >= Date[j]:
+                        if Date[i] <= Date[j]:
                             tempd = Date[j]
                             Date[j] = Date[i]
                             Date[i] = tempd
