@@ -77,8 +77,8 @@
         <table id="id_list_table" align="center">
             <tr>
 
-            {% for movie in movies %}
 {% for ids in IDnow %}
+            {% for movie in movies %}
 {% if movie.id == ids %} 
 
                 <td><a href="/movie_detail/{{ movie.id }}/" id="view_detail_pic_{{ movie.id }}"> <img src=" {{ movie.poster }} " width=200 height=300> </a><br>
