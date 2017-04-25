@@ -2,10 +2,9 @@
     <head>
         <title>Movie Rate App</title>
 <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
-<link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
     <link href="/static/style/style.css" rel="stylesheet" media="screen">
     <link href="/static/style/star.css" rel="stylesheet" media="screen">
-
+<link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
 	<script type="text/javascript" src="js/jquery-1.4.2.min.js"></script>
 	<script type="text/javascript" src="js/jquery-func.js"></script>
 
@@ -13,7 +12,7 @@
     <body>
 <!-- Shell -->
 <div id="shell">
-<h1>Detail of {{ movie_.name }} </h1>
+<h1>Movie Rate App</h1>
 <!-- Header -->
 	<div id="header">
 		
@@ -62,97 +61,145 @@
 
 </div>
 	<!-- end Header -->
-<div class="cleaner h40"></div>
-   <div class="test">     
+
+<br><br><br>
+<!-- Box -->
+<div class="box">
+  <div class="head">
+	<h12 align="center">{{ movie_.name }}</h12>
+  </div>
+<br>
+
+ {% if user.is_superuser %}
+
+         <form method="POST" action="/movie/{{movie_.id}}/edit/" align="right">
+            <input type="submit" value="Edit" class="btn2" id="Edit" >
+            <input type="hidden" value="send_edit" name="send_Edit" >
+	    <br>
+            {% csrf_token %}
+        </form>
+
+        {% endif%}
+</br>
+<p align="center">
 <table id="id_list_table" align="center">
-<tr><td>
-Name: </td><td> {{ movie_.name }}</td></tr>
-<tr><td>
-<div class="cleaner h10"></div>  
-</td><td><div class="cleaner h10"></div> 
+<tr ><td>
+
+{% if movie_.poster != "" %}
+<img src=" {{ movie_.poster }} " height=450 width=300 align="center">
+{% else %}
+<img src="http://mtdb.vebto.com/assets/images/imdbnoimage.jpg" height=450 width=300 align="center">
+{% endif%}
+
+</td><td>&nbsp;&nbsp;&nbsp;</td>
+<td>
+   <div class="test">     
+<table id="id_list_table" align="center" height=450 >
+
+<tr><td >
+<div class="cleaner h15"></div>  
+</td><td><div class="cleaner h15"></div> 
+</td></tr>
+
+<tr ><td>
+<b>Release&nbsp;Date:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</b></td><td> 
+{% if movie_.release_date != "" %} {{ movie_.release_date }} 
+{% else %}
+-
+{% endif%}</td></tr>
+
+<tr><td >
+<div class="cleaner h15"></div>  
+</td><td><div class="cleaner h15"></div> 
 </td></tr>
 
 <tr><td>
-Release Date:  </td><td>  {{ movie_.release_date }}</td></tr>
+<b>Lead&nbsp;Actors:&nbsp;&nbsp;</b></td><td>{% if movie_.lead_actors != "" %} {{ movie_.lead_actors }} 
+{% else %}
+-
+{% endif%}  </td></tr>
 
 <tr><td>
-<div class="cleaner h10"></div>  
-</td><td><div class="cleaner h10"></div> 
+<div class="cleaner h15"></div>  
+</td><td><div class="cleaner h15"></div> 
 </td></tr>
 
 <tr><td>
-Lead Actors:  </td><td>  {{ movie_.lead_actors }}</td></tr>
+<b>Director: </b></td><td> 
+{% if movie_.director != "" %} {{ movie_.director }}
+{% else %}
+-
+{% endif%}  </td></tr>
 
 <tr><td>
-<div class="cleaner h10"></div>  
-</td><td><div class="cleaner h10"></div> 
+<div class="cleaner h15"></div>  
+</td><td><div class="cleaner h15"></div> 
 </td></tr>
 
 <tr><td>
-Director:  </td><td>  {{ movie_.director }}</td></tr>
+<b>Genre:  </b></td><td> 
+{% if movie_.genre  != "" %} {{ movie_.genre }}
+{% else %}
+-
+{% endif%} </td></tr>
 
 <tr><td>
-<div class="cleaner h10"></div>  
-</td><td><div class="cleaner h10"></div> 
+<div class="cleaner h15"></div>  
+</td><td><div class="cleaner h15"></div> 
 </td></tr>
 
 <tr><td>
-Genre:  </td><td>  {{ movie_.genre }}</td></tr>
+<b>Detail:  </b></td><td>
+{% if movie_.detail  != "" %} {{ movie_.detail }}
+{% else %}
+-
+{% endif%}  </td></tr>
 
 <tr><td>
-<div class="cleaner h10"></div>  
-</td><td><div class="cleaner h10"></div> 
-</td></tr>
-
-<tr><td>
-Detail:  </td><td>  {{ movie_.detail }}</td></tr>
-
-<tr><td>
-<div class="cleaner h10"></div>  
-</td><td><div class="cleaner h10"></div> 
-</td></tr>
-
-<tr><td>
-Poster Image URL:  </td><td>  <img src=" {{ movie_.poster }} " height=600 ></td></tr>
-
-
-<tr><td>
-<div class="cleaner h10"></div>  
-</td><td><div class="cleaner h10"></div> 
-</td></tr>
-
-<tr><td>
-Add Date: </td><td>   {{ movie_.add_date }}</td></tr>
-
-<tr><td>
-<div class="cleaner h10"></div>  
-</td><td><div class="cleaner h10"></div> 
-</td></tr>
-
-<tr><td>
-Rate:  </td><td>  {{ movie_.rate }}</td></tr>
-
-<tr><td>
-<div class="cleaner h40"></div>  
-</td><td><div class="cleaner h40"></div> 
-</td></tr>
-
-<tr><td>
-Clip : </td><td> 
-<iframe width="420" height="345"
-src="{{ movie_.clip }}">
-</iframe>
-
+<div class="cleaner h15"></div>  
+</td><td><div class="cleaner h15"></div> 
 </td></tr>
 
 
+
 <tr><td>
-<div class="cleaner h10"></div>  
-</td><td><div class="cleaner h10"></div> 
+<b>Add&nbsp;Date: </b></td><td> 
+{% if movie_.add_date  != "" %} {{ movie_.add_date }}
+{% else %}
+-
+{% endif%}   </td></tr>
+
+<tr><td>
+<div class="cleaner h15"></div>  
+</td><td><div class="cleaner h15"></div> 
 </td></tr>
 
 <tr><td>
-</td><td>   <form method="POST" action="/movie_detail/{{movie_.id}}/">
+<b>Rate:  </b></td><td> 
+{% if movie_.rate != 0.0 %}  {{ movie_.rate }}/5
+{% else %}
+-
+{% endif%} </td></tr>
+
+
+<tr><td>
+</td><td width=500px>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td></tr>
+</table>
+  </div>   
+</td>
+</tr >  
+</table>
+</p>
+
+
+{% if movie_.clip != "" %}
+<div class="cleaner h20"></div>
+<p align="center"><iframe width="720" height="480" src="{{ movie_.clip }}" >
+</iframe></p>
+{% endif%}
+<div id="bord">
+  <form method="POST" action="/movie_detail/{{movie_.id}}/" align="center">
 <div class="stars">
     <input class="star star-5" id="star-5" type="radio" name="star" value=5 />
     <label class="star star-5" for="star-5"></label>
@@ -165,13 +212,15 @@ src="{{ movie_.clip }}">
     <input class="star star-1" id="star-1" type="radio" name="star" value=1 />
     <label class="star star-1" for="star-1"></label>
 </div>
-            <input type="submit" value="rate"        id="id_rate"  >
+
+            <input type="submit" value="rate"  class="btn2" id="id_rate" >
             <input type="hidden" value="send_rate"  name="send_rate">
 	    <br>
             {% csrf_token %}
-        </form></td></tr>
-</table>
-  </div>     
+        </form>
+
+</div>
+
 
 
 <div class="cleaner h40"></div>
@@ -179,21 +228,39 @@ src="{{ movie_.clip }}">
 <table id="comment_text" align="center">
 
         {% if movie_.countcom != 0 %}
-           <h2>COMMENTS</h2>
+           <h2>--COMMENTS--</h2>
             {% for comment in comments %}
 
            <tr id="comment_{{ comment.id }}_name"><td> <b>Name: </b>{{ comment.user }}</td></tr>
            <tr id="comment_{{ comment.id }}_date"><td><span class="date"> date:{{ comment.date }}<br></span></td></tr>
-           <tr id="comment_{{ comment.id }}_comment"><td><span class="comment"> <b>comment:</b> {{ comment.comment_text }}<br></span></td></tr>
-           <tr id="comment_{{ comment.id }}_like"><td><span class="like"><b> Like:{{ comment.like }}<br></b></span></td></tr>
-       <tr><td> <form method="POST" action="/movie_detail/{{movie_.id}}/">
-            <input type="submit" value="LIKE"        id="submit_like_{{ comment.id }}"  >
+           <tr id="comment_{{ comment.id }}_comment"><td>
+<div class="container">
+  <div class="dialogbox">
+    <div class="body">
+      <span class="tip tip-up"></span>
+      <div class="message">
+        {{ comment.comment_text }}<br>
+      </div>
+    </div>
+  </div>
+  
+</div>
+
+</td></tr>
+           <tr id="comment_{{ comment.id }}_like"><td>
+<form method="POST" action="/movie_detail/{{movie_.id}}/">
+<input type="image" name="submit" value="LIKE"      src="https://upload.wikimedia.org/wikipedia/commons/1/13/Facebook_like_thumb.png" height=30  tittle="Like" id="submit_like_{{ comment.id }}"  >
             <input type="hidden" value="submit_like"  name="send_like">
             <input type="hidden" value="{{ comment.id }}"  name="id_send_like">
-                
-            {% csrf_token %}
-        </form></td></tr>
-<tr><td> </td></tr>
+ {% csrf_token %}
+   <b>{{ comment.like }} likes</b>
+
+            
+             
+           
+        </form> 
+</td></tr>
+<tr><td> ---------------------------------------------------------------------------</td></tr>
 <tr><td> </td></tr>
 <tr><td><div class="cleaner h20"></div> </td></tr>
             {% endfor %}
@@ -205,11 +272,9 @@ src="{{ movie_.clip }}">
 
 
 
-
-
 <div class="cleaner h40"></div>
 <div id="comment_form">
-<h3>Comment</h3>
+<h13>Comment</h13>
  <form method="POST" name="comment" action="/movie_detail/{{movie_.id}}/">
 {% if user.is_authenticated %}
 
@@ -229,32 +294,22 @@ src="{{ movie_.clip }}">
     oninput="setCustomValidity('')"/></textarea></div>
             <br>
 
-
-
-            <input type="submit" value="Comment"        id="id_comment"  >
+          
+            <input type="submit" value="Comment"    id="id_comment"  >
             <input type="hidden" value="send_Comment"  name="send_comment">
-	    <br>
+            
+	    
             {% csrf_token %}
+</div>
+<br>
         </form>
 
 </div>
 
 
 
-        <form method="POST" action="/">
-            <input type="submit" value="Back" id="back" >
-            <input type="hidden" value="Back_send" name="back_send" >
-	    <br>
-            {% csrf_token %}
-        </form>
-         {% if user.is_authenticated %}
-         <form method="POST" action="/movie/{{movie_.id}}/edit/">
-            <input type="submit" value="edit" id="Edit" >
-            <input type="hidden" value="send_edit" name="send_Edit" >
-	    <br>
-            {% csrf_token %}
-        </form>
-        {% endif%}
+        
+        
 </div>
 <!-- end Shell -->
     </body>

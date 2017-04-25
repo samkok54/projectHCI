@@ -21,7 +21,8 @@
             <input type="submit" value="logout" id="logout" >
             <input type="hidden" value="go_logout" name="submit_logout_page" >
             {% csrf_token %}
-        </form></p>
+        </p>
+</form>
 {% else %}
 
         <form method="POST" action="/accounts/registration/" style="float:right;">
@@ -55,7 +56,7 @@
 			    <li><a href="/top_rate">TOP RATED</a></li>
 			    <li><a href="/most_comment">MOST COMMENTED</a></li>
 			</ul>
-			</div>
+	        </div>
 		<!-- end Sub-Menu -->
 
 </div>
@@ -64,15 +65,20 @@
 <!-- Box -->
 <div class="box">
   <div class="head">
-	<h2>Show All</h2>
+	<h2>--Show All--</h2>
   </div>
 <br>
-        <table id="id_list_table" align="center">
+        <table id="id_list_table">
             <tr>
 {% for ID in IDall %}
             {% for movie in movies %}
 {% if movie.id == ID%} 
-                <td><a href="/movie_detail/{{ movie.id }}/" id="view_detail_pic_{{ movie.id }}"> <img src=" {{ movie.poster }} " width=200 height=300> </a><br>
+                <td><a href="/movie_detail/{{ movie.id }}/" id="view_detail_pic_{{ movie.id }}"> 
+{% if movie.poster != "" %}
+<img src=" {{ movie.poster }} " width=200 height=300>
+{% else %}
+<img src="http://mtdb.vebto.com/assets/images/imdbnoimage.jpg"width=200 height=300>
+{% endif%} </a><br>
                     <a href="/movie_detail/{{ movie.id }}/" id="view_detail_{{ movie.id }}" >{{ movie.name }} </a><br>
                       {{ movie.rate }} 
  {% if movie.rate == 0.0 %} <!--17=0 16=0.5 15=1-->
@@ -145,18 +151,21 @@
 
 <span class="comments">{{ movie.countcom }}</span>
 
-                 {% if user.is_authenticated %}
+             {% if user.is_superuser %}
+
                   <FORM method="POST" action="/">
-                     <INPUT Type="submit" VALUE="delete" id="button_d" >      
+                     <INPUT Type="submit" VALUE="delete" class="btn2" id="button_d" OnClick="return confirm('Do you want to delete {{ movie.name }}?')"  >      
                      <INPUT Type = "hidden" value ="delete" name = 'delete'>
                      <INPUT Type = "hidden" value ="{{ movie.id }}" name = 'id_delete'>
                      {% csrf_token %}
                  </FORM>
+
                  {% endif %}
                 </td>
            
 {% endif %}
 {% endfor %}
+<td> &nbsp;&nbsp;&nbsp;&nbsp;</td>
 {% if forloop.counter|divisibleby:5 %}
                 </tr><tr>
                 {% endif%}

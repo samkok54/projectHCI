@@ -7,6 +7,7 @@
         <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js"></script>
     <link href="/static/style/style.css" rel="stylesheet" media="screen">
 
+
 	<script type="text/javascript" src="js/jquery-1.4.2.min.js"></script>
 	<script type="text/javascript" src="js/jquery-func.js"></script>
         <script>
@@ -69,41 +70,53 @@
 
 </div>
 	<!-- end Header -->
-
+<h12 align="center">Edit -- {{ movie_.name }}</h12>
         <form method="POST" action="/movie/{{movie_.id}}/edit/">
-<table>
-<tr><td>Name:   
+<table  id="id_list_table" align="center">
+<tr><td>
+<div class="cleaner h20"></div>  
+</td><td><div class="cleaner h20"></div> 
+</td></tr>
+
+<tr><td>
+{% if movie_.poster != "" %}
+<img src=" {{ movie_.poster }} " height=450 align="center">
+{% else %}
+<img src="http://mtdb.vebto.com/assets/images/imdbnoimage.jpg" height=450 align="center">
+{% endif%}
+</td><td>&nbsp;&nbsp;&nbsp;</td>
+<td>
+
+<div class="test">     
+<table id="id_list_table" align="center" height=450 >
+<tr><td>
+<div class="cleaner h10"></div>  
+</td><td><div class="cleaner h10"></div> 
+</td></tr>
+
+<tr><td>
+<b>Name:</b>
 </td><td><input name="name_text" id="id_new_name" placeholder="{{movie_.name}}" />
 </td></tr>
 
 <tr><td>
-<div class="cleaner h15"></div>  
-</td><td><div class="cleaner h15"></div> 
+<div class="cleaner h10"></div>  
+</td><td><div class="cleaner h10"></div> 
 </td></tr>
 
 <tr><td>
-Release Date:    
+<b>Release&nbsp;Date:&nbsp;&nbsp;&nbsp;</b> 
 </td><td><input name="date_text" id="id_new_date" placeholder="{{movie_.release_date}}" />
 </td></tr>
 
 <tr><td>
-<div class="cleaner h20"></div>  
-</td><td><div class="cleaner h20"></div> 
+<div class="cleaner h10"></div>  
+</td><td><div class="cleaner h10"></div> 
 </td></tr>
 
 <tr><td>
-Lead Actors:    
-</td><td><input name="actor_text" id="id_new_actor" placeholder="Add Lead Actors" />
-</td></tr>
-
-<tr><td>
-<div class="cleaner h15"></div>  
-</td><td><div class="cleaner h15"></div> 
-</td></tr>
-
-<tr><td>
-Director:    
-</td><td><input name="director_text" id="id_new_director" placeholder="Add Director" />
+<b>Lead&nbsp;Actors:</b>    
+</td><td><input name="actor_text" id="id_new_actor" placeholder="{{movie_.lead_actors}}" />
 </td></tr>
 
 <tr><td>
@@ -112,8 +125,8 @@ Director:
 </td></tr>
 
 <tr><td>
-Genre:    
-</td><td><input name="genre_text" id="id_new_genre" placeholder="Add Type Of Movie" />
+<b>Director:</b>    
+</td><td><input name="director_text" id="id_new_director" placeholder="{{movie_.director}}" />
 </td></tr>
 
 <tr><td>
@@ -122,8 +135,8 @@ Genre:
 </td></tr>
 
 <tr><td>
-Detail:    
-</td><td><textarea name="detail_text" id="id_new_detail" placeholder="{{movie_.detail}}" /></textarea>
+<b>Genre:</b>    
+</td><td><input name="genre_text" id="id_new_genre" placeholder="{{movie_.genre}}"  />
 </td></tr>
 
 <tr><td>
@@ -132,34 +145,63 @@ Detail:
 </td></tr>
 
 <tr><td>
-Poster Image URL:    
+<b>Detail:</b>   
+</td><td><textarea name="detail_text" id="id_new_detail" placeholder="{{movie_.detail}}" rows="7" cols="31"></textarea>
+</td></tr>
+
+<tr><td>
+<div class="cleaner h20"></div>  
+</td><td><div class="cleaner h20"></div> 
+</td></tr>
+
+<tr><td>
+<b>Image&nbsp;URL:</b>    
 </td><td><input name="poster_url" id="id_new_pic" placeholder="{{movie_.poster}}" />
 </td></tr>
 
 <tr><td>
-<div class="cleaner h15"></div>  
-</td><td><div class="cleaner h15"></div> 
+<div class="cleaner h10"></div>  
+</td><td><div class="cleaner h10"></div> 
 </td></tr>
 
 <tr><td>
-Clip URL:    
+<b>Clip&nbsp;URL:</b>  
 </td><td><input name="clip_url" id="id_new_clip" placeholder="{{movie_.clip}}" />
 </td></tr>
 
+<tr><td>
+<div class="cleaner h10"></div>  
+</td><td><div class="cleaner h10"></div> 
+</td></tr>
 
 </table>
-            <input type="submit" value="Update"        id="submit_update_data"  >
+ </div>
+</td>
+</tr > 
+<tr><td>
+
+ <form method="POST" action="/">
+            <input type="submit" value="< Back"  class="btn2" id="back" >
+            <input type="hidden" value="Back_send" name="back_send" >
+	    <br>
+            {% csrf_token %}
+        </form>
+
+</td><td>
+</td><td align="center">
+
+       <form method="POST" action="/">
+            <input type="submit" value="Update" class="btn2" id="submit_update_data" OnClick="return confirm('Do you want to update {{ movie_.name }}?')">
             <input type="hidden" value="submit_send_update"  name="Update_send_Detail">
             <INPUT Type = "hidden" value ="{{ movie_.id }}" name = 'id_update'>
 	    <br>
             {% csrf_token %}
         </form>
-        <form method="POST" action="/">
-            <input type="submit" value="Back" id="back" >
-            <input type="hidden" value="Back_send" name="back_send" >
-	    <br>
-            {% csrf_token %}
-        </form>
+
+</td></tr> 
+</table>
+
+       
 </div>
 <!-- end Shell -->
     </body>

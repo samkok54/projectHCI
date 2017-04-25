@@ -2,20 +2,66 @@
     <head>
         <title>Movie Rate App</title>
 <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <link href="/static/style/style.css" rel="stylesheet" media="screen">
+    <link href="/static/style/photobanner.css" rel="stylesheet" media="screen">
 
 	<script type="text/javascript" src="js/jquery-1.4.2.min.js"></script>
 	<script type="text/javascript" src="js/jquery-func.js"></script>
+
     </head>
     <body>
+	   <!-- <h1>Animated Photo Banner</h1>
+    <!-- Each image is 350px by 233px 
+    <div class="photobanner">
+    	<img class="first" src="http://kingofwallpapers.com/picture/picture-015.jpg" alt="" />
+    	<img src="http://kingofwallpapers.com/picture/picture-003.jpg" alt="" />
+    	<img src="http://kingofwallpapers.com/picture/picture-006.jpg" alt="" />
+    	<img src="http://kingofwallpapers.com/picture/picture-009.jpg" alt="" />
+    	    </div>-->
+<div class="w3-content w3-display-container" style="max-width:1000px">
+  <img class="mySlides" src="http://kingofwallpapers.com/picture/picture-015.jpg" style="width:100%" width=1000 height=200>
+  <img class="mySlides" src="http://kingofwallpapers.com/picture/picture-002.jpg" style="width:100%" width=1000 height=200>
+  <img class="mySlides" src="http://kingofwallpapers.com/picture/picture-007.jpg" style="width:100%" width=1000 height=200>
+  <div class="w3-center w3-container w3-section w3-large w3-text-white w3-display-bottommiddle" style="width:100%">
+    <div class="w3-left w3-hover-text-khaki" onclick="plusDivs(-1)">&#10094;</div>
+    <div class="w3-right w3-hover-text-khaki" onclick="plusDivs(1)">&#10095;</div>
+    <span class="w3-badge demo w3-border w3-transparent w3-hover-white" onclick="currentDiv(1)"></span>
+    <span class="w3-badge demo w3-border w3-transparent w3-hover-white" onclick="currentDiv(2)"></span>
+    <span class="w3-badge demo w3-border w3-transparent w3-hover-white" onclick="currentDiv(3)"></span>
+  </div>
+</div>
+
+<script>
+var myIndex = 0;
+carousel();
+
+function carousel() {
+    var i;
+    var x = document.getElementsByClassName("mySlides");
+      var dots = document.getElementsByClassName("demo");
+
+    for (i = 0; i < x.length; i++) {
+       x[i].style.display = "none";  
+    }
+     for (i = 0; i < dots.length; i++) {
+     dots[i].className = dots[i].className.replace(" w3-white", "");
+  }
+    myIndex++;
+    if (myIndex > x.length) {myIndex = 1} 
+ 
+    x[myIndex-1].style.display = "block";  
+     dots[myIndex-1].className += " w3-white";
+    setTimeout(carousel, 2000); // Change image every 2 seconds
+}
+</script>
+
 <!-- Shell -->
 <div id="shell">
-        <h1>Movie Rate</h1>
-
 <!-- Header -->
 	<div id="header">
-		
-{% if user.is_authenticated %}
+	  {% if user.is_authenticated %}
         <form method="POST" action="/">
             <p align="right">Welcome, {{ user.get_username }}.
             <input type="submit" value="logout" id="logout" >
@@ -23,7 +69,6 @@
             {% csrf_token %}
         </form></p>
 {% else %}
-
         <form method="POST" action="/accounts/registration/" style="float:right;">
             <input type="submit" value="signup" id="registration" >
             <input type="hidden" value="go_regis" name="submit_regis_page" >
@@ -60,12 +105,10 @@
 
 </div>
 	<!-- end Header -->
-
-
-        {% if user.is_authenticated %}
+        {% if user.is_superuser %}
         <form method="POST" action="/add_movie" style="float:right;">
             <!-- <input name="name_text" id="id_new_name" placeholder="New Movie Name" /> -->
-            <input type="submit" value="Add Movie" id="add_data" >
+            <input type="submit" value="Add Movie" class="btn2" id="add_data" >
             <input type="hidden" value="send_Add Movie" name="send_add_data" >
 	    <br>
             {% csrf_token %}
@@ -86,7 +129,16 @@
 {% for ids in IDcomming %}
             {% for movie in movies %}
 {% if movie.id == ids and  forloop.counter <= 5 %} 
-                <td><a href="/movie_detail/{{ movie.id }}/" id="view_detail_pic_{{ movie.id }}"> <img src=" {{ movie.poster }} " width=200 height=300> </a><br>
+                <td><a href="/movie_detail/{{ movie.id }}/" id="view_detail_pic_{{ movie.id }}"> 
+
+{% if movie.poster != "" %}
+<img src=" {{ movie.poster }} " width=200 height=300>
+{% else %}
+<img src="http://mtdb.vebto.com/assets/images/imdbnoimage.jpg"width=200 height=300>
+{% endif%}
+
+
+ </a><br>
                     <a href="/movie_detail/{{ movie.id }}/" id="view_detail_{{ movie.id }}" >{{ movie.name }} </a><br>
                       {{ movie.rate }} 
  {% if movie.rate == 0.0 %} <!--17=0 16=0.5 15=1-->
@@ -159,9 +211,9 @@
 
 <span class="comments">{{ movie.countcom }}</span>
 
-                 {% if user.is_authenticated %}
+                 {% if user.is_superuser %}
                   <FORM method="POST" action="/">
-                     <INPUT Type="submit" VALUE="delete" id="button_d" >      
+                     <INPUT Type="submit" VALUE="delete" class="btn2" id="button_d" OnClick="return confirm('Do you want to delete {{ movie.name }}?')" >      
                      <INPUT Type = "hidden" value ="delete" name = 'delete'>
                      <INPUT Type = "hidden" value ="{{ movie.id }}" name = 'id_delete'>
                      {% csrf_token %}
@@ -197,7 +249,12 @@
 {% if movie.id == ids %} 
 
 
-                <td><a href="/movie_detail/{{ movie.id }}/" id="view_detail_pic_{{ movie.id }}"> <img src=" {{ movie.poster }} " width=200 height=300> </a><br>
+                <td><a href="/movie_detail/{{ movie.id }}/" id="view_detail_pic_{{ movie.id }}"> 
+{% if movie.poster != "" %}
+<img src=" {{ movie.poster }} " width=200 height=300>
+{% else %}
+<img src="http://mtdb.vebto.com/assets/images/imdbnoimage.jpg"width=200 height=300>
+{% endif%}</a><br>
                     <a href="/movie_detail/{{ movie.id }}/" id="view_detail_{{ movie.id }}" >{{ movie.name }} </a><br>
                       {{ movie.rate }} 
  {% if movie.rate == 0.0 %} <!--17=0 16=0.5 15=1-->
@@ -270,11 +327,11 @@
 
 <span class="comments">{{ movie.countcom }}</span>
 
-                 {% if user.is_authenticated %}
+                 {% if user.is_superuser %}
                   <FORM method="POST" action="/">
-                     <INPUT Type="submit" VALUE="delete" id="button_d" >      
-                     <INPUT Type = "hidden" value ="delete" name = 'delete'>
-                     <INPUT Type = "hidden" value ="{{ movie.id }}" name = 'id_delete'>
+                     <INPUT Type="submit" VALUE="delete" class="btn2" id="button_d" OnClick="return confirm('Do you want to delete {{ movie.name }}?')" >      
+                     <INPUT Type = "hidden" value ="delete" name = 'delete' >
+                     <INPUT Type = "hidden" value ="{{ movie.id }}" name = 'id_delete' >
                      {% csrf_token %}
                  </FORM>
                  {% endif %}
@@ -282,6 +339,7 @@
                 
 {% endif %}
 {% endfor %}
+<td> &nbsp;&nbsp;&nbsp;&nbsp;</td>
 {% if forloop.counter|divisibleby:5 %}
                 </tr><tr>
                 {% endif%}
@@ -295,5 +353,7 @@
 
 </div>
 <!-- end Shell -->
+
+
     </body>
 </html>

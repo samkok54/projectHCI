@@ -18,6 +18,7 @@ class Movie(models.Model):
     clip = models.TextField(default='')
 
 
+
 class Comment(models.Model):
     movie = models.ForeignKey(Movie, default=None)
     user = models.TextField(default='')

@@ -13,6 +13,8 @@
                   $("#id_new_date").datepicker({ dateFormat: 'yy-mm-dd' });
             });
         </script>
+
+
     </head>
     <body>
 
@@ -68,7 +70,7 @@
 
 </div>
 	<!-- end Header -->
-
+  {% if user.is_superuser %}
         <form method="POST" action="/">
 <table>
 <tr><td>Name<h style="color:red">*</h>:   
@@ -83,7 +85,7 @@
 </td></tr>
 
 <tr><td>
-Release Date:    
+Release&nbsp;Date:&nbsp;&nbsp;&nbsp; 
 </td><td><input name="date_text" id="id_new_date" placeholder="Add Release Date">
 </td></tr>
 
@@ -93,7 +95,7 @@ Release Date:
 </td></tr>
 
 <tr><td>
-Lead Actors:    
+Lead&nbsp;Actors:    
 </td><td><input name="actor_text" id="id_new_actor" placeholder="Add Lead Actors" />
 </td></tr>
 
@@ -133,7 +135,7 @@ Detail:
 </td></tr>
 
 <tr><td>
-Poster Image URL:    
+Image&nbsp;URL:    
 </td><td><input name="poster_url" id="id_new_pic" placeholder="Add Poster URL" />
 </td></tr>
 
@@ -143,25 +145,31 @@ Poster Image URL:
 </td></tr>
 
 <tr><td>
-Clip URL:    
+Clip&nbsp;URL:    
 </td><td><input name="clip_url" id="id_new_clip" placeholder="Add Clip URL" />
 </td></tr>
 
 
-
 </table>
-            <input type="submit" value="Add Detail"        id="submit_data"  >
+            <input type="submit" value="Add Detail"     class="btn2"   id="submit_data"  >
             <input type="hidden" value="submit_send_data"  name="Add_send_Detail">
 	    <br>
             {% csrf_token %}
         </form>
         <form method="POST" action="/">
-            <input type="submit" value="Back" id="back" >
+            <input type="submit" value="< Back"  class="btn2" id="back" >
             <input type="hidden" value="Back_send" name="back_send" >
 	    <br>
             {% csrf_token %}
         </form>
-
+{% else %}
+<br><br><br><br><br><br><br>
+<p align="center"><h12>Do Not</h12>
+<br>
+<h12>Enter Here</h12>
+<br>
+<br>please,login with superuser</p>
+  {% endif %}
 </div>
 <!-- end Shell -->
     </body>
