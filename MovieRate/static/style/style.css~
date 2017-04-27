@@ -26,15 +26,11 @@ h13 { font-size:30px; color:#FFF; font-weight:bold; }
 
 
 #shell { width:1000px; margin:0 auto; }
-#header { position:relative; padding-top: 100px;}
-#sub-navigation { display:block; clear:right; border-top:1px dashed #666; border-bottom:1px dashed #666; padding:20px 0;  }
-#sub-navigation ul { list-style:none; }
-#sub-navigation ul li { float:left; display:inline; padding-right:23px;  }
-#sub-navigation ul li a { font-size:14px; font-weight:bold; color:#fff; line-height:1px; text-decoration:none; }
-#sub-navigation ul li a:hover { text-decoration:underline; }
+#header { position:relative; padding-top: 10px;}
 
 
-#navigation { float:right; clear:right; padding-top:28px; padding-bottom:47px; }
+
+#navigation { float:right; clear:right; padding-top:20px; padding-bottom:20px; }
 #navigation ul { list-style:none; }
 #navigation ul li { float:left; display:inline; padding-left:29px;  }
 #navigation ul li a { font-size:14px; font-weight:bold; color:#fff; text-decoration:none; }
@@ -233,5 +229,13 @@ color : #A4A4A4;
 .btn2:hover {
   background: #A4A4A4;
   text-decoration: none;
+}
+
+footer {
+    padding: 1em;
+    color: white;
+    background-color: black;
+    clear: left;
+    text-align: center;
 }
 
