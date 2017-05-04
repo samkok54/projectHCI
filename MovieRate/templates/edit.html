@@ -198,7 +198,7 @@
 
             <input type="submit" value="Update" class="btn2" id="submit_update_data" OnClick="return confirm('Do you want to update {{ movie.name }}?')"  >
             <input type="hidden" value="submit_send_update"  name="Update_send_Detail">
-            <INPUT Type = "hidden" value ="{{ movie_.id }}" name = 'id_update'>
+            <input Type = "hidden" value ="{{ movie_.id }}" name = 'id_update'>
 	    <br>
             {% csrf_token %}
         

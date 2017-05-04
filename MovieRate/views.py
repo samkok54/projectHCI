@@ -28,6 +28,22 @@ def home_page(request):
                                  )
             Movie_xml()
         return redirect('/')
+    movies = Movie.objects.all()
+    #found=''
+    movies_s=[]
+    str_f=0
+    search=''
+    if (request.method == 'GET' and request.GET.get('ss', '') == 'submit_search'):
+        if request.GET['search_box'] != '':
+            search = request.GET['search_box']
+            for movie in movies:
+                 if movie.name.lower().find(search.lower()) != -1:
+                     movies_s.append(movie.id)
+                     str_f=1
+        if str_f != 1: str_f=2
+  
+            
+
     if (request.method == 'POST' and request.POST.get(
       'back_send', '') == 'Back_send'):
         return redirect('/')
@@ -58,53 +74,9 @@ def home_page(request):
       'submit_logout_page', '') == 'go_logout'):
         auth.logout(request)
 
-    movies = Movie.objects.all()
-    Day = int(time.strftime("%Y%m%d"))
-    IDcomming = []
-    IDnow = []
-    Datecomming = []
-    Datenow = []
-    if Movie.objects.count() != 0:
-        for movie in movies:
-            if str(movie.release_date) != "":
-                date = str(movie.release_date).split("-")
-                F = ""
-                for j in range(len(date)):
-                    F = F+str(date[j])
-                dates = int(F)
-            else:
-                dates = Day
-            if Day < dates:
-                IDcomming.append(movie.id)
-                Datecomming.append(dates)
-                for i in range(len(Datecomming)):
-                    for j in range(len(Datecomming)):
-                        if Datecomming[i] <= Datecomming[j]:
-                            tempd = Datecomming[j]
-                            Datecomming[j] = Datecomming[i]
-                            Datecomming[i] = tempd
 
-                            temp = IDcomming[j]
-                            IDcomming[j] = IDcomming[i]
-                            IDcomming[i] = temp
-            else:
-                IDnow.append(movie.id)
-                Datenow.append(dates)
-                for i in range(len(Datenow)):
-                    for j in range(len(Datenow)):
-                        if Datenow[i] >= Datenow[j]:
-                            tempd = Datenow[j]
-                            Datenow[j] = Datenow[i]
-                            Datenow[i] = tempd
-
-                            temp = IDnow[j]
-                            IDnow[j] = IDnow[i]
-                            IDnow[i] = temp
-
-    return render(request, 'home.html', {
-        'movies': movies, 'IDcomming': IDcomming, 'IDnow': IDnow,
-        'Datenow': Datenow
-                  })
+      
+    return render(request, 'home.html',{'movies':movies , 'movies_s':movies_s , 'str_f':str_f , 'search':search})
 
 
 def edit_page(request, movie_id):
@@ -196,6 +168,35 @@ def register_page(request):
         return redirect('/accounts/registration/')
     return render(request, 'registration/registration_form.html')
 
+def news1(request):
+    return render(request, '1.html')
+
+def news2(request):
+    return render(request, '2.html')
+
+def news3(request):
+    return render(request, '3.html')
+
+def news4(request):
+    return render(request, '4.html')
+
+def news5(request):
+    return render(request, '5.html')
+
+def news6(request):
+    return render(request, '6.html')
+
+def news7(request):
+    return render(request, '7.html')
+
+def news8(request):
+    return render(request, '8.html')
+
+def news9(request):
+    return render(request, '9.html')
+
+def news10(request):
+    return render(request, '10.html')
 
 def register_complete_page(request):
     # register
@@ -400,13 +401,13 @@ def most_comment(request):
         'movies': movies, 'IDcomm': IDcomm
                   })
 
-def search_titles(request):
-    if request.method == "POST" :
-       search_text=request.POST['search_test']
-    else :
-       search_text=''
-    movies= Movie.objects.filter(title__contains=search_text)
-    return render_to_response('ajax_search.html',{'movies':movies})
+#def search_titles(request):
+ #   if request.method == "POST" :
+  #     search_text=request.POST['search_test']
+   # else :
+    #   search_text=''
+   # movies= Movie.objects.filter(name__contains=search_text)
+    #return render_to_response('ajax_search.html',{'movies':movies})
     
 
 #def contact(request):

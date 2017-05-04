@@ -1,0 +1,97 @@
+<html>
+    <head>
+        <title>Movie Rate App</title>
+
+<meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+    <link href="/static/style/style.css" rel="stylesheet" media="screen">
+    <link href="/static/style/dropdown.css" rel="stylesheet" media="screen">
+	<script type="text/javascript" src="js/jquery-1.4.2.min.js"></script>
+	<script type="text/javascript" src="js/jquery-func.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    </head>
+
+    <body>
+<!-- Shell -->
+<div id="shell">
+        <h1>Movie Rate</h1>
+
+<!-- Header -->
+	<div id="header">
+		
+{% if user.is_authenticated %}
+        <form method="POST" action="/">
+            <p align="right">Welcome, {{ user.get_username }}.
+{% if user.is_superuser %}
+<span class="tooltip"><a href="/add_movie"><span class="fa fa-plus btn3" aria-hidden="true" ></span></a>
+  <span class="tooltiptext">Add movies</span>
+</span>
+&nbsp;
+
+
+            
+           {% endif %}
+            <input type="submit" value="logout" id="logout" >
+            <input type="hidden" value="go_logout" name="submit_logout_page" >
+            {% csrf_token %}
+        </form></p>
+{% else %}
+
+        <form method="POST" action="/accounts/registration/" style="float:right;">
+            <input type="submit" value="signup" id="registration" >
+            <input type="hidden" value="go_regis" name="submit_regis_page" >
+            {% csrf_token %}
+        </form>
+        <form method="POST" action="/accounts/login/" style="float:right;">
+            Welcome, new user. Please 
+            <input type="submit" value="login" id="login" >
+            <input type="hidden" value="go_login" name="submit_login_page" >
+            {% csrf_token %}
+            or &nbsp;
+        </form>
+{% endif %}
+		<!-- Navigation -->
+		<div id="navigation">
+			<ul>
+			    <li><a href="/">HOME</a></li>
+			    <li><a href="/movie_now">IN THEATERS</a></li>
+			    <li><a href="/movie_comming">COMING SOON</a></li>
+			</ul>
+
+		</div>
+		<!-- end Navigation -->
+<!-- Sub-menu -->
+		<div id="sub-navigation">
+			<div class="container">
+  <a href="/show_all">SHOW ALL</a>
+  <a href="/last_movie">LATEST TRAILERS</a>
+  <a href="/top_rate">TOP RATED</a>
+  <a href="/most_comment">MOST COMMENTED</a>
+</div>
+			</div>
+		<!-- end Sub-Menu -->
+
+</div>
+	<!-- end Header -->
+<br>
+
+<!-- Box -->
+<div class="box">  
+<div class="head">
+	<h1>พาราเมาท์ประกาศยกเลิก Friday the 13th ฉบับ 2017</h1>
+<br>
+<center><img src="http://cdn.movieweb.com/img.news.tops/NEknZ0DSKtjrok_1_b.jpg" width=600px></center>
+  </div>
+<br>
+     <p>&emsp;เมื่อช่วงต้นสัปดาห์ พาราเมาท์ได้ประกาศยกเลิกแผนการฉาย Friday the 13th ฉบับปี 2017 ครับ ทีแรกคาดกันว่าน่าจะมีการหาวันฉายใหม่ แต่ทาง The Hollywood Reporter แหล่งข่าวที่มีความน่าเชื่อถือได้กลับบอกว่าการยกเลิกแผนการฉายนี้คือการพับโครงการเก็บเข้ากรุไปเลย ทั้งๆที่แผนการณ์เดิมนั้นเหลือเวลาอีกไม่ถึง 6 อาทิตย์ที่หนังจะเริ่มเปิดกล้องถ่ายทำเพื่อออกฉายวันที่ 23 ตุลาคมปีนี้ ทว่าทางพาราเมาท์กลับตัดสินใจพับโปรเจคลงโดยไม่มีสาเหตุ แหล่งข่าวมีการวิเคราะห์ว่าอาจจะเป็นเพราะรายรับของ Rings ในสัปดาห์เปิดตัวที่ทำไปได้เพียง 13 ล้านเหรียญ ทำให้พวกเขากลัวว่า Friday the 13th อาจจะมีชะตากรรมเดียวกันเลยอาจเป็นเหตุให้ถูกพับโครงการครับ</p>
+<br>
+     <p>&emsp;Friday the 13th เป็นเรื่องราวของเจสัน ฆาตกรที่ฆ่าไม่ตายและออกมาไล่ฆ่าคน ณ แคมป์ทะเลสาบคริสตัล ตัวหนังสร้างมาแล้วถึงสิบภาค รวมไปถึงภาคครอสโอเวอร์กับเฟรดดี้ใน Freddy vs. Jason และล่าสุดกับภาครีบูตที่ออกฉายไปเมื่อปี 2009</p>
+
+</div>
+<!--END Box -->
+
+<footer>Copyright &copy; Cpr.E KMUTNB</footer>
+</div>
+<!-- end Shell -->
+
+    </body>
+</html>

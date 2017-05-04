@@ -1,0 +1,98 @@
+<html>
+    <head>
+        <title>Movie Rate App</title>
+
+<meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+    <link href="/static/style/style.css" rel="stylesheet" media="screen">
+    <link href="/static/style/dropdown.css" rel="stylesheet" media="screen">
+	<script type="text/javascript" src="js/jquery-1.4.2.min.js"></script>
+	<script type="text/javascript" src="js/jquery-func.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    </head>
+
+    <body>
+<!-- Shell -->
+<div id="shell">
+        <h1>Movie Rate</h1>
+
+<!-- Header -->
+	<div id="header">
+		
+{% if user.is_authenticated %}
+        <form method="POST" action="/">
+            <p align="right">Welcome, {{ user.get_username }}.
+{% if user.is_superuser %}
+<span class="tooltip"><a href="/add_movie"><span class="fa fa-plus btn3" aria-hidden="true" ></span></a>
+  <span class="tooltiptext">Add movies</span>
+</span>
+&nbsp;
+
+
+            
+           {% endif %}
+            <input type="submit" value="logout" id="logout" >
+            <input type="hidden" value="go_logout" name="submit_logout_page" >
+            {% csrf_token %}
+        </form></p>
+{% else %}
+
+        <form method="POST" action="/accounts/registration/" style="float:right;">
+            <input type="submit" value="signup" id="registration" >
+            <input type="hidden" value="go_regis" name="submit_regis_page" >
+            {% csrf_token %}
+        </form>
+        <form method="POST" action="/accounts/login/" style="float:right;">
+            Welcome, new user. Please 
+            <input type="submit" value="login" id="login" >
+            <input type="hidden" value="go_login" name="submit_login_page" >
+            {% csrf_token %}
+            or &nbsp;
+        </form>
+{% endif %}
+		<!-- Navigation -->
+		<div id="navigation">
+			<ul>
+			    <li><a href="/">HOME</a></li>
+			    <li><a href="/movie_now">IN THEATERS</a></li>
+			    <li><a href="/movie_comming">COMING SOON</a></li>
+			</ul>
+
+		</div>
+		<!-- end Navigation -->
+<!-- Sub-menu -->
+		<div id="sub-navigation">
+			<div class="container">
+  <a href="/show_all">SHOW ALL</a>
+  <a href="/last_movie">LATEST TRAILERS</a>
+  <a href="/top_rate">TOP RATED</a>
+  <a href="/most_comment">MOST COMMENTED</a>
+</div>
+			</div>
+		<!-- end Sub-Menu -->
+
+</div>
+	<!-- end Header -->
+<br>
+
+<!-- Box -->
+<div class="box">  
+<div class="head">
+	<h1>ตัวอย่างแรกของหนังสยองขวัญรีเมค IT</h1>
+<br>
+<center><img src="https://i.ytimg.com/vi/fh8FLnFQj3o/maxresdefault.jpg" width=600px></center>
+  </div>
+<br>
+     <p>&emsp;เมื่อคืนนี้ทางนิวไลน์ ซีนีม่า ได้ออนไลน์ตัวอย่างซับไทยของหนังสยองขวัญรีเมค IT ออกมาทางยูทูปครับ ทีแรกผมก็ไม่ได้คิดอะไร กะว่าจะกดดูแบบผ่านๆ แต่เมื่อได้ดูตัวอย่างแล้วถึงกับตาสว่าง ขนลุกและรู้สึกหลอนก่อนนอนไปเลย เพราะเดิมทีผมไม่รู้จักหนังเรื่องนี้ในฉบับเก่า เห็นแค่ใบปิดผ่านๆและมันดูตลกเอามากๆ เพราะหนังนำเอาตัวตลกมาเป็นตัวร้าย ซึ่งผมก็ไม่รู้อีกแหละว่าเจ้าตัวตลกตัวนี้เป็นผี ปีศาจ หรือฆาตกรโรคจิตกันแน่ แต่พอได้มาเห็นตัวอย่างนี้ก็ได้คำตอบและลองมาหาข้อมูลเพิ่มเติม กลายเป็นว่าหนังเรื่องนี้อยู่ในลิสต์หนังที่อยากดูไปอีกเรื่องเลยครับ</p>
+<br>
+     <p>&emsp;IT มีฉากหลังเป็นเมืองเล็กๆที่ชื่อว่าเดอร์รี่ เมืองที่มีสถิติคนหายมากที่สุดโดยเฉพาะเด็กๆ(หายบ่อยถึงขนาดที่ในฉากหนึ่งของตัวอย่างมีการประกาศเคอร์ฟิวในเวลากลางคืน) ตัวหนังจะดำเนินเรื่องราวผ่านกลุ่มเด็กๆที่ต้องเผชิญหน้ากับปีศาจตัวตลกที่ใช้ความกลัวที่สุดของเด็กแต่ละคนมาเล่นงานพวกเขา ยิ่งฉากฉายสไลด์ในตัวอย่างนี้ โคตรหลอนอ่ะครับ</p>
+<br>
+<p>IT ได้ชื่อไทยว่า อิท โผล่จากนรก วางกำหนดฉายในไทยวันที่ 7 กันยายนนี้</p>
+</div>
+<!--END Box -->
+
+<footer>Copyright &copy; Cpr.E KMUTNB</footer>
+</div>
+<!-- end Shell -->
+
+    </body>
+</html>

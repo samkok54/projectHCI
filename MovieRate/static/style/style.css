@@ -26,8 +26,15 @@ table { border: 0; width:200px;}
 
 h2 { font-size:20px; color:#523029; font-weight:bold; }
 h12 { font-size:40px; color:#dbb083; text-shadow:4px 0 #2d130c, 0 1px #2d130c, 1px 0 #2d130c, 0 -1px #2d130c;
-
 font-weight:bold; }
+
+p {
+    font-size: 16px;
+}
+
+
+
+
 .nameH {  
   text-decoration: none; 
   width : 1000px; 
@@ -54,6 +61,28 @@ h13 { font-size:30px; color:#2d130c; font-weight:bold; }
 #navigation ul li a { font-size:14px; font-weight:bold; color:#000; text-decoration:none; }
 #navigation ul li a.active,
 #navigation ul li a:hover { color:#d91d2a; }
+
+nav {
+    float: left;
+    max-width: 300px;
+    margin: 0;
+    padding: 1em;
+}
+
+nav ul {
+    list-style-type: none;
+    padding: 0;
+}
+   
+nav ul a {
+    text-decoration: none;
+}
+article {
+    margin-left: 170px;
+    border-left: 2px solid gray;
+    padding: 1em;
+    overflow: hidden;
+}
 
 
 
