@@ -6,6 +6,7 @@
     <link href="/static/style/style.css" rel="stylesheet" media="screen">
     <link href="/static/style/photobanner.css" rel="stylesheet" media="screen">
     <link href="/static/style/dropdown.css" rel="stylesheet" media="screen">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
 	<script type="text/javascript" src="js/jquery-1.4.2.min.js"></script>
 	<script type="text/javascript" src="js/jquery-func.js"></script>
@@ -90,13 +91,26 @@ function showSlides() {
 	<div id="header">
 	  {% if user.is_authenticated %}
         <form method="POST" action="/">
-            <p align="right">Welcome, {{ user.get_username }}.
+            <p align="right">Welcome, {{ user.get_username }}.&nbsp;
+           {% if user.is_superuser %}
+<span class="tooltip"><a href="/add_movie"><span class="fa fa-plus btn3" aria-hidden="true" ></span></a>
+  <span class="tooltiptext">Add movies</span>
+</span>
+&nbsp;
+
+
+            
+           {% endif %}
+
             <input type="submit" value="logout" id="logout" >
             <input type="hidden" value="go_logout" name="submit_logout_page" >
 
             {% csrf_token %}
 
-        </form></p>
+
+
+            </p>
+        </form>
 {% else %}
         <form method="POST" action="/accounts/registration/" style="float:right;">
             <input type="submit" value="signup" id="registration" >
@@ -111,6 +125,9 @@ function showSlides() {
             or &nbsp;
         </form>
 {% endif %}
+
+
+
 		<!-- Navigation -->
 		<div id="navigation">
 			<ul>
@@ -136,20 +153,13 @@ function showSlides() {
 
 </div>
 	<!-- end Header -->
-        {% if user.is_superuser %}
-        <form method="POST" action="/add_movie" style="float:right;">
-            <!-- <input name="name_text" id="id_new_name" placeholder="New Movie Name" /> -->
-            <input type="submit" value="Add Movie" class="btn2" id="add_data" >
-            <input type="hidden" value="send_Add Movie" name="send_add_data" >
-	    <br>
-            {% csrf_token %}
-        </form>
-        {% endif %}
-<br><br><br>
 
 <!-- Box -->
 <div class="box">
   <div class="head">
+
+
+
   </div>
 </div>
 <!--END Box -->

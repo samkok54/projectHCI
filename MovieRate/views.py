@@ -1,10 +1,11 @@
-from django.shortcuts import redirect, render
+from django.shortcuts import redirect, render, render_to_response
 from MovieRate.models import Movie, Comment, Movie_xml
 from datetime import datetime
 from django.contrib import auth
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from django.core import serializers
+from django.db.models import Q
 import time
 
 
@@ -107,10 +108,8 @@ def home_page(request):
 
 
 def edit_page(request, movie_id):
-    if (request.method == 'POST' and request.POST.get(
-      'send_Edit', '') == 'send_edit'):
-        movie_ = Movie.objects.get(id=movie_id)
-        return render(request, 'edit.html', {'movie_': movie_})
+    movie_ = Movie.objects.get(id=movie_id)
+  
     # แก้ไข รายละเอียดหนัง
     if (request.method == 'POST' and request.POST.get(
       'Update_send_Detail', '') == 'submit_send_update'):
@@ -134,8 +133,8 @@ def edit_page(request, movie_id):
         movie_.add_date = movie_.add_date
         movie_.save()
         Movie_xml()
-        return redirect('/movie_detail/%d' % int(movie_.id))
-    return redirect('/detail')
+        return redirect('/movie_detail/%d' % int(movie_.id)) 
+    return render(request, 'edit.html', {'movie_': movie_})
 
 
 def add_page(request):
@@ -286,6 +285,7 @@ def movie_now(request):
                             temp = IDnow[j]
                             IDnow[j] = IDnow[i]
                             IDnow[i] = temp
+               
     return render(request, 'movienow.html', {
         'movies': movies, 'IDnow': IDnow
                   })
@@ -399,3 +399,17 @@ def most_comment(request):
     return render(request, 'mostcomment.html', {
         'movies': movies, 'IDcomm': IDcomm
                   })
+
+def search_titles(request):
+    if request.method == "POST" :
+       search_text=request.POST['search_test']
+    else :
+       search_text=''
+    movies= Movie.objects.filter(title__contains=search_text)
+    return render_to_response('ajax_search.html',{'movies':movies})
+    
+
+#def contact(request):
+ #   if request.method == 'POST':
+  #      return redirect('/contact')
+   # return render(request, 'contact.html')

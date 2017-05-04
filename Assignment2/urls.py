@@ -21,4 +21,6 @@ urlpatterns = patterns('',
     #url(r'^accounts/logout/$', 'MovieRate.views.logout_page', name='logout'),
     url(r'^accounts/registration/$', 'MovieRate.views.register_page', name='register'),
     url(r'^accounts/registration_complete/$', 'MovieRate.views.register_complete_page', name='register_ok'),
+    #url(r'^contact$', 'MovieRate.views.contact', name='contact'),
+    url(r'^search/$', 'MovieRate.views.search_titles', name='home'),
 )

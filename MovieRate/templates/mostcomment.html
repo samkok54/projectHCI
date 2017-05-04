@@ -6,6 +6,7 @@
     <link href="/static/style/dropdown.css" rel="stylesheet" media="screen">
 	<script type="text/javascript" src="js/jquery-1.4.2.min.js"></script>
 	<script type="text/javascript" src="js/jquery-func.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     </head>
     <body>
 <!-- Shell -->
@@ -18,6 +19,15 @@
 {% if user.is_authenticated %}
         <form method="POST" action="/">
             <p align="right">Welcome, {{ user.get_username }}.
+{% if user.is_superuser %}
+<span class="tooltip"><a href="/add_movie"><span class="fa fa-plus btn3" aria-hidden="true" ></span></a>
+  <span class="tooltiptext">Add movies</span>
+</span>
+&nbsp;
+
+
+            
+           {% endif %}
             <input type="submit" value="logout" id="logout" >
             <input type="hidden" value="go_logout" name="submit_logout_page" >
             {% csrf_token %}
@@ -81,7 +91,7 @@
 {% else %}
 <img src="http://mtdb.vebto.com/assets/images/imdbnoimage.jpg"width=200 height=300>
 {% endif%} </a><br>
-                    <a href="/movie_detail/{{ movie.id }}/" id="view_detail_{{ movie.id }}" >{{ movie.name }} </a><br>
+                    <a class="nameM" href="/movie_detail/{{ movie.id }}/" id="view_detail_{{ movie.id }}" >{{ movie.name }} </a><br>
                       {{ movie.rate }} 
  {% if movie.rate == 0.0 %} <!--17=0 16=0.5 15=1-->
 <img src="http://png.findicons.com/files/icons/2181/34al_volume_3_2_se/24/001_17.png" width=15 height=15>

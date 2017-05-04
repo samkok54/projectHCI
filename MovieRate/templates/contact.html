@@ -1,0 +1,137 @@
+<html>
+    <head>
+        <title>Movie Rate App</title>
+<meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link href="/static/style/style.css" rel="stylesheet" media="screen">
+    <link href="/static/style/dropdown.css" rel="stylesheet" media="screen">
+ <!--  <link href="/static/style/contact.css" rel="stylesheet" media="screen"> -->
+   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+
+	<script type="text/javascript" src="js/jquery-1.4.2.min.js"></script>
+	<script type="text/javascript" src="js/jquery-func.js"></script>
+
+    </head>
+    <body>
+
+
+
+
+<div id="shell">
+<!-- Header -->
+	<div id="header">
+	  {% if user.is_authenticated %}
+        <form method="POST" action="/">
+            <p align="right">Welcome, {{ user.get_username }}.&nbsp;
+           {% if user.is_superuser %}
+<span class="tooltip"><a href="/add_movie"><span class="fa fa-plus btn3" aria-hidden="true" ></span></a>
+  <span class="tooltiptext">Add movies</span>
+</span>
+&nbsp;
+
+
+            
+           {% endif %}
+
+            <input type="submit" value="logout" id="logout" >
+            <input type="hidden" value="go_logout" name="submit_logout_page" >
+
+            {% csrf_token %}
+
+
+
+            </p>
+        </form>
+{% else %}
+        <form method="POST" action="/accounts/registration/" style="float:right;">
+            <input type="submit" value="signup" id="registration" >
+            <input type="hidden" value="go_regis" name="submit_regis_page" >
+            {% csrf_token %}
+        </form>
+        <form method="POST" action="/accounts/login/" style="float:right;">
+            Welcome, new user. Please 
+            <input type="submit" value="login" id="login" >
+            <input type="hidden" value="go_login" name="submit_login_page" >
+            {% csrf_token %}
+            or &nbsp;
+        </form>
+{% endif %}
+
+
+
+		<!-- Navigation -->
+		<div id="navigation">
+			<ul>
+			    <li><a href="/">HOME</a></li>
+			    <li><a href="/movie_now">IN THEATERS</a></li>
+			    <li><a href="/movie_comming">COMING SOON</a></li>
+			    <li><a href="/contact">Contact US</a></li>
+			</ul>
+
+		</div>
+		<!-- end Navigation -->
+<!-- Sub-menu -->
+		<div id="sub-navigation">
+			
+<div class="container">
+  <a href="/show_all">SHOW ALL</a>
+  <a href="/last_movie">LATEST TRAILERS</a>
+  <a href="/top_rate">TOP RATED</a>
+  <a href="/most_comment">MOST COMMENTED</a>
+</div>
+			
+			</div>
+		<!-- end Sub-Menu -->
+
+</div>
+	<!-- end Header -->
+
+  <div class="head">
+<div id="contact" class="container">
+  <h3 class="text-center">Contact</h3>
+  <p class="text-center"><em>We love our fans!</em></p>
+
+  <div class="row">
+    <div class="col-md-4">
+      <p>Fan? Drop a note.</p>
+      <p><span class="glyphicon glyphicon-map-marker"></span>Chicago, US</p>
+      <p><span class="glyphicon glyphicon-phone"></span>Phone: +00 1515151515</p>
+      <p><span class="glyphicon glyphicon-envelope"></span>Email: mail@mail.com</p>
+    </div>
+    <div class="col-md-4">
+      <div class="row">
+        <div class="col-sm-6 form-group">
+          <input class="form-control" id="name" name="name" placeholder="Name" type="text" required>
+        </div>
+        <div class="col-sm-6 form-group">
+          <input class="form-control" id="email" name="email" placeholder="Email" type="email" required>
+        </div>
+      </div>
+      <textarea class="form-control" id="comments" name="comments" placeholder="Comment" rows="5"></textarea>
+      <br>
+      <div class="row">
+        <div class="col-md-12 form-group">
+          <button class="btn pull-right" type="submit">Send</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+<footer>Copyright &copy; Cpr.E KMUTNB</footer>
+</div>
+<!-- end Shell -->
+
+
+
+
+
+</body>
+</html>

@@ -5,7 +5,7 @@
     <link href="/static/style/style.css" rel="stylesheet" media="screen">
     <link href="/static/style/star.css" rel="stylesheet" media="screen">
     <link href="/static/style/dropdown.css" rel="stylesheet" media="screen">
-<link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 	<script type="text/javascript" src="js/jquery-1.4.2.min.js"></script>
 	<script type="text/javascript" src="js/jquery-func.js"></script>
 
@@ -20,6 +20,15 @@
 {% if user.is_authenticated %}
         <form method="POST" action="/">
             <p align="right">Welcome, {{ user.get_username }}.
+{% if user.is_superuser %}
+<span class="tooltip"><a href="/add_movie"><span class="fa fa-plus btn3" aria-hidden="true" ></span></a>
+  <span class="tooltiptext">Add movies</span>
+</span>
+&nbsp;
+
+
+            
+           {% endif %}
             <input type="submit" value="logout" id="logout" >
             <input type="hidden" value="go_logout" name="submit_logout_page" >
             {% csrf_token %}
@@ -63,25 +72,22 @@
 </div>
 	<!-- end Header -->
 
-<br><br><br>
+<br>
 <!-- Box -->
 <div class="box">
   <div class="head">
-	<h12 align="center">{{ movie_.name }}</h12>
-  </div>
-<br>
+	<h12 class="nameH">{{ movie_.name }}</h12>
+
 
  {% if user.is_superuser %}
-
-         <form method="POST" action="/movie/{{movie_.id}}/edit/" align="right">
-            <input type="submit" value="Edit" class="btn2" id="Edit" >
-            <input type="hidden" value="send_edit" name="send_Edit" >
-	    <br>
-            {% csrf_token %}
-        </form>
-
+  &nbsp;&nbsp;&nbsp;
+<span class="tooltip" style="float:right" ><a href="/movie/{{movie_.id}}/edit/"><span class="fa fa-cogs fa-2x btn4" aria-hidden="true"></span></a>
+  <span class="tooltiptext">Configs this movies</span>
+</span>
         {% endif%}
-</br>
+
+  </div>
+
 <p align="center">
 <table id="id_list_table" align="center">
 <tr ><td>
@@ -150,7 +156,7 @@
 </td></tr>
 
 <tr><td>
-<b>Detail:  </b></td><td>
+<b>Detail:  </b></td><td class="newline">
 {% if movie_.detail  != "" %} {{ movie_.detail }}
 {% else %}
 -
@@ -221,25 +227,25 @@
         </form>
 
 </div>
-
-
+</div>
+<!-- Box -->
+<div class="box">
 
 <div class="cleaner h40"></div>
 <div class="wTable">
 <table id="comment_text" align="center">
 
         {% if movie_.countcom != 0 %}
-           <h2>--COMMENTS--</h2>
+           <h2><span class="fa fa-comments " aria-hidden="true"></span> Comments</h2>
             {% for comment in comments %}
-
-           <tr id="comment_{{ comment.id }}_name"><td> <b>Name: </b>{{ comment.user }}</td></tr>
+           <tr id="comment_{{ comment.id }}_name"><td></br><b>Name: </b>{{ comment.user }}</td></tr>
            <tr id="comment_{{ comment.id }}_date"><td><span class="date"> date:{{ comment.date }}<br></span></td></tr>
            <tr id="comment_{{ comment.id }}_comment"><td>
-<div class="container">
+<div class="containers">
   <div class="dialogbox">
     <div class="body">
-      <span class="tip tip-up"></span>
-      <div class="message">
+      <span class="tip tip-up" ></span>
+      <div class="message" >
         {{ comment.comment_text }}<br>
       </div>
     </div>
@@ -250,19 +256,15 @@
 </td></tr>
            <tr id="comment_{{ comment.id }}_like"><td>
 <form method="POST" action="/movie_detail/{{movie_.id}}/">
-<input type="image" name="submit" value="LIKE"      src="https://upload.wikimedia.org/wikipedia/commons/1/13/Facebook_like_thumb.png" height=30  tittle="Like" id="submit_like_{{ comment.id }}"  >
+<input type="image" name="submit" value="LIKE"      src="https://upload.wikimedia.org/wikipedia/commons/1/13/Facebook_like_thumb.png" height=20  tittle="Like" id="submit_like_{{ comment.id }}"  >
             <input type="hidden" value="submit_like"  name="send_like">
             <input type="hidden" value="{{ comment.id }}"  name="id_send_like">
  {% csrf_token %}
    <b>{{ comment.like }} likes</b>
-
-            
-             
-           
         </form> 
 </td></tr>
-<tr><td> ---------------------------------------------------------------------------</td></tr>
-<tr><td> </td></tr>
+<tr><td></td></tr>
+<tr><td></td></tr>
 <tr><td><div class="cleaner h20"></div> </td></tr>
             {% endfor %}
         {% endif%}
@@ -275,8 +277,8 @@
 
 <div class="cleaner h40"></div>
 <div id="comment_form">
-<h13>Comment</h13>
- <form method="POST" name="comment" action="/movie_detail/{{movie_.id}}/">
+<h13>Comment <span class="fa fa-commenting " aria-hidden="true"></span></h13>
+<form method="POST" name="comment" action="/movie_detail/{{movie_.id}}/">
 {% if user.is_authenticated %}
 
            <div class="form_row"> <label for="text">name<h style="color:red">*</h>: {{ user.get_username }}</label><br/> 
@@ -290,16 +292,15 @@
     oninput="setCustomValidity('')"/></div>
             <br/>
 {% endif%}
-          <div class="form_row">  <label for="text">Message<h style="color:red">*</h>:</label> <br/><textarea name="comment_text" id="id_comment_text" placeholder="Comment this movie" class="validate-email required input_field" required
+          <div class="form_row" >  <label for="text">Message<h style="color:red">*</h>:</label> <br/><textarea name="comment_text" id="id_comment_text" placeholder="Comment this movie" class="validate-email required input_field" required
     oninvalid="this.setCustomValidity('Please Enter some comment message')"
     oninput="setCustomValidity('')"/></textarea></div>
             <br>
 
-          
-            <input type="submit" value="Comment"    id="id_comment"  >
+ 
+            <input type="submit" value="Comment" class="btn2" id="id_comment"  >
             <input type="hidden" value="send_Comment"  name="send_comment">
             
-	    
             {% csrf_token %}
 </div>
 <br>
