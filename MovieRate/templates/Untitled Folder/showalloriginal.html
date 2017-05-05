@@ -6,7 +6,6 @@
     <link href="/static/style/dropdown.css" rel="stylesheet" media="screen">
 	<script type="text/javascript" src="js/jquery-1.4.2.min.js"></script>
 	<script type="text/javascript" src="js/jquery-func.js"></script>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     </head>
     <body>
 <!-- Shell -->
@@ -19,19 +18,11 @@
 {% if user.is_authenticated %}
         <form method="POST" action="/">
             <p align="right">Welcome, {{ user.get_username }}.
-{% if user.is_superuser %}
-<span class="tooltip"><a href="/add_movie"><span class="fa fa-plus btn3" aria-hidden="true" ></span></a>
-  <span class="tooltiptext">Add movies</span>
-</span>
-&nbsp;
-
-
-            
-           {% endif %}
             <input type="submit" value="logout" id="logout" >
             <input type="hidden" value="go_logout" name="submit_logout_page" >
             {% csrf_token %}
-        </form></p>
+        </p>
+</form>
 {% else %}
 
         <form method="POST" action="/accounts/registration/" style="float:right;">
@@ -47,41 +38,26 @@
             or &nbsp;
         </form>
 {% endif %}
-	<!-- Sub-menu -->
-		<div id="sub-navigation">
-			<div class="container">
-  <a href="/">HOME</a>
-  <div class="dropdown">
-    <div class="dropdown">
-    <button class="dropbtn" onclick="myFunction()">MOVIES</button>
-    <div class="dropdown-content" id="myDropdown">
-      <a href="/show_all">SHOW ALL</a>
-      <a href="/movie_release">RELEASED</a>
-      <a href="/most_comment">MOST COMMENTED</a>
-      <a href="/top_rate">TOP RATED</a>
-    </div>
-  </div> 
-</div>
-  <a href="/movie_comming">COMING SOON</a>
-			</div>
-<!-- end Sub-Menu -->
-<script>
-/* When the user clicks on the button, 
-toggle between hiding and showing the dropdown content */
-function myFunction() {
-    document.getElementById("myDropdown").classList.toggle("show");
-}
+		<!-- Navigation -->
+		<div id="navigation">
+			<ul>
+			    <li><a href="/">HOME</a></li>
+			    <li><a href="/movie_now">IN THEATERS</a></li>
+			    <li><a href="/movie_comming">COMING SOON</a></li>
+			</ul>
 
-// Close the dropdown if the user clicks outside of it
-window.onclick = function(e) {
-  if (!e.target.matches('.dropbtn')) {
-    var myDropdown = document.getElementById("myDropdown");
-      if (myDropdown.classList.contains('show')) {
-        myDropdown.classList.remove('show');
-      }
-  }
-}
-</script>
+		</div>
+		<!-- end Navigation -->
+<!-- Sub-menu -->
+		<div id="sub-navigation">
+	<div class="container">
+  <a href="/show_all">SHOW ALL</a>
+  <a href="/last_movie">LATEST TRAILERS</a>
+  <a href="/top_rate">TOP RATED</a>
+  <a href="/most_comment">MOST COMMENTED</a>
+</div>
+	        </div>
+		<!-- end Sub-Menu -->
 
 </div>
 	<!-- end Header -->
@@ -89,12 +65,13 @@ window.onclick = function(e) {
 <!-- Box -->
 <div class="box">
   <div class="head">
-	<h2>--Top Rated--</h2>
+	<h2>--Show All--</h2>
   </div>
 <br>
-<table id="id_list_table" align="center">
+
+        <table id="id_list_table">
             <tr>
-{% for ID in IDrate %}
+{% for ID in IDall %}
             {% for movie in movies %}
 {% if movie.id == ID%} 
                 <td><a href="/movie_detail/{{ movie.id }}/" id="view_detail_pic_{{ movie.id }}"> 
@@ -102,8 +79,8 @@ window.onclick = function(e) {
 <img src=" {{ movie.poster }} " width=200 height=300>
 {% else %}
 <img src="http://mtdb.vebto.com/assets/images/imdbnoimage.jpg"width=200 height=300>
-{% endif%}</a><br>
-                    <a class="nameM" href="/movie_detail/{{ movie.id }}/" id="view_detail_{{ movie.id }}" >{{ movie.name }} </a><br>
+{% endif%} </a><br>
+                    <a href="/movie_detail/{{ movie.id }}/" id="view_detail_{{ movie.id }}" >{{ movie.name }} </a><br>
                       {{ movie.rate }} 
  {% if movie.rate == 0.0 %} <!--17=0 16=0.5 15=1-->
 <img src="http://png.findicons.com/files/icons/2181/34al_volume_3_2_se/24/001_17.png" width=15 height=15>
@@ -175,19 +152,19 @@ window.onclick = function(e) {
 
 <span class="comments">{{ movie.countcom }}</span>
 
-                 {% if user.is_superuser %}
+             {% if user.is_superuser %}
+
                   <FORM method="POST" action="/">
-                     <INPUT Type="submit" VALUE="delete" class="btn2" id="button_d" OnClick="return confirm('Do you want to delete {{ movie.name }}?')" >      
+                     <INPUT Type="submit" VALUE="delete" class="btn2" id="button_d" OnClick="return confirm('Do you want to delete {{ movie.name }}?')"  >      
                      <INPUT Type = "hidden" value ="delete" name = 'delete'>
                      <INPUT Type = "hidden" value ="{{ movie.id }}" name = 'id_delete'>
                      {% csrf_token %}
                  </FORM>
+
                  {% endif %}
                 </td>
-                
-
+           
 {% endif %}
- 
 {% endfor %}
 <td> &nbsp;&nbsp;&nbsp;&nbsp;</td>
 {% if forloop.counter|divisibleby:5 %}
@@ -197,7 +174,6 @@ window.onclick = function(e) {
 
         </tr>
         </table>
- 
 </div>
 <!--END Box -->
 </div>

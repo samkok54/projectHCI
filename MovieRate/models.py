@@ -13,6 +13,7 @@ class Movie(models.Model):
     rate = models.FloatField(default=0)
     viewer = models.IntegerField(default=0)
     poster = models.URLField(default='')
+    picture = models.TextField(default='')
     add_date = models.DateTimeField(default=datetime.now, blank=True)
     countcom = models.IntegerField(default=0)
     clip = models.TextField(default='')

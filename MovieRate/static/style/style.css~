@@ -29,9 +29,8 @@ h12 { font-size:40px; color:#dbb083; text-shadow:4px 0 #2d130c, 0 1px #2d130c, 1
 font-weight:bold; }
 
 p {
-    font-size: 20px;
+    font-size: 16px;
 }
-
 
 
 
@@ -51,7 +50,7 @@ h13 { font-size:30px; color:#2d130c; font-weight:bold; }
 
 #shell { width:1000px; margin:0 auto; }
 #header { position:relative; padding-top: 10px; }
-#sub-navigation { display:block; clear:right; border-top:1px dashed #666; border-bottom:1px dashed #666; padding:20px 0;  }
+#sub-navigation { display:block; clear:right;   padding:20px 0;  }
 
 
 

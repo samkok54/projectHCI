@@ -8,6 +8,7 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 	<script type="text/javascript" src="js/jquery-1.4.2.min.js"></script>
 	<script type="text/javascript" src="js/jquery-func.js"></script>
+    <link href="/static/style/photobanner.css" rel="stylesheet" media="screen">
 
     </head>
     <body>
@@ -48,26 +49,42 @@
             or &nbsp;
         </form>
 {% endif %}
-		<!-- Navigation -->
-		<div id="navigation">
-			<ul>
-			    <li><a href="/">HOME</a></li>
-			    <li><a href="/movie_now">IN THEATERS</a></li>
-			    <li><a href="/movie_comming">COMING SOON</a></li>
-			</ul>
 
-		</div>
-		<!-- end Navigation -->
-<!-- Sub-menu -->
+	<!-- Sub-menu -->
 		<div id="sub-navigation">
 			<div class="container">
-  <a href="/show_all">SHOW ALL</a>
-  <a href="/last_movie">LATEST TRAILERS</a>
-  <a href="/top_rate">TOP RATED</a>
-  <a href="/most_comment">MOST COMMENTED</a>
+  <a href="/">HOME</a>
+  <div class="dropdown">
+    <div class="dropdown">
+    <button class="dropbtn" onclick="myFunction()">MOVIES</button>
+    <div class="dropdown-content" id="myDropdown">
+      <a href="/show_all">SHOW ALL</a>
+      <a href="/movie_release">RELEASED</a>
+      <a href="/most_comment">MOST COMMENTED</a>
+      <a href="/top_rate">TOP RATED</a>
+    </div>
+  </div> 
 </div>
+  <a href="/movie_comming">COMING SOON</a>
 			</div>
-		<!-- end Sub-Menu -->
+<!-- end Sub-Menu -->
+<script>
+/* When the user clicks on the button, 
+toggle between hiding and showing the dropdown content */
+function myFunction() {
+    document.getElementById("myDropdown").classList.toggle("show");
+}
+
+// Close the dropdown if the user clicks outside of it
+window.onclick = function(e) {
+  if (!e.target.matches('.dropbtn')) {
+    var myDropdown = document.getElementById("myDropdown");
+      if (myDropdown.classList.contains('show')) {
+        myDropdown.classList.remove('show');
+      }
+  }
+}
+</script>
 
 </div>
 	<!-- end Header -->
@@ -150,17 +167,7 @@
 -
 {% endif%} </td></tr>
 
-<tr><td>
-<div class="cleaner h15"></div>  
-</td><td><div class="cleaner h15"></div> 
-</td></tr>
 
-<tr><td>
-<b>Detail:  </b></td><td class="newline">
-{% if movie_.detail  != "" %} {{ movie_.detail }}
-{% else %}
--
-{% endif%}  </td></tr>
 
 <tr><td>
 <div class="cleaner h15"></div>  
@@ -200,11 +207,85 @@
 </p>
 
 
+<br><br>
+<center>
+<div class="test" style="width:100% "  > 
+<table  style="width:90% " >
+<tr><td><br>
+<b style="font-size:20px;">Detail:&nbsp;&nbsp;&nbsp;&nbsp;</b>
+<br><br>
+<p style="font-size:16px;">&emsp;&emsp;{% if movie_.detail  != "" %} {{ movie_.detail }}
+{% else %}
+-
+{% endif%}
+</p>
+
+</td></tr> 
+</table>
+<br><br>
+</div>
+</center>
+
+<br><br><br>
+{% if movie_.picture != "" %}
+<!-- slide header-->
+<center>
+<div class="slideshow-container">
+{% for pic in picdet %}
+<div class="mySlides fade">
+  <!--<div class="numbertext">1 / 3</div>-->
+  <img src=" {{ pic }} " style="width:50%" >
+    <div class="text">{{movie_.name}}</div>
+</div>
+
+{% endfor %}
+</div>
+</center>
+<br>
+
+<div style="text-align:center">
+{% for pic in picdet %}
+
+  <span class="dot"></span> 
+
+{% endfor %}
+</div>
+{% endif %}
+
+
+<script>
+var slideIndex = 0;
+showSlides();
+
+function showSlides() {
+    var i;
+    var slides = document.getElementsByClassName("mySlides");
+    var dots = document.getElementsByClassName("dot");
+    for (i = 0; i < slides.length; i++) {
+       slides[i].style.display = "none";  
+    }
+    slideIndex++;
+    if (slideIndex> slides.length) {slideIndex = 1}    
+    for (i = 0; i < dots.length; i++) {
+        dots[i].className = dots[i].className.replace(" active", "");
+    }
+    slides[slideIndex-1].style.display = "block";  
+    dots[slideIndex-1].className += " active";
+    setTimeout(showSlides, 3000); // Change image every 3 seconds
+}
+</script>
+<!--end slide header-->
+
+
+
 {% if movie_.clip != "" %}
 <div class="cleaner h20"></div>
 <p align="center"><iframe width="720" height="480" src="{{ movie_.clip }}" >
 </iframe></p>
 {% endif%}
+
+
+
 <div id="bord">
   <form method="POST" action="/movie_detail/{{movie_.id}}/" align="center">
 <div class="stars">

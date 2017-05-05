@@ -47,26 +47,41 @@
             or &nbsp;
         </form>
 {% endif %}
-		<!-- Navigation -->
-		<div id="navigation">
-			<ul>
-			    <li><a  href="/">HOME</a></li>
-			    <li><a href="/movie_now">IN THEATERS</a></li>
-			    <li><a href="/movie_comming">COMING SOON</a></li>
-			</ul>
-
-		</div>
-		<!-- end Navigation -->
-<!-- Sub-menu -->
+	<!-- Sub-menu -->
 		<div id="sub-navigation">
-<div class="container">
-  <a href="/show_all">SHOW ALL</a>
-  <a href="/last_movie">LATEST TRAILERS</a>
-  <a href="/top_rate">TOP RATED</a>
-  <a href="/most_comment">MOST COMMENTED</a>
+			<div class="container">
+  <a href="/">HOME</a>
+  <div class="dropdown">
+    <div class="dropdown">
+    <button class="dropbtn" onclick="myFunction()">MOVIES</button>
+    <div class="dropdown-content" id="myDropdown">
+      <a href="/show_all">SHOW ALL</a>
+      <a href="/movie_release">RELEASED</a>
+      <a href="/most_comment">MOST COMMENTED</a>
+      <a href="/top_rate">TOP RATED</a>
+    </div>
+  </div> 
 </div>
+  <a href="/movie_comming">COMING SOON</a>
 			</div>
-		<!-- end Sub-Menu -->
+<!-- end Sub-Menu -->
+<script>
+/* When the user clicks on the button, 
+toggle between hiding and showing the dropdown content */
+function myFunction() {
+    document.getElementById("myDropdown").classList.toggle("show");
+}
+
+// Close the dropdown if the user clicks outside of it
+window.onclick = function(e) {
+  if (!e.target.matches('.dropbtn')) {
+    var myDropdown = document.getElementById("myDropdown");
+      if (myDropdown.classList.contains('show')) {
+        myDropdown.classList.remove('show');
+      }
+  }
+}
+</script>
 
 </div>
 	<!-- end Header -->

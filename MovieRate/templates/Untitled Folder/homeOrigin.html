@@ -1,0 +1,389 @@
+<html>
+    <head>
+        <title>Movie Rate App</title>
+<meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link href="/static/style/style.css" rel="stylesheet" media="screen">
+    <link href="/static/style/photobanner.css" rel="stylesheet" media="screen">
+
+	<script type="text/javascript" src="js/jquery-1.4.2.min.js"></script>
+	<script type="text/javascript" src="js/jquery-func.js"></script>
+
+    </head>
+    <body>
+	   <!-- <h1>Animated Photo Banner</h1>
+    <!-- Each image is 350px by 233px 
+    <div class="photobanner">
+    	<img class="first" src="http://kingofwallpapers.com/picture/picture-015.jpg" alt="" />
+    	<img src="http://kingofwallpapers.com/picture/picture-003.jpg" alt="" />
+    	<img src="http://kingofwallpapers.com/picture/picture-006.jpg" alt="" />
+    	<img src="http://kingofwallpapers.com/picture/picture-009.jpg" alt="" />
+    	    </div>
+<div class="w3-content w3-display-container" style="max-width:1000px">
+  <img class="mySlides" src="http://kingofwallpapers.com/picture/picture-015.jpg" style="width:100%" width=1000 height=200>
+  <img class="mySlides" src="http://kingofwallpapers.com/picture/picture-002.jpg" style="width:100%" width=1000 height=200>
+  <img class="mySlides" src="http://kingofwallpapers.com/picture/picture-007.jpg" style="width:100%" width=1000 height=200>
+  <div class="w3-center w3-container w3-section w3-large w3-text-white w3-display-bottommiddle" style="width:100%">
+    <div class="w3-left w3-hover-text-khaki" onclick="plusDivs(-1)">&#10094;</div>
+    <div class="w3-right w3-hover-text-khaki" onclick="plusDivs(1)">&#10095;</div>
+    <span class="w3-badge demo w3-border w3-transparent w3-hover-white" onclick="currentDiv(1)"></span>
+    <span class="w3-badge demo w3-border w3-transparent w3-hover-white" onclick="currentDiv(2)"></span>
+    <span class="w3-badge demo w3-border w3-transparent w3-hover-white" onclick="currentDiv(3)"></span>
+  </div>
+</div> -->
+
+
+<div class="slideshow-container">
+
+<div class="mySlides fade">
+  <div class="numbertext">1 / 3</div>
+  <img src="http://kingofwallpapers.com/picture/picture-015.jpg" style="width:100%"  width=1000 height=150>
+  <div class="text">Caption Text</div>
+</div>
+
+<div class="mySlides fade">
+  <div class="numbertext">2 / 3</div>
+  <img src="http://kingofwallpapers.com/picture/picture-025.jpg" style="width:100%"  width=1000 height=150>
+  <div class="text">Caption Two</div>
+</div>
+
+<div class="mySlides fade">
+  <div class="numbertext">3 / 3</div>
+  <img src="http://kingofwallpapers.com/picture/picture-013.jpg" style="width:100%"  width=1000 height=150>
+  <div class="text">Caption Three</div>
+</div>
+
+</div>
+<br>
+
+<div style="text-align:center">
+  <span class="dot"></span> 
+  <span class="dot"></span> 
+  <span class="dot"></span> 
+</div>
+
+<script>
+var slideIndex = 0;
+showSlides();
+
+function showSlides() {
+    var i;
+    var slides = document.getElementsByClassName("mySlides");
+    var dots = document.getElementsByClassName("dot");
+    for (i = 0; i < slides.length; i++) {
+       slides[i].style.display = "none";  
+    }
+    slideIndex++;
+    if (slideIndex> slides.length) {slideIndex = 1}    
+    for (i = 0; i < dots.length; i++) {
+        dots[i].className = dots[i].className.replace(" active", "");
+    }
+    slides[slideIndex-1].style.display = "block";  
+    dots[slideIndex-1].className += " active";
+    setTimeout(showSlides, 2000); // Change image every 2 seconds
+}
+</script>
+
+
+<br><br>
+<!-- Shell -->
+<div id="shell">
+<!-- Header -->
+	<div id="header">
+	  {% if user.is_authenticated %}
+        <form method="POST" action="/">
+            <p align="right">Welcome, {{ user.get_username }}.
+            <input type="submit" value="logout" id="logout" >
+            <input type="hidden" value="go_logout" name="submit_logout_page" >
+            {% csrf_token %}
+        </form></p>
+{% else %}
+        <form method="POST" action="/accounts/registration/" style="float:right;">
+            <input type="submit" value="signup" id="registration" >
+            <input type="hidden" value="go_regis" name="submit_regis_page" >
+            {% csrf_token %}
+        </form>
+        <form method="POST" action="/accounts/login/" style="float:right;">
+            Welcome, new user. Please 
+            <input type="submit" value="login" id="login" >
+            <input type="hidden" value="go_login" name="submit_login_page" >
+            {% csrf_token %}
+            or &nbsp;
+        </form>
+{% endif %}
+		<!-- Navigation -->
+		<div id="navigation">
+			<ul>
+			    <li><a href="/">HOME</a></li>
+			    <li><a href="/movie_now">IN THEATERS</a></li>
+			    <li><a href="/movie_comming">COMING SOON</a></li>
+			</ul>
+
+		</div>
+		<!-- end Navigation -->
+<!-- Sub-menu -->
+		<div id="sub-navigation">
+			<ul>
+			    <li><a href="/show_all">SHOW ALL</a></li>
+			    <li><a href="/last_movie">LATEST TRAILERS</a></li>
+			    <li><a href="/top_rate">TOP RATED</a></li>
+			    <li><a href="/most_comment">MOST COMMENTED</a></li>
+			</ul>
+			</div>
+		<!-- end Sub-Menu -->
+
+</div>
+	<!-- end Header -->
+        {% if user.is_superuser %}
+        <form method="POST" action="/add_movie" style="float:right;">
+            <!-- <input name="name_text" id="id_new_name" placeholder="New Movie Name" /> -->
+            <input type="submit" value="Add Movie" class="btn2" id="add_data" >
+            <input type="hidden" value="send_Add Movie" name="send_add_data" >
+	    <br>
+            {% csrf_token %}
+        </form>
+        {% endif %}
+<br><br><br>
+
+<!-- Box -->
+<div class="box">
+  <div class="head">
+	<h2>Comming Soon</h2>
+        <p class="text-right"><a href="/movie_comming">See all</a></p>
+  </div>
+
+        <table id="id_list_table" align="center">
+            <tr>
+
+{% for ids in IDcomming %}
+            {% for movie in movies %}
+{% if movie.id == ids and  forloop.counter <= 5 %} 
+                <td><a href="/movie_detail/{{ movie.id }}/" id="view_detail_pic_{{ movie.id }}"> 
+
+{% if movie.poster != "" %}
+<img src=" {{ movie.poster }} " width=200 height=300>
+{% else %}
+<img src="http://mtdb.vebto.com/assets/images/imdbnoimage.jpg"width=200 height=300>
+{% endif%}
+
+
+ </a><br>
+                    <a href="/movie_detail/{{ movie.id }}/" id="view_detail_{{ movie.id }}" >{{ movie.name }} </a><br>
+                      {{ movie.rate }} 
+ {% if movie.rate == 0.0 %} <!--17=0 16=0.5 15=1-->
+<img src="http://png.findicons.com/files/icons/2181/34al_volume_3_2_se/24/001_17.png" width=15 height=15>
+<img src="http://png.findicons.com/files/icons/2181/34al_volume_3_2_se/24/001_17.png" width=15 height=15>
+<img src="http://png.findicons.com/files/icons/2181/34al_volume_3_2_se/24/001_17.png" width=15 height=15>
+<img src="http://png.findicons.com/files/icons/2181/34al_volume_3_2_se/24/001_17.png" width=15 height=15>
+<img src="http://png.findicons.com/files/icons/2181/34al_volume_3_2_se/24/001_17.png" width=15 height=15>
+{% elif movie.rate <= 0.5 %} 
+<img src="http://png.findicons.com/files/icons/2181/34al_volume_3_2_se/24/001_16.png" width=15 height=15>
+<img src="http://png.findicons.com/files/icons/2181/34al_volume_3_2_se/24/001_17.png" width=15 height=15>
+<img src="http://png.findicons.com/files/icons/2181/34al_volume_3_2_se/24/001_17.png" width=15 height=15>
+<img src="http://png.findicons.com/files/icons/2181/34al_volume_3_2_se/24/001_17.png" width=15 height=15>
+<img src="http://png.findicons.com/files/icons/2181/34al_volume_3_2_se/24/001_17.png" width=15 height=15>
+{% elif movie.rate <= 1.0 %} 
+<img src="http://png.findicons.com/files/icons/2181/34al_volume_3_2_se/24/001_15.png" width=15 height=15>
+<img src="http://png.findicons.com/files/icons/2181/34al_volume_3_2_se/24/001_17.png" width=15 height=15>
+<img src="http://png.findicons.com/files/icons/2181/34al_volume_3_2_se/24/001_17.png" width=15 height=15>
+<img src="http://png.findicons.com/files/icons/2181/34al_volume_3_2_se/24/001_17.png" width=15 height=15>
+<img src="http://png.findicons.com/files/icons/2181/34al_volume_3_2_se/24/001_17.png" width=15 height=15>
+{% elif movie.rate <= 1.5 %} 
+<img src="http://png.findicons.com/files/icons/2181/34al_volume_3_2_se/24/001_15.png" width=15 height=15>
+<img src="http://png.findicons.com/files/icons/2181/34al_volume_3_2_se/24/001_16.png" width=15 height=15>
+<img src="http://png.findicons.com/files/icons/2181/34al_volume_3_2_se/24/001_17.png" width=15 height=15>
+<img src="http://png.findicons.com/files/icons/2181/34al_volume_3_2_se/24/001_17.png" width=15 height=15>
+<img src="http://png.findicons.com/files/icons/2181/34al_volume_3_2_se/24/001_17.png" width=15 height=15>
+{% elif movie.rate <= 2.0 %} 
+<img src="http://png.findicons.com/files/icons/2181/34al_volume_3_2_se/24/001_15.png" width=15 height=15>
+<img src="http://png.findicons.com/files/icons/2181/34al_volume_3_2_se/24/001_15.png" width=15 height=15>
+<img src="http://png.findicons.com/files/icons/2181/34al_volume_3_2_se/24/001_17.png" width=15 height=15>
+<img src="http://png.findicons.com/files/icons/2181/34al_volume_3_2_se/24/001_17.png" width=15 height=15>
+<img src="http://png.findicons.com/files/icons/2181/34al_volume_3_2_se/24/001_17.png" width=15 height=15>
+{% elif movie.rate <= 2.5 %} 
+<img src="http://png.findicons.com/files/icons/2181/34al_volume_3_2_se/24/001_15.png" width=15 height=15>
+<img src="http://png.findicons.com/files/icons/2181/34al_volume_3_2_se/24/001_15.png" width=15 height=15>
+<img src="http://png.findicons.com/files/icons/2181/34al_volume_3_2_se/24/001_16.png" width=15 height=15>
+<img src="http://png.findicons.com/files/icons/2181/34al_volume_3_2_se/24/001_17.png" width=15 height=15>
+<img src="http://png.findicons.com/files/icons/2181/34al_volume_3_2_se/24/001_17.png" width=15 height=15>
+{% elif movie.rate <= 3.0 %} 
+<img src="http://png.findicons.com/files/icons/2181/34al_volume_3_2_se/24/001_15.png" width=15 height=15>
+<img src="http://png.findicons.com/files/icons/2181/34al_volume_3_2_se/24/001_15.png" width=15 height=15>
+<img src="http://png.findicons.com/files/icons/2181/34al_volume_3_2_se/24/001_15.png" width=15 height=15>
+<img src="http://png.findicons.com/files/icons/2181/34al_volume_3_2_se/24/001_17.png" width=15 height=15>
+<img src="http://png.findicons.com/files/icons/2181/34al_volume_3_2_se/24/001_17.png" width=15 height=15>
+{% elif movie.rate <= 3.5 %} 
+<img src="http://png.findicons.com/files/icons/2181/34al_volume_3_2_se/24/001_15.png" width=15 height=15>
+<img src="http://png.findicons.com/files/icons/2181/34al_volume_3_2_se/24/001_15.png" width=15 height=15>
+<img src="http://png.findicons.com/files/icons/2181/34al_volume_3_2_se/24/001_15.png" width=15 height=15>
+<img src="http://png.findicons.com/files/icons/2181/34al_volume_3_2_se/24/001_16.png" width=15 height=15>
+<img src="http://png.findicons.com/files/icons/2181/34al_volume_3_2_se/24/001_17.png" width=15 height=15>
+{% elif movie.rate <= 4.0 %} 
+<img src="http://png.findicons.com/files/icons/2181/34al_volume_3_2_se/24/001_15.png" width=15 height=15>
+<img src="http://png.findicons.com/files/icons/2181/34al_volume_3_2_se/24/001_15.png" width=15 height=15>
+<img src="http://png.findicons.com/files/icons/2181/34al_volume_3_2_se/24/001_15.png" width=15 height=15>
+<img src="http://png.findicons.com/files/icons/2181/34al_volume_3_2_se/24/001_15.png" width=15 height=15>
+<img src="http://png.findicons.com/files/icons/2181/34al_volume_3_2_se/24/001_17.png" width=15 height=15>
+{% elif movie.rate <= 4.5 %} 
+<img src="http://png.findicons.com/files/icons/2181/34al_volume_3_2_se/24/001_15.png" width=15 height=15>
+<img src="http://png.findicons.com/files/icons/2181/34al_volume_3_2_se/24/001_15.png" width=15 height=15>
+<img src="http://png.findicons.com/files/icons/2181/34al_volume_3_2_se/24/001_15.png" width=15 height=15>
+<img src="http://png.findicons.com/files/icons/2181/34al_volume_3_2_se/24/001_15.png" width=15 height=15>
+<img src="http://png.findicons.com/files/icons/2181/34al_volume_3_2_se/24/001_16.png" width=15 height=15>
+{% elif movie.rate <= 5.0 %} 
+<img src="http://png.findicons.com/files/icons/2181/34al_volume_3_2_se/24/001_15.png" width=15 height=15>
+<img src="http://png.findicons.com/files/icons/2181/34al_volume_3_2_se/24/001_15.png" width=15 height=15>
+<img src="http://png.findicons.com/files/icons/2181/34al_volume_3_2_se/24/001_15.png" width=15 height=15>
+<img src="http://png.findicons.com/files/icons/2181/34al_volume_3_2_se/24/001_15.png" width=15 height=15>
+<img src="http://png.findicons.com/files/icons/2181/34al_volume_3_2_se/24/001_15.png" width=15 height=15>
+ {% endif %}
+
+<span class="comments">{{ movie.countcom }}</span>
+
+                 {% if user.is_superuser %}
+                  <FORM method="POST" action="/">
+                     <INPUT Type="submit" VALUE="delete" class="btn2" id="button_d" OnClick="return confirm('Do you want to delete {{ movie.name }}?')" >      
+                     <INPUT Type = "hidden" value ="delete" name = 'delete'>
+                     <INPUT Type = "hidden" value ="{{ movie.id }}" name = 'id_delete'>
+                     {% csrf_token %}
+                 </FORM>
+                 {% endif %}
+                </td>
+                {% if forloop.counter|divisibleby:5 %}
+                </tr><tr>
+                {% endif%}
+
+{% endif %}
+{% endfor %}
+            {% endfor %}
+
+        </tr>
+        </table>
+</div>
+<!--END Box -->
+
+<!-- Box -->
+<div class="box">
+  <div class="head">
+	<h2>Now</h2>
+        <p class="text-right"><a href="/movie_now">See all</a></p>
+  </div>
+
+        <table id="id_now_table" align="center">
+            <tr>
+
+{% for ids in IDnow %}
+{% if forloop.counter <= 5  %} 
+            {% for movie in movies %}
+{% if movie.id == ids %} 
+
+
+                <td><a href="/movie_detail/{{ movie.id }}/" id="view_detail_pic_{{ movie.id }}"> 
+{% if movie.poster != "" %}
+<img src=" {{ movie.poster }} " width=200 height=300>
+{% else %}
+<img src="http://mtdb.vebto.com/assets/images/imdbnoimage.jpg"width=200 height=300>
+{% endif%}</a><br>
+                    <a href="/movie_detail/{{ movie.id }}/" id="view_detail_{{ movie.id }}" >{{ movie.name }} </a><br>
+                      {{ movie.rate }} 
+ {% if movie.rate == 0.0 %} <!--17=0 16=0.5 15=1-->
+<img src="http://png.findicons.com/files/icons/2181/34al_volume_3_2_se/24/001_17.png" width=15 height=15>
+<img src="http://png.findicons.com/files/icons/2181/34al_volume_3_2_se/24/001_17.png" width=15 height=15>
+<img src="http://png.findicons.com/files/icons/2181/34al_volume_3_2_se/24/001_17.png" width=15 height=15>
+<img src="http://png.findicons.com/files/icons/2181/34al_volume_3_2_se/24/001_17.png" width=15 height=15>
+<img src="http://png.findicons.com/files/icons/2181/34al_volume_3_2_se/24/001_17.png" width=15 height=15>
+{% elif movie.rate <= 0.5 %} 
+<img src="http://png.findicons.com/files/icons/2181/34al_volume_3_2_se/24/001_16.png" width=15 height=15>
+<img src="http://png.findicons.com/files/icons/2181/34al_volume_3_2_se/24/001_17.png" width=15 height=15>
+<img src="http://png.findicons.com/files/icons/2181/34al_volume_3_2_se/24/001_17.png" width=15 height=15>
+<img src="http://png.findicons.com/files/icons/2181/34al_volume_3_2_se/24/001_17.png" width=15 height=15>
+<img src="http://png.findicons.com/files/icons/2181/34al_volume_3_2_se/24/001_17.png" width=15 height=15>
+{% elif movie.rate <= 1.0 %} 
+<img src="http://png.findicons.com/files/icons/2181/34al_volume_3_2_se/24/001_15.png" width=15 height=15>
+<img src="http://png.findicons.com/files/icons/2181/34al_volume_3_2_se/24/001_17.png" width=15 height=15>
+<img src="http://png.findicons.com/files/icons/2181/34al_volume_3_2_se/24/001_17.png" width=15 height=15>
+<img src="http://png.findicons.com/files/icons/2181/34al_volume_3_2_se/24/001_17.png" width=15 height=15>
+<img src="http://png.findicons.com/files/icons/2181/34al_volume_3_2_se/24/001_17.png" width=15 height=15>
+{% elif movie.rate <= 1.5 %} 
+<img src="http://png.findicons.com/files/icons/2181/34al_volume_3_2_se/24/001_15.png" width=15 height=15>
+<img src="http://png.findicons.com/files/icons/2181/34al_volume_3_2_se/24/001_16.png" width=15 height=15>
+<img src="http://png.findicons.com/files/icons/2181/34al_volume_3_2_se/24/001_17.png" width=15 height=15>
+<img src="http://png.findicons.com/files/icons/2181/34al_volume_3_2_se/24/001_17.png" width=15 height=15>
+<img src="http://png.findicons.com/files/icons/2181/34al_volume_3_2_se/24/001_17.png" width=15 height=15>
+{% elif movie.rate <= 2.0 %} 
+<img src="http://png.findicons.com/files/icons/2181/34al_volume_3_2_se/24/001_15.png" width=15 height=15>
+<img src="http://png.findicons.com/files/icons/2181/34al_volume_3_2_se/24/001_15.png" width=15 height=15>
+<img src="http://png.findicons.com/files/icons/2181/34al_volume_3_2_se/24/001_17.png" width=15 height=15>
+<img src="http://png.findicons.com/files/icons/2181/34al_volume_3_2_se/24/001_17.png" width=15 height=15>
+<img src="http://png.findicons.com/files/icons/2181/34al_volume_3_2_se/24/001_17.png" width=15 height=15>
+{% elif movie.rate <= 2.5 %} 
+<img src="http://png.findicons.com/files/icons/2181/34al_volume_3_2_se/24/001_15.png" width=15 height=15>
+<img src="http://png.findicons.com/files/icons/2181/34al_volume_3_2_se/24/001_15.png" width=15 height=15>
+<img src="http://png.findicons.com/files/icons/2181/34al_volume_3_2_se/24/001_16.png" width=15 height=15>
+<img src="http://png.findicons.com/files/icons/2181/34al_volume_3_2_se/24/001_17.png" width=15 height=15>
+<img src="http://png.findicons.com/files/icons/2181/34al_volume_3_2_se/24/001_17.png" width=15 height=15>
+{% elif movie.rate <= 3.0 %} 
+<img src="http://png.findicons.com/files/icons/2181/34al_volume_3_2_se/24/001_15.png" width=15 height=15>
+<img src="http://png.findicons.com/files/icons/2181/34al_volume_3_2_se/24/001_15.png" width=15 height=15>
+<img src="http://png.findicons.com/files/icons/2181/34al_volume_3_2_se/24/001_15.png" width=15 height=15>
+<img src="http://png.findicons.com/files/icons/2181/34al_volume_3_2_se/24/001_17.png" width=15 height=15>
+<img src="http://png.findicons.com/files/icons/2181/34al_volume_3_2_se/24/001_17.png" width=15 height=15>
+{% elif movie.rate <= 3.5 %} 
+<img src="http://png.findicons.com/files/icons/2181/34al_volume_3_2_se/24/001_15.png" width=15 height=15>
+<img src="http://png.findicons.com/files/icons/2181/34al_volume_3_2_se/24/001_15.png" width=15 height=15>
+<img src="http://png.findicons.com/files/icons/2181/34al_volume_3_2_se/24/001_15.png" width=15 height=15>
+<img src="http://png.findicons.com/files/icons/2181/34al_volume_3_2_se/24/001_16.png" width=15 height=15>
+<img src="http://png.findicons.com/files/icons/2181/34al_volume_3_2_se/24/001_17.png" width=15 height=15>
+{% elif movie.rate <= 4.0 %} 
+<img src="http://png.findicons.com/files/icons/2181/34al_volume_3_2_se/24/001_15.png" width=15 height=15>
+<img src="http://png.findicons.com/files/icons/2181/34al_volume_3_2_se/24/001_15.png" width=15 height=15>
+<img src="http://png.findicons.com/files/icons/2181/34al_volume_3_2_se/24/001_15.png" width=15 height=15>
+<img src="http://png.findicons.com/files/icons/2181/34al_volume_3_2_se/24/001_15.png" width=15 height=15>
+<img src="http://png.findicons.com/files/icons/2181/34al_volume_3_2_se/24/001_17.png" width=15 height=15>
+{% elif movie.rate <= 4.5 %} 
+<img src="http://png.findicons.com/files/icons/2181/34al_volume_3_2_se/24/001_15.png" width=15 height=15>
+<img src="http://png.findicons.com/files/icons/2181/34al_volume_3_2_se/24/001_15.png" width=15 height=15>
+<img src="http://png.findicons.com/files/icons/2181/34al_volume_3_2_se/24/001_15.png" width=15 height=15>
+<img src="http://png.findicons.com/files/icons/2181/34al_volume_3_2_se/24/001_15.png" width=15 height=15>
+<img src="http://png.findicons.com/files/icons/2181/34al_volume_3_2_se/24/001_16.png" width=15 height=15>
+{% elif movie.rate <= 5.0 %} 
+<img src="http://png.findicons.com/files/icons/2181/34al_volume_3_2_se/24/001_15.png" width=15 height=15>
+<img src="http://png.findicons.com/files/icons/2181/34al_volume_3_2_se/24/001_15.png" width=15 height=15>
+<img src="http://png.findicons.com/files/icons/2181/34al_volume_3_2_se/24/001_15.png" width=15 height=15>
+<img src="http://png.findicons.com/files/icons/2181/34al_volume_3_2_se/24/001_15.png" width=15 height=15>
+<img src="http://png.findicons.com/files/icons/2181/34al_volume_3_2_se/24/001_15.png" width=15 height=15>
+ {% endif %}
+
+<span class="comments">{{ movie.countcom }}</span>
+
+                 {% if user.is_superuser %}
+                  <FORM method="POST" action="/">
+                     <INPUT Type="submit" VALUE="delete" class="btn2" id="button_d" OnClick="return confirm('Do you want to delete {{ movie.name }}?')" >      
+                     <INPUT Type = "hidden" value ="delete" name = 'delete' >
+                     <INPUT Type = "hidden" value ="{{ movie.id }}" name = 'id_delete' >
+                     {% csrf_token %}
+                 </FORM>
+                 {% endif %}
+                </td>
+                
+{% endif %}
+{% endfor %}
+<td> &nbsp;&nbsp;&nbsp;&nbsp;</td>
+{% if forloop.counter|divisibleby:5 %}
+                </tr><tr>
+                {% endif%}
+{% endif%}
+            {% endfor %}
+
+        </tr>
+        </table>
+</div>
+<!--END Box -->
+
+</div>
+<!-- end Shell -->
+
+
+    </body>
+</html>

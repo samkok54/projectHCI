@@ -34,7 +34,6 @@ p {
 
 
 
-
 .nameH {  
   text-decoration: none; 
   width : 1000px; 
@@ -51,7 +50,7 @@ h13 { font-size:30px; color:#2d130c; font-weight:bold; }
 
 #shell { width:1000px; margin:0 auto; }
 #header { position:relative; padding-top: 10px; }
-#sub-navigation { display:block; clear:right; border-top:1px dashed #666; border-bottom:1px dashed #666; padding:20px 0;  }
+#sub-navigation { display:block; clear:right;  border-bottom:1px dashed #666; padding:20px 0;  }
 
 
 

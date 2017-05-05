@@ -57,27 +57,41 @@
             or &nbsp;
         </form>
 {% endif %}
-		<!-- Navigation -->
-		<div id="navigation">
-			<ul>
-			    <li><a href="/">HOME</a></li>
-			    <li><a href="/movie_now">IN THEATERS</a></li>
-			    <li><a href="/movie_comming">COMING SOON</a></li>
-			</ul>
-
-		</div>
-		<!-- end Navigation -->
-<!-- Sub-menu -->
+	<!-- Sub-menu -->
 		<div id="sub-navigation">
 			<div class="container">
-  <a href="/show_all">SHOW ALL</a>
-  <a href="/last_movie">LATEST TRAILERS</a>
-  <a href="/top_rate">TOP RATED</a>
-  <a href="/most_comment">MOST COMMENTED</a>
+  <a href="/">HOME</a>
+  <div class="dropdown">
+    <div class="dropdown">
+    <button class="dropbtn" onclick="myFunction()">MOVIES</button>
+    <div class="dropdown-content" id="myDropdown">
+      <a href="/show_all">SHOW ALL</a>
+      <a href="/movie_release">RELEASED</a>
+      <a href="/most_comment">MOST COMMENTED</a>
+      <a href="/top_rate">TOP RATED</a>
+    </div>
+  </div> 
+   <a href="/movie_comming">COMING SOON</a>
 </div>
 			</div>
-		<!-- end Sub-Menu -->
+<!-- end Sub-Menu -->
+<script>
+/* When the user clicks on the button, 
+toggle between hiding and showing the dropdown content */
+function myFunction() {
+    document.getElementById("myDropdown").classList.toggle("show");
+}
 
+// Close the dropdown if the user clicks outside of it
+window.onclick = function(e) {
+  if (!e.target.matches('.dropbtn')) {
+    var myDropdown = document.getElementById("myDropdown");
+      if (myDropdown.classList.contains('show')) {
+        myDropdown.classList.remove('show');
+      }
+  }
+}
+</script>
 </div>
 	<!-- end Header -->
 <h12 align="center">Edit -- {{ movie_.name }}</h12>
@@ -106,7 +120,7 @@
 
 <tr><td>
 <b>Name:</b>
-</td><td><input name="name_text" id="id_new_name" placeholder="{{movie_.name}}" />
+</td><td><input name="name_text" id="id_new_name" value="{{movie_.name}}"/>
 </td></tr>
 
 <tr><td>
@@ -116,7 +130,7 @@
 
 <tr><td>
 <b>Release&nbsp;Date:&nbsp;&nbsp;&nbsp;</b> 
-</td><td><input name="date_text" id="id_new_date" placeholder="{{movie_.release_date}}" />
+</td><td><input name="date_text" id="id_new_date" value="{{movie_.release_date}}" />
 </td></tr>
 
 <tr><td>
@@ -126,7 +140,7 @@
 
 <tr><td>
 <b>Lead&nbsp;Actors:</b>    
-</td><td><input name="actor_text" id="id_new_actor" placeholder="{{movie_.lead_actors}}" />
+</td><td><input name="actor_text" id="id_new_actor" value="{{movie_.lead_actors}}" />
 </td></tr>
 
 <tr><td>
@@ -136,7 +150,7 @@
 
 <tr><td>
 <b>Director:</b>    
-</td><td><input name="director_text" id="id_new_director" placeholder="{{movie_.director}}" />
+</td><td><input name="director_text" id="id_new_director" value="{{movie_.director}}" />
 </td></tr>
 
 <tr><td>
@@ -146,7 +160,7 @@
 
 <tr><td>
 <b>Genre:</b>    
-</td><td><input name="genre_text" id="id_new_genre" placeholder="{{movie_.genre}}"  />
+</td><td><input name="genre_text" id="id_new_genre" value="{{movie_.genre}}"  />
 </td></tr>
 
 <tr><td>
@@ -156,7 +170,7 @@
 
 <tr><td>
 <b>Detail:</b>   
-</td><td><textarea name="detail_text" id="id_new_detail" placeholder="{{movie_.detail}}" rows="7" cols="31"></textarea>
+</td><td><textarea name="detail_text" id="id_new_detail" rows="7" cols="31" wrap="off">{{movie_.detail}}</textarea>
 </td></tr>
 
 <tr><td>
@@ -166,7 +180,17 @@
 
 <tr><td>
 <b>Image&nbsp;URL:</b>    
-</td><td><input name="poster_url" id="id_new_pic" placeholder="{{movie_.poster}}" />
+</td><td><input name="poster_url" id="id_new_pic" value="{{movie_.poster}}" />
+</td></tr>
+
+<tr><td>
+<div class="cleaner h20"></div>  
+</td><td><div class="cleaner h20"></div> 
+</td></tr>
+
+<tr><td>
+<b>Picture Detail:</b>   
+</td><td><textarea name="pic_url" id="id_new_picture" rows="7" cols="31" wrap="off">{{movie_.picture}}</textarea>
 </td></tr>
 
 <tr><td>
@@ -176,7 +200,7 @@
 
 <tr><td>
 <b>Clip&nbsp;URL:</b>  
-</td><td><input name="clip_url" id="id_new_clip" placeholder="{{movie_.clip}}" />
+</td><td><input name="clip_url" id="id_new_clip" value="{{movie_.clip}}" />
 </td></tr>
 
 <tr><td>

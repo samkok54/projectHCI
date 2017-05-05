@@ -23,6 +23,7 @@ def home_page(request):
                              rate=0,
                              viewer=0,
                              poster=request.POST['poster_url'],
+                             picture=request.POST['pic_url'],
                              clip=request.POST['clip_url'],
                              add_date=datetime.now(),
                                  )
@@ -102,6 +103,8 @@ def edit_page(request, movie_id):
             movie_.clip = request.POST['clip_url']
         if request.POST['poster_url'] != '':
             movie_.poster = request.POST['poster_url']
+        if request.POST['pic_url'] != '':
+            movie_.picture = request.POST['pic_url']
         movie_.add_date = movie_.add_date
         movie_.save()
         Movie_xml()
@@ -117,6 +120,10 @@ def add_page(request):
 
 def movie_detail_page(request, movie_id):
     movie_ = Movie.objects.get(id=movie_id)
+    picdet = []
+    if movie_.picture != '':
+       picdet=movie_.picture.split(" ")
+       
     comments = Comment.objects.filter(movie=movie_)
     # rating
     if (request.method == 'POST' and request.POST.get(
@@ -152,7 +159,7 @@ def movie_detail_page(request, movie_id):
         comment_.save()
         return redirect('/movie_detail/%d' % int(movie_id))
     return render(request, 'detail.html', {
-                  'movie_': movie_, 'comments': comments})
+                  'movie_': movie_, 'comments': comments, 'picdet':picdet})
 
 
 def login_page(request):
