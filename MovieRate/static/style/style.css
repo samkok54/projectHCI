@@ -42,9 +42,10 @@ p {
 h13 { font-size:30px; color:#2d130c; font-weight:bold; }
 .text-right { text-align:right; }
 .comments { background:url('images/comments.gif') no-repeat 0 center; padding-left:12px; float:right; }
+.search { background:url('images/search-256.png') no-repeat 0 center; padding-left:12px; float:right; }
 .add { background:url('images/comments.gif') no-repeat 0 center; padding-left:12px; float:right; }
-.box { width:980px; border-bottom:1px dashed #413e3e; padding-bottom:21px; }
-.box .head { width:980px; padding-top:14px; padding-bottom:11px;}
+.box { width:980px;   }
+.box .head { width:980px; padding-top:14px; }
 .box .head h2 { float:left; display:inline; text-align:center; }
 
 
@@ -352,3 +353,18 @@ footer {
   white-space: pre-line;
 }
 
+#images {
+
+    float: left;
+    width: 100px;
+    height: 100px;
+    position: relative
+}
+
+.del_photo {
+    position: absolute;
+    right: 0;
+    top: 0;
+    float:right;
+    margin:5px 5px 0 0;
+}

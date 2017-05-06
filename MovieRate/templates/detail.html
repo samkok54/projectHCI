@@ -1,6 +1,6 @@
 <html>
     <head>
-        <title>Movie Rate App</title>
+        <title>SKIN-APP</title>
 <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
     <link href="/static/style/style.css" rel="stylesheet" media="screen">
     <link href="/static/style/star.css" rel="stylesheet" media="screen">
@@ -14,7 +14,7 @@
     <body>
 <!-- Shell -->
 <div id="shell">
-<h1>Movie Rate App</h1>
+         <h1>&nbsp;SKIN-APP&nbsp;<span class="fa fa-magnet" aria-hidden="true"></span></h1>
 <!-- Header -->
 	<div id="header">
 		
@@ -214,7 +214,11 @@ window.onclick = function(e) {
 <tr><td><br>
 <b style="font-size:20px;">Detail:&nbsp;&nbsp;&nbsp;&nbsp;</b>
 <br><br>
-<p style="font-size:16px;">&emsp;&emsp;{% if movie_.detail  != "" %} {{ movie_.detail }}
+<p style="font-size:16px;">{% if movie_.detail  != "" %} 
+{%for detail in details %}
+&emsp;&emsp;{{ detail }}
+<br/>
+{%endfor%}
 {% else %}
 -
 {% endif%}
@@ -390,7 +394,7 @@ function showSlides() {
 </div>
 
 
-
+<footer>Copyright &copy; Cpr.E KMUTNB</footer>
         
         
 </div>

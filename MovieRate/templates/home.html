@@ -5,6 +5,7 @@
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <link href="/static/style/style.css" rel="stylesheet" media="screen">
     <link href="/static/style/photobanner.css" rel="stylesheet" media="screen">
+    <link href="/static/style/input.css" rel="stylesheet" media="screen">
     <link href="/static/style/dropdown.css" rel="stylesheet" media="screen">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <meta http-equiv="content-language" content="th" />
@@ -206,8 +207,8 @@ $('.banner_pad').pgwSlider(
 
 <nav>
 <form type="GET" action="/" >
-    <input  id="search_box" type="text" name="search_box"  placeholder="Search..." >
-    <input type="submit" value="search" id="submit_s_data" >
+    <span class="icon"><i class="fa fa-search"></i></span>&nbsp;<input id="search_box" type="text" name="search_box"  placeholder="Search..." />
+    <!--<input type="submit" value="search" id="submit_s_data" >-->
     <input type="hidden" value="submit_search"  name="ss">
 
 {% csrf_token %}
@@ -234,59 +235,59 @@ $('.banner_pad').pgwSlider(
 <article>
 <table style="width:100%">
 <tr><td>
-<img src="http://www.joblo.com/face_off_img/acf881d8-ffe9-38e0..jpg"width=120 height=180>
+<a href="/news/7/" style="text-decoration:none"><img src="http://www.joblo.com/face_off_img/acf881d8-ffe9-38e0..jpg"width=120 height=180></a>
 </td><td>&nbsp;&nbsp;&nbsp;&nbsp;</td><td>
 
-  <h2>พาราเมาท์ประกาศยกเลิก Friday the 13th ฉบับ 2017</h2>
+  <a href="/news/7/" style="text-decoration:none"><h2>พาราเมาท์ประกาศยกเลิก Friday the 13th ฉบับ 2017</h2></a>
   <p>เมื่อช่วงต้นสัปดาห์ พาราเมาท์ได้ประกาศยกเลิกแผนการฉาย Friday the 13th ฉบับปี 2017 ครับ ทีแรกคาดกันว่าน่าจะมีการหาวันฉายใหม่ แต่ทาง The Hollywood Reporter แหล่งข่าวที่มีความน่าเชื่อถือได้กลับบอกว่าการยกเลิกแผนการฉายนี้
 <a href="/news/7/">
 Read More...</a></p></td></tr>
 <tr><td>&nbsp;&nbsp;</td><td>&nbsp;&nbsp;</td></tr>
 
 <tr><td>
-<img src="http://logan-touch.foxfilm.com/backgrounds_logan_outer.jpg"width=120 height=180>
+<a href="/news/8/" style="text-decoration:none"><img src="http://logan-touch.foxfilm.com/backgrounds_logan_outer.jpg"width=120 height=180></a>
 </td><td>&nbsp;&nbsp;&nbsp;&nbsp;</td><td>
 
-  <h2>ยังไงกันแน่ เมื่อฮิวจ์ แจ็คแมนบอกว่า Logan ไม่ได้อยู่ในจักรวาลเดียวกับ X-Men</h2>
+  <a href="/news/8/" style="text-decoration:none"><h2>ยังไงกันแน่ เมื่อฮิวจ์ แจ็คแมนบอกว่า Logan ไม่ได้อยู่ในจักรวาลเดียวกับ X-Men</h2></a>
   <p>ที่บอกว่ายังไงกันแน่ก็เพราะก่อนหน้านี้ทางผู้กำกับเจมส์ แมนโกล์ดได้ให้ข้อมูลว่า Logan หนังภาคแยกของวูลฟ์เวอรีนลำดับที่ 3 จะเป็นเรื่องราวต่อจากภาค Days of Future Past แต่ล่าสุดกับบทสัมภาษณ์ของฮิวจ์ แจ็คแมนก็ต้องทำให้แฟนๆงงกันอีก
 <a href="/news/8/">
 Read More...</a></p></td></tr>
 <tr><td>&nbsp;&nbsp;</td><td>&nbsp;&nbsp;</td></tr>
 
 <tr><td>
-<img src="http://pre00.deviantart.net/d3e5/th/pre/f/2015/322/a/0/alien__covenant_poster_1970_by_scpmaniac34-d9h3op9.jpg"width=120 height=180>
+<a href="/news/3/" style="text-decoration:none"><img src="http://pre00.deviantart.net/d3e5/th/pre/f/2015/322/a/0/alien__covenant_poster_1970_by_scpmaniac34-d9h3op9.jpg"width=120 height=180></a>
 </td><td>&nbsp;&nbsp;&nbsp;&nbsp;</td><td>
 
-  <h2>หนังสั้นเกริ่นนำเรื่องราวก่อน Alien: Covenant เผยเหตุการณ์ต่อจากตอนจบ Prometheus</h2>
+  <a href="/news/3/" style="text-decoration:none"><h2>หนังสั้นเกริ่นนำเรื่องราวก่อน Alien: Covenant เผยเหตุการณ์ต่อจากตอนจบ Prometheus</h2></a>
   <p>เหลือเวลาราวๆ 2 อาทิตย์ Alien: Covenant ก็จะเข้าฉายในบ้านเราแล้วครับ ย้อนกลับไปเมื่อช่วงเดือนกุมภาพันธ์ ทางฟอกส์ได้ออนไลน์หนังสั้นสำหรับเกริ่นนำเรื่องราวในภาคนี้ โดยเนื้อหาจะเป็นการแนะนำลูกเรือยานโคเวอร์แนนท์กับภารกิจตั้งอาณานิคมบนดาวที่พวกเขาเชื่อว่าเป็นสรวงสวรรค์แห่งใหม่ของมนุษยชาติ
 <a href="/news/3/">
 Read More...</a></p></td></tr>
 <tr><td>&nbsp;&nbsp;</td><td>&nbsp;&nbsp;</td></tr>
 
 <tr><td>
-<img src="http://cdn1-www.comingsoon.net/assets/uploads/gallery/war-for-the-planet-of-the-apes/apes-war-srgb_dc-1.jpg"width=120 height=180>
+<a href="/news/4/" style="text-decoration:none"><img src="http://cdn1-www.comingsoon.net/assets/uploads/gallery/war-for-the-planet-of-the-apes/apes-war-srgb_dc-1.jpg"width=120 height=180></a>
 </td><td>&nbsp;&nbsp;&nbsp;&nbsp;</td><td>
 
-  <h2>ซีซาร์ลุกขึ้นสู้ในตัวอย่างแรกของ War for the Planet of the Apes</h2>
+  <a href="/news/4/" style="text-decoration:none"><h2>ซีซาร์ลุกขึ้นสู้ในตัวอย่างแรกของ War for the Planet of the Apes</h2></a>
   <p>War for the Planet of the Apes คือภาคที่ 3 ของการยกเครื่องหนังตระกูลพิภพวานร จากเนื้อหาในตัวอย่าง ซีซาร์ยังคงปกครองเหล่าวานรและพยายามแสวงหาสันติสุข แต่ในขณะเดียวกันเขาก็ต้องรับมือกับสงครามที่ไม่ได้เป็นผู้ริเริ่ม
 <a href="/news/4/">
 Read More...</a></p></td></tr>
 <tr><td>&nbsp;&nbsp;</td><td>&nbsp;&nbsp;</td></tr>
 
 <tr><td>
-<img src="http://pre11.deviantart.net/b10d/th/pre/f/2017/093/5/3/it__2017____poster___4_by_camw1n-db4i2ol.png"width=120 height=180>
+<a href="/news/5/" style="text-decoration:none"><img src="http://pre11.deviantart.net/b10d/th/pre/f/2017/093/5/3/it__2017____poster___4_by_camw1n-db4i2ol.png"width=120 height=180></a>
 </td><td>&nbsp;&nbsp;&nbsp;&nbsp;</td><td>
 
-  <h2>ตัวอย่างแรกของหนังสยองขวัญรีเมค IT</h2>
+  <a href="/news/5/" style="text-decoration:none"><h2>ตัวอย่างแรกของหนังสยองขวัญรีเมค IT</h2></a>
   <p>เมื่อคืนนี้ทางนิวไลน์ ซีนีม่า ได้ออนไลน์ตัวอย่างซับไทยของหนังสยองขวัญรีเมค IT ออกมาทางยูทูปครับ ทีแรกผมก็ไม่ได้คิดอะไร กะว่าจะกดดูแบบผ่านๆ แต่เมื่อได้ดูตัวอย่างแล้วถึงกับตาสว่าง ขนลุกและรู้สึกหลอนก่อนนอนไปเลย เพราะเดิมทีผมไม่รู้จักหนังเรื่องนี้ในฉบับเก่า เห็นแค่ใบปิดผ่านๆและมันดูตลกเอามากๆ<a href="/news/5/">
 Read More...</a></p></td></tr>
 <tr><td>&nbsp;&nbsp;</td><td>&nbsp;&nbsp;</td></tr>
 
 <tr><td>
-<img src="https://vignette1.wikia.nocookie.net/ideas/images/b/b2/Vsfictional.jpg/revision/latest?cb=20140514065826"width=120 height=180>
+<a href="/news/6/" style="text-decoration:none"><img src="https://vignette1.wikia.nocookie.net/ideas/images/b/b2/Vsfictional.jpg/revision/latest?cb=20140514065826"width=120 height=180></a>
 </td><td>&nbsp;&nbsp;&nbsp;&nbsp;</td><td>
 
-  <h2>ลีเจนดารี่รวมทีมมือเขียนบท Godzilla vs Kong</h2>
+  <a href="/news/6/" style="text-decoration:none"><h2>ลีเจนดารี่รวมทีมมือเขียนบท Godzilla vs Kong</h2></a>
   <p>ก่อนจะเข้าเนื้อหาข่าว ผมขออธิบายอะไรนิดนึงเพื่อความเข้าใจตรงกันครับ ในยุคหลังๆมานี่เรามีโอกาสได้รับชมหนังภาคต่อแนวจักรวาลเดียวกัน อย่างเช่นจักรวาลซูเปอร์ฮีโร่มาร์เวลที่มีหนังเดี่ยวๆของตัวเองแล้วมาครอสโอเวอร์กันใน Avengers หรืออย่างทางฝั่งดีซีที่ตอนนี้ก็เตรียมส่ง Justice League ออกมาจากการเริ่มต้นเรื่องราวใน Man of Steel และ Batman V Superman ขณะที่ทางพาราเมาท์ก็เตรียมขยายจักรวาลเรื่องราวของ Transformers ด้วยการสร้างภาคฉายเดี่ยวของบัมเบิ้ลบี จากที่ยกตัวอย่างมาจะเห็นได้ว่า
 
 <a href="/news/6/">
@@ -294,7 +295,7 @@ Read More...</a></p></td></tr>
 </table>
 </article>
 
-
+<br><br>
 
 
 

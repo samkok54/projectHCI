@@ -1,16 +1,17 @@
 <html>
     <head>
-        <title>Movie Rate App</title>
+        <title>SKIN-APP</title>
 <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
     <link href="/static/style/style.css" rel="stylesheet" media="screen">
     <link href="/static/style/dropdown.css" rel="stylesheet" media="screen">
 	<script type="text/javascript" src="js/jquery-1.4.2.min.js"></script>
 	<script type="text/javascript" src="js/jquery-func.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     </head>
     <body>
 <!-- Shell -->
 <div id="shell">
-        <h1>Movie Rate</h1>
+ <h1>&nbsp;SKIN-APP&nbsp;<span class="fa fa-magnet" aria-hidden="true"></span></h1>
 
 <!-- Header -->
 	<div id="header">
@@ -18,6 +19,15 @@
 {% if user.is_authenticated %}
         <form method="POST" action="/">
             <p align="right">Welcome, {{ user.get_username }}.
+{% if user.is_superuser %}
+<span class="tooltip"><a href="/add_movie"><span class="fa fa-plus btn3" aria-hidden="true" ></span></a>
+  <span class="tooltiptext">Add movies</span>
+</span>
+&nbsp;
+
+
+            
+           {% endif %}
             <input type="submit" value="logout" id="logout" >
             <input type="hidden" value="go_logout" name="submit_logout_page" >
             {% csrf_token %}
@@ -38,37 +48,48 @@
             or &nbsp;
         </form>
 {% endif %}
-		<!-- Navigation -->
-		<div id="navigation">
-			<ul>
-			    <li><a href="/">HOME</a></li>
-			    <li><a href="/movie_now">IN THEATERS</a></li>
-			    <li><a href="/movie_comming">COMING SOON</a></li>
-			</ul>
-
-		</div>
-		<!-- end Navigation -->
-<!-- Sub-menu -->
+	<!-- Sub-menu -->
 		<div id="sub-navigation">
-	<div class="container">
-  <a href="/show_all">SHOW ALL</a>
-  <a href="/last_movie">LATEST TRAILERS</a>
-  <a href="/top_rate">TOP RATED</a>
-  <a href="/most_comment">MOST COMMENTED</a>
+			<div class="container">
+  <a href="/">HOME</a>
+  <div class="dropdown">
+    <div class="dropdown">
+    <button class="dropbtn" onclick="myFunction()">MOVIES</button>
+    <div class="dropdown-content" id="myDropdown">
+      <a href="/show_all">SHOW ALL</a>
+      <a href="/movie_release">RELEASED</a>
+      <a href="/most_comment">MOST COMMENTED</a>
+      <a href="/top_rate">TOP RATED</a>
+    </div>
+  </div> 
 </div>
-	        </div>
-		<!-- end Sub-Menu -->
+  <a href="/movie_comming">COMING SOON</a>
+			</div>
+<!-- end Sub-Menu -->
 
 </div>
 	<!-- end Header -->
-<br><br><br>
+<br><br>
+
+
+
+<script type="text/javascript"> 
+
+function changeNavigation(id) 
+
+{document.getElementById('main').innerHTML=document.getElementById(id).innerHTML} 
+
+</script>
+
+
+
 <!-- Box -->
 <div class="box">
   <div class="head">
-	<h2>--Show All--</h2>
+	<h2>Show All</h2>
   </div>
-<br>
-
+<br><br>
+{% if num < 2%} 
         <table id="id_list_table">
             <tr>
 {% for ID in IDall %}
@@ -80,7 +101,7 @@
 {% else %}
 <img src="http://mtdb.vebto.com/assets/images/imdbnoimage.jpg"width=200 height=300>
 {% endif%} </a><br>
-                    <a href="/movie_detail/{{ movie.id }}/" id="view_detail_{{ movie.id }}" >{{ movie.name }} </a><br>
+                    <a class="nameM" href="/movie_detail/{{ movie.id }}/" id="view_detail_{{ movie.id }}" >{{ movie.name }} </a><br>
                       {{ movie.rate }} 
  {% if movie.rate == 0.0 %} <!--17=0 16=0.5 15=1-->
 <img src="http://png.findicons.com/files/icons/2181/34al_volume_3_2_se/24/001_17.png" width=15 height=15>
@@ -150,7 +171,7 @@
 <img src="http://png.findicons.com/files/icons/2181/34al_volume_3_2_se/24/001_15.png" width=15 height=15>
  {% endif %}
 
-<span class="comments">{{ movie.countcom }}</span>
+<span class="fa fa-comments icon2" aria-hidden="true" >&nbsp;{{ movie.countcom }}</span>
 
              {% if user.is_superuser %}
 
@@ -174,8 +195,19 @@
 
         </tr>
         </table>
+
+  {% endif%}
+
+
+
+
+
+
+
 </div>
 <!--END Box -->
+
+<footer>Copyright &copy; Cpr.E KMUTNB</footer>
 </div>
 <!-- end Shell -->
     </body>

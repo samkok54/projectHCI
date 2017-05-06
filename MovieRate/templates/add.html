@@ -1,6 +1,6 @@
 <html>
     <head>
-        <title>Movie Rate App</title>
+        <title>SKIN-APP</title>
 <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
         <link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery-ui.css" rel="stylesheet" type="text/css"/>
         <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
@@ -22,7 +22,7 @@
 
 <!-- Shell -->
 <div id="shell">
-        <h1>Add New Movie</h1>
+        <h1>&nbsp;SKIN-APP&nbsp;<span class="fa fa-magnet" aria-hidden="true"></span>
 
 <!-- Header -->
 	<div id="header">
@@ -97,7 +97,13 @@ window.onclick = function(e) {
 
 </div>
 	<!-- end Header -->
+
+
+<h12 align="center">Add Movie</h12>
+<br>
   {% if user.is_superuser %}
+
+<center>
         <form method="POST" action="/">
 <table>
 <tr><td>Name<h style="color:red">*</h>:   
@@ -153,7 +159,7 @@ Genre:
 
 <tr><td>
 Detail:    
-</td><td><br><textarea name="detail_text" id="id_new_detail" placeholder="Add Details"  /></textarea>
+</td><td><br><textarea name="detail_text" id="id_new_detail" placeholder="Add Details" rows="7" cols="70"  /></textarea>
 </td></tr>
 
 <tr><td>
@@ -178,7 +184,7 @@ Clip&nbsp;URL:
 
 <tr><td>
 pic detail:    
-</td><td><br><textarea name="pic_url" id="id_new_picture" placeholder="Add Picture url use , "  /></textarea>
+</td><td><br><textarea name="pic_url" id="id_new_picture" placeholder="Add Picture url use spacebar  "  rows="7" cols="70" /></textarea>
 </td></tr>
 
 
@@ -194,6 +200,7 @@ pic detail:
 	    <br>
             {% csrf_token %}
         </form>
+</center>
 {% else %}
 <br><br><br><br><br><br><br>
 <p align="center"><h12>Do Not</h12>
@@ -202,7 +209,10 @@ pic detail:
 <br>
 <br>please,login with superuser</p>
   {% endif %}
+
+
 </div>
+
 <!-- end Shell -->
     </body>
 </html>

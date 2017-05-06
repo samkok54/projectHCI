@@ -1,5 +1,6 @@
 from django.shortcuts import redirect, render, render_to_response
 from MovieRate.models import Movie, Comment, Movie_xml
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from datetime import datetime
 from django.contrib import auth
 from django.contrib.auth.forms import UserCreationForm
@@ -121,6 +122,7 @@ def add_page(request):
 def movie_detail_page(request, movie_id):
     movie_ = Movie.objects.get(id=movie_id)
     picdet = []
+    details = movie_.detail.split("\n")
     if movie_.picture != '':
        picdet=movie_.picture.split(" ")
        
@@ -159,7 +161,7 @@ def movie_detail_page(request, movie_id):
         comment_.save()
         return redirect('/movie_detail/%d' % int(movie_id))
     return render(request, 'detail.html', {
-                  'movie_': movie_, 'comments': comments, 'picdet':picdet})
+                  'movie_': movie_, 'comments': comments, 'picdet':picdet , 'details':details})
 
 
 def login_page(request):
@@ -260,8 +262,25 @@ def movie_comming(request):
                             temp = IDcomming[j]
                             IDcomming[j] = IDcomming[i]
                             IDcomming[i] = temp
+    contact_list=[]
+    for ids in IDcomming :   
+        for movie in movies:
+           if ids==movie.id :
+                 contact_list.append(Movie.objects.get(id=ids))
+        
+    #contact_list = Movie.objects.all()
+    paginator = Paginator(contact_list, 20) # Show 25 contacts per page
+    page = request.GET.get('page')
+    try:
+        contacts = paginator.page(page)
+    except PageNotAnInteger:
+        # If page is not an integer, deliver first page.
+        contacts = paginator.page(1)
+    except EmptyPage:
+        # If page is out of range (e.g. 9999), deliver last page of results.
+        contacts = paginator.page(paginator.num_pages)    
     return render(request, 'commingsoon.html', {
-        'movies': movies, 'IDcomming': IDcomming
+        'movies': movies, 'IDcomming': IDcomming ,'contacts':contacts
                   })
 
 
@@ -293,9 +312,25 @@ def movie_now(request):
                             temp = IDnow[j]
                             IDnow[j] = IDnow[i]
                             IDnow[i] = temp
-               
+    contact_list=[]
+    for ids in IDnow :   
+        for movie in movies:
+           if ids==movie.id :
+                 contact_list.append(Movie.objects.get(id=ids))
+        
+    #contact_list = Movie.objects.all()
+    paginator = Paginator(contact_list, 20) # Show 25 contacts per page
+    page = request.GET.get('page')
+    try:
+        contacts = paginator.page(page)
+    except PageNotAnInteger:
+        # If page is not an integer, deliver first page.
+        contacts = paginator.page(1)
+    except EmptyPage:
+        # If page is out of range (e.g. 9999), deliver last page of results.
+        contacts = paginator.page(paginator.num_pages)
     return render(request, 'movienow.html', {
-        'movies': movies, 'IDnow': IDnow
+        'movies': movies, 'IDnow': IDnow ,'contacts':contacts
                   })
 
 
@@ -326,8 +361,25 @@ def show_all(request):
                         temp = IDall[j]
                         IDall[j] = IDall[i]
                         IDall[i] = temp
+    contact_list=[]
+    for ids in IDall :   
+        for movie in movies:
+           if ids==movie.id :
+                 contact_list.append(Movie.objects.get(id=ids))
+        
+    #contact_list = Movie.objects.all()
+    paginator = Paginator(contact_list, 20) # Show 25 contacts per page
+    page = request.GET.get('page')
+    try:
+        contacts = paginator.page(page)
+    except PageNotAnInteger:
+        # If page is not an integer, deliver first page.
+        contacts = paginator.page(1)
+    except EmptyPage:
+        # If page is out of range (e.g. 9999), deliver last page of results.
+        contacts = paginator.page(paginator.num_pages)
     return render(request, 'showall.html', {
-        'movies': movies, 'IDall': IDall
+        'movies': movies, 'IDall': IDall ,'contacts':contacts
                   })
 
 
@@ -382,8 +434,25 @@ def top_rate(request):
                         temp = IDrate[j]
                         IDrate[j] = IDrate[i]
                         IDrate[i] = temp
+    contact_list=[]
+    for ids in IDrate :   
+        for movie in movies:
+           if ids==movie.id :
+                 contact_list.append(Movie.objects.get(id=ids))
+        
+    #contact_list = Movie.objects.all()
+    paginator = Paginator(contact_list, 20) # Show 25 contacts per page
+    page = request.GET.get('page')
+    try:
+        contacts = paginator.page(page)
+    except PageNotAnInteger:
+        # If page is not an integer, deliver first page.
+        contacts = paginator.page(1)
+    except EmptyPage:
+        # If page is out of range (e.g. 9999), deliver last page of results.
+        contacts = paginator.page(paginator.num_pages)
     return render(request, 'toprate.html', {
-        'movies': movies, 'IDrate': IDrate
+        'movies': movies, 'IDrate': IDrate ,'contacts':contacts
                   })
 
 
@@ -404,9 +473,40 @@ def most_comment(request):
                         temp = IDcomm[j]
                         IDcomm[j] = IDcomm[i]
                         IDcomm[i] = temp
+    contact_list=[]
+    for ids in IDcomm :   
+        for movie in movies:
+           if ids==movie.id :
+                 contact_list.append(Movie.objects.get(id=ids))
+        
+    #contact_list = Movie.objects.all()
+    paginator = Paginator(contact_list, 20) # Show 25 contacts per page
+    page = request.GET.get('page')
+    try:
+        contacts = paginator.page(page)
+    except PageNotAnInteger:
+        # If page is not an integer, deliver first page.
+        contacts = paginator.page(1)
+    except EmptyPage:
+        # If page is out of range (e.g. 9999), deliver last page of results.
+        contacts = paginator.page(paginator.num_pages)
     return render(request, 'mostcomment.html', {
-        'movies': movies, 'IDcomm': IDcomm
+        'movies': movies, 'IDcomm': IDcomm , 'contacts':contacts
                   })
+def listing(request):
+    contact_list = Movie.objects.all()
+    paginator = Paginator(contact_list, 20) # Show 25 contacts per page
+    page = request.GET.get('page')
+    try:
+        contacts = paginator.page(page)
+    except PageNotAnInteger:
+        # If page is not an integer, deliver first page.
+        contacts = paginator.page(1)
+    except EmptyPage:
+        # If page is out of range (e.g. 9999), deliver last page of results.
+        contacts = paginator.page(paginator.num_pages)
+
+    return render(request, 'list.html', {'contacts':contacts})
 
 #def search_titles(request):
  #   if request.method == "POST" :

@@ -69,18 +69,18 @@
 </div>
 	<!-- end Header -->
        
-<br><br><br>
+<br><br>
 <!-- Box -->
 <div class="box">
   <div class="head">
 	<h2>Comming Soon</h2>
 </div>
-<br>
-        <table id="id_list_table" align="center">
-            <tr>
+<br><br>
+        <table id="id_list_table" align="center" >
+            <tr>{% for movie in contacts %}
 
 {% for ids in IDcomming %}
-            {% for movie in movies %}
+            
 {% if movie.id == ids  %} 
                 <td><a href="/movie_detail/{{ movie.id }}/" id="view_detail_pic_{{ movie.id }}"> 
 {% if movie.poster != "" %}
@@ -88,7 +88,7 @@
 {% else %}
 <img src="http://mtdb.vebto.com/assets/images/imdbnoimage.jpg"width=200 height=300>
 {% endif%} </a><br>
-                    <a class="nameM" href="/movie_detail/{{ movie.id }}/" id="view_detail_{{ movie.id }}" >{{ movie.name }} </a><br>
+                    <a class="nameM" href="/movie_detail/{{ movie.id }}/" id="view_detail_{{ movie.id }}" >{{ movie.name }} </a>
                       {{ movie.rate }} 
  {% if movie.rate == 0.0 %} <!--17=0 16=0.5 15=1-->
 <img src="http://png.findicons.com/files/icons/2181/34al_volume_3_2_se/24/001_17.png" width=15 height=15>
@@ -170,6 +170,7 @@
                  </FORM>
 
                  {% endif %}
+<br><br>
                 </td>
 
 {% endif %}
@@ -182,8 +183,33 @@
 
         </tr>
         </table>
+
+<div class="pagination">
+    <span class="step-links">
+        {% if contacts.has_previous %}
+            <a href="?page={{ contacts.previous_page_number }}">previous</a>
+        {% endif %}
+
+        <span class="current">
+            Page {{ contacts.number }} of {{ contacts.paginator.num_pages }}.
+        </span>
+
+        {% if contacts.has_next %}
+            <a href="?page={{ contacts.next_page_number }}">next</a>
+        {% endif %}
+
+
+    </span>
+</div>
+
+
+
+
+
 </div>
 <!--END Box -->
+
+<footer>Copyright &copy; Cpr.E KMUTNB</footer>
 </div>
 <!-- end Shell -->
 

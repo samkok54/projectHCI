@@ -1,6 +1,6 @@
 <html>
     <head>
-        <title>Movie Rate App</title>
+        <title>SKIN-APP</title>
 <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
     <link href="/static/style/style.css" rel="stylesheet" media="screen">
     <link href="/static/style/dropdown.css" rel="stylesheet" media="screen">
@@ -11,7 +11,7 @@
     <body>
 <!-- Shell -->
 <div id="shell">
-        <h1>Movie Rate</h1>
+ <h1>&nbsp;SKIN-APP&nbsp;<span class="fa fa-magnet" aria-hidden="true"></span></h1>
 
 <!-- Header -->
 	<div id="header">
@@ -85,17 +85,17 @@ window.onclick = function(e) {
 
 </div>
 	<!-- end Header -->
-<br><br><br>
+<br><br>
 <!-- Box -->
 <div class="box">
   <div class="head">
-	<h2>--Top Rated--</h2>
+	<h2>Top Rated</h2>
   </div>
-<br>
+<br><br>
 <table id="id_list_table" align="center">
-            <tr>
+            <tr>{% for movie in contacts %}
 {% for ID in IDrate %}
-            {% for movie in movies %}
+            
 {% if movie.id == ID%} 
                 <td><a href="/movie_detail/{{ movie.id }}/" id="view_detail_pic_{{ movie.id }}"> 
 {% if movie.poster != "" %}
@@ -103,7 +103,7 @@ window.onclick = function(e) {
 {% else %}
 <img src="http://mtdb.vebto.com/assets/images/imdbnoimage.jpg"width=200 height=300>
 {% endif%}</a><br>
-                    <a class="nameM" href="/movie_detail/{{ movie.id }}/" id="view_detail_{{ movie.id }}" >{{ movie.name }} </a><br>
+                    <a class="nameM" href="/movie_detail/{{ movie.id }}/" id="view_detail_{{ movie.id }}" >{{ movie.name }} </a>
                       {{ movie.rate }} 
  {% if movie.rate == 0.0 %} <!--17=0 16=0.5 15=1-->
 <img src="http://png.findicons.com/files/icons/2181/34al_volume_3_2_se/24/001_17.png" width=15 height=15>
@@ -173,7 +173,7 @@ window.onclick = function(e) {
 <img src="http://png.findicons.com/files/icons/2181/34al_volume_3_2_se/24/001_15.png" width=15 height=15>
  {% endif %}
 
-<span class="comments">{{ movie.countcom }}</span>
+<span class="fa fa-comments icon2" aria-hidden="true" >&nbsp;{{ movie.countcom }}</span>
 
                  {% if user.is_superuser %}
                   <FORM method="POST" action="/">
@@ -183,6 +183,7 @@ window.onclick = function(e) {
                      {% csrf_token %}
                  </FORM>
                  {% endif %}
+<br><br>
                 </td>
                 
 
@@ -197,9 +198,32 @@ window.onclick = function(e) {
 
         </tr>
         </table>
+
+
+<div class="pagination">
+    <span class="step-links">
+        {% if contacts.has_previous %}
+            <a href="?page={{ contacts.previous_page_number }}">previous</a>
+        {% endif %}
+
+        <span class="current">
+            Page {{ contacts.number }} of {{ contacts.paginator.num_pages }}.
+        </span>
+
+        {% if contacts.has_next %}
+            <a href="?page={{ contacts.next_page_number }}">next</a>
+        {% endif %}
+
+
+    </span>
+</div>
+
+
  
 </div>
 <!--END Box -->
+
+<footer>Copyright &copy; Cpr.E KMUTNB</footer>
 </div>
 <!-- end Shell -->
     </body>
