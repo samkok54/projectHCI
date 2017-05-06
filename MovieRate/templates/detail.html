@@ -1,3 +1,5 @@
+<!DOCTYPE html>
+
 <html>
     <head>
         <title>SKIN-APP</title>
@@ -106,7 +108,7 @@ window.onclick = function(e) {
   </div>
 
 <p align="center">
-<table id="id_list_table" align="center">
+<table id="id_list_table" align="center" style="background:black;">
 <tr ><td>
 
 {% if movie_.poster != "" %}
@@ -118,85 +120,81 @@ window.onclick = function(e) {
 </td><td>&nbsp;&nbsp;&nbsp;</td>
 <td>
    <div class="test">     
-<table id="id_list_table" align="center" height=450 >
+<table id="id_list_table" align="center" height="300px" width="50%">
 
 <tr><td >
 <div class="cleaner h15"></div>  
 </td><td><div class="cleaner h15"></div> 
+</td><td><div class="cleaner h15"></div> 
 </td></tr>
 
 <tr ><td>
-<b>Release&nbsp;Date:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</b></td><td> 
+<b>&nbsp;&nbsp;Release&nbsp;Date&emsp;</b></td>
+<td><b>:</b></td>
+<td> &emsp;
 {% if movie_.release_date != "" %} {{ movie_.release_date }} 
 {% else %}
 -
 {% endif%}</td></tr>
 
-<tr><td >
-<div class="cleaner h15"></div>  
-</td><td><div class="cleaner h15"></div> 
-</td></tr>
+
 
 <tr><td>
-<b>Lead&nbsp;Actors:&nbsp;&nbsp;</b></td><td>{% if movie_.lead_actors != "" %} {{ movie_.lead_actors }} 
+<b>&nbsp;&nbsp;Lead&nbsp;Actors&emsp;</b></td>
+<td><b>:</b></td>
+<td>&emsp;{% if movie_.lead_actors != "" %} {{ movie_.lead_actors }} 
 {% else %}
 -
 {% endif%}  </td></tr>
 
-<tr><td>
-<div class="cleaner h15"></div>  
-</td><td><div class="cleaner h15"></div> 
-</td></tr>
 
 <tr><td>
-<b>Director: </b></td><td> 
-{% if movie_.director != "" %} {{ movie_.director }}
+<b>&nbsp;&nbsp;Director&emsp;</b></td><td>
+<b>:</b></td><td> 
+&emsp;{% if movie_.director != "" %} {{ movie_.director }}
 {% else %}
 -
 {% endif%}  </td></tr>
 
-<tr><td>
-<div class="cleaner h15"></div>  
-</td><td><div class="cleaner h15"></div> 
-</td></tr>
+
 
 <tr><td>
-<b>Genre:  </b></td><td> 
-{% if movie_.genre  != "" %} {{ movie_.genre }}
+<b>&nbsp;&nbsp;Genre&emsp; </b></td>
+<td>
+<b>:</b></td>
+<td> 
+&emsp;{% if movie_.genre  != "" %} {{ movie_.genre }}
 {% else %}
 -
 {% endif%} </td></tr>
 
 
 
-<tr><td>
-<div class="cleaner h15"></div>  
-</td><td><div class="cleaner h15"></div> 
-</td></tr>
-
 
 
 <tr><td>
-<b>Add&nbsp;Date: </b></td><td> 
-{% if movie_.add_date  != "" %} {{ movie_.add_date }}
+<b>&nbsp;&nbsp;Add&nbsp;Date&emsp; </b></td>
+<td>
+<b>:</b></td>
+<td> 
+&emsp;{% if movie_.add_date  != "" %} {{ movie_.add_date }}
 {% else %}
 -
 {% endif%}   </td></tr>
 
-<tr><td>
-<div class="cleaner h15"></div>  
-</td><td><div class="cleaner h15"></div> 
-</td></tr>
+
 
 <tr><td>
-<b>Rate:  </b></td><td> 
-{% if movie_.rate != 0.0 %}  {{ movie_.rate }}/5
+<b>&nbsp;&nbsp;Rate&emsp;  </b></td><td>
+<b>:</b></td><td> 
+&emsp;{% if movie_.rate != 0.0 %}  {{ movie_.rate }}/5
 {% else %}
 -
 {% endif%} </td></tr>
 
 
 <tr><td>
+</td><td>
 </td><td width=500px>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td></tr>
 </table>

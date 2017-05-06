@@ -1,6 +1,6 @@
 .container {
     overflow: hidden;
-    background-color: #4f340e;
+    background-color: #920637;
     font-family: Arial;
 }
 
@@ -28,7 +28,7 @@
 }
 
 .container a:hover, .dropdown:hover .dropbtn {
-    background-color: #b19881;
+    background-color: #ff544e;
 }
 
 .dropdown-content {
