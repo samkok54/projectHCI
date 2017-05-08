@@ -2,26 +2,24 @@
 <head>
 </head>
 <body>
-{% for contact in contacts %}
-    {# Each "contact" is a Contact model object. #}
-    {{ contact.name|upper }}<br />
-    ...
+
+
+{% if movies_s != 0 %} 
+{% if str_f == 1%}
+<h2>Search : {{search}}</h2>
+</br>
+{% for movie in movies %}
+{% for movie_s in movies_s %}
+{% if movie_s == movie.id%} 
+  <a class="nameS" href="/movie_detail/{{ movie.id }}/">{{ movie.name }} </a>
+
+{% endif %}
+{% endfor %}
 {% endfor %}
 
-<div class="pagination">
-    <span class="step-links">
-        {% if contacts.has_previous %}
-            <a href="?page={{ contacts.previous_page_number }}">previous</a>
-        {% endif %}
-
-        <span class="current">
-            Page {{ contacts.number }} of {{ contacts.paginator.num_pages }}.
-        </span>
-
-        {% if contacts.has_next %}
-            <a href="?page={{ contacts.next_page_number }}">next</a>
-        {% endif %}
-    </span>
-</div>
+{% elif str_f == 2%}
+<h2>Not found</h2>
+{% endif %}
+{% endif %}
 </body>
 </html>

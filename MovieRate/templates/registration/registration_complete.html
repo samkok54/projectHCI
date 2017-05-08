@@ -8,10 +8,13 @@
     <title>Login</title>
     <link href="/static/bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <link href="/static/base.css" rel="stylesheet">
+    <link href="/static/style/style.css" rel="stylesheet" media="screen">
+<link rel="shortcut icon" type="image/png" href="https://cdn3.iconfinder.com/data/icons/movie-video/512/Icon_16-512.png"/>
 </head>
 
 <body>
-<br><br><br><br><br><br><br><br>
+<div class="logo" style="background-position: center;">&nbsp;</div>
+<br><br><br>
 <div class="container">
 
     <div class="row">
@@ -19,13 +22,14 @@
             <div class="text-center">
 <h1>Registration Complete</h1>
         <p>You are now registered</p>
+<br> <br>
         <form method="POST" action="/accounts/login/" style="float:right;">
-            <input type="submit" value="login" id="login" >
+            <input class="rate" type="submit" value="login" id="login" >
             <input type="hidden" value="go_login" name="submit_login_page" >
             {% csrf_token %}
         </form>
         <form method="POST" action="/" style="float:right;">
-            <input type="submit" value="go to homepage" id="tohome" >
+            <input class="rate" type="submit" value="go to homepage" id="tohome" >
             <input type="hidden" value="go_home" name="submit_homepage" >
             {% csrf_token %}
             or &nbsp;

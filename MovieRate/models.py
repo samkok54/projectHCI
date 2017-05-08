@@ -26,6 +26,7 @@ class Comment(models.Model):
     comment_text = models.TextField(default='')
     date = models.DateTimeField(default=datetime.now, blank=True)
     like = models.IntegerField(default=0)
+    unlike = models.IntegerField(default=0)
 
 
 def Movie_xml():

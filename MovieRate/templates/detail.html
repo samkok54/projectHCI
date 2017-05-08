@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-
 <html>
     <head>
         <title>SKIN-APP</title>
@@ -8,19 +7,36 @@
     <link href="/static/style/star.css" rel="stylesheet" media="screen">
     <link href="/static/style/dropdown.css" rel="stylesheet" media="screen">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="shortcut icon" type="image/png" href="https://cdn3.iconfinder.com/data/icons/movie-video/512/Icon_16-512.png"/>
 	<script type="text/javascript" src="js/jquery-1.4.2.min.js"></script>
 	<script type="text/javascript" src="js/jquery-func.js"></script>
     <link href="/static/style/photobanner.css" rel="stylesheet" media="screen">
 
+<script type="text/javascript" src="http://www.filmsoon.com/templates/js/jquery-1.7.2.min.js"></script>
+  <style>
+  background:#FFFFF;
+  </style> 
+
+
     </head>
     <body>
+
+
+ <div class="block_left">
+   <link rel="stylesheet" type="text/css" href="http://www.filmsoon.com/templates/css/colorbox.css" media="screen" />
+  <link rel="stylesheet" href="http://www.filmsoon.com/templates/css/tsc_pagination.css" />
+  <script src="http://www.filmsoon.com/templates/js/jquery.colorbox-min.js"></script>
+  <script>
+  function lightbox(path){
+   $.colorbox({width:"80%", height:"85%", iframe:true, href:path});
+  }
+  </script> 
+
+
 <!-- Shell -->
 <div id="shell">
-         <h1>&nbsp;SKIN-APP&nbsp;<span class="fa fa-magnet" aria-hidden="true"></span></h1>
-<!-- Header -->
-	<div id="header">
-		
-{% if user.is_authenticated %}
+        <div class="logo">&nbsp;<br><br><br>{% if user.is_authenticated %}
+        
         <form method="POST" action="/">
             <p align="right">Welcome, {{ user.get_username }}.
 {% if user.is_superuser %}
@@ -32,25 +48,33 @@
 
             
            {% endif %}
-            <input type="submit" value="logout" id="logout" >
-            <input type="hidden" value="go_logout" name="submit_logout_page" >
+            <input class="regist" type="submit" value="logout" id="logout" >
+            <input class="regist" type="hidden" value="go_logout" name="submit_logout_page" >
             {% csrf_token %}
-        </form></p>
+        </p>
+</form>
 {% else %}
 
         <form method="POST" action="/accounts/registration/" style="float:right;">
-            <input type="submit" value="signup" id="registration" >
-            <input type="hidden" value="go_regis" name="submit_regis_page" >
+            <input class="regist" type="submit" value="signup" id="registration" >
+            <input class="regist" type="hidden" value="go_regis" name="submit_regis_page" >
             {% csrf_token %}
         </form>
         <form method="POST" action="/accounts/login/" style="float:right;">
             Welcome, new user. Please 
-            <input type="submit" value="login" id="login" >
-            <input type="hidden" value="go_login" name="submit_login_page" >
+            <input class="regist" type="submit" value="login" id="login" >
+            <input class="regist" type="hidden" value="go_login" name="submit_login_page" >
             {% csrf_token %}
             or &nbsp;
         </form>
 {% endif %}
+
+
+</div><!--endlogo-->
+
+<!-- Header -->
+	<div id="header">
+		
 
 	<!-- Sub-menu -->
 		<div id="sub-navigation">
@@ -68,7 +92,8 @@
   </div> 
 </div>
   <a href="/movie_comming">COMING SOON</a>
-			</div>
+			</div><!--endcontain-->
+</div>
 <!-- end Sub-Menu -->
 <script>
 /* When the user clicks on the button, 
@@ -98,27 +123,49 @@ window.onclick = function(e) {
 	<h12 class="nameH">{{ movie_.name }}</h12>
 
 
+
  {% if user.is_superuser %}
-  &nbsp;&nbsp;&nbsp;
+                  <FORM method="POST" action="/" style="float:right">
+                      <INPUT type="image" src="http://www.freeiconspng.com/uploads/remove-icon-png-25.png" width=28px height=28px alt="Delete" value="delete" OnClick="return confirm('Do you want to delete {{ movie_.name }}?')"  >  
+                     <input type = "hidden" value ="delete" name = 'delete'>
+                     <input type = "hidden" value ="{{ movie_.id }}" name = 'id_delete'>
+                     {% csrf_token %}
+                 </FORM>
 <span class="tooltip" style="float:right" ><a href="/movie/{{movie_.id}}/edit/"><span class="fa fa-cogs fa-2x btn4" aria-hidden="true"></span></a>
-  <span class="tooltiptext">Configs this movies</span>
+  <span class="tooltiptextCon">Configs this movies</span>
 </span>
         {% endif%}
 
   </div>
 
 <p align="center">
-<table id="id_list_table" align="center" style="background:black;">
+<table id="id_list_table" align="center" >
 <tr ><td>
 
-{% if movie_.poster != "" %}
+
+
+
+
+{% if movie_.poster != "" and movie_.clip != "" %}
+<div title="กดเพื่อดูวีดีโอ" onclick="lightbox('{{ movie_.clip }}?rel=0&amp;autohide=1&showinfo=0&autoplay=1&iv_load_policy=3')" class="trailer_video">
+    <div id="play"></div>
+      <img src=" {{ movie_.poster }} " height=450 width=300 align="center" alt="Avatar" class="images">
+<center><span class="fa fa-film" style="font-size:20px" aria-hidden="true">&nbsp;click for watch video</span></center>
+</div> 
+
+{% elif movie_.poster != "" and movie_.clip == "" %}
 <img src=" {{ movie_.poster }} " height=450 width=300 align="center">
+
+{% elif movie_.poster == "" and movie_.clip != "" %}
+<div title="กดเพื่อดูวีดีโอ" onclick="lightbox('{{ movie_.clip }}?rel=0&amp;autohide=1&showinfo=0&autoplay=1&iv_load_policy=3')" class="trailer_video"><div id="play"></div><img src="http://mtdb.vebto.com/assets/images/imdbnoimage.jpg" height=450 width=300>
+<center><span class="fa fa-film" style="font-size:20px" aria-hidden="true">&nbsp;click for watch video</span></center></div> 
+
 {% else %}
 <img src="http://mtdb.vebto.com/assets/images/imdbnoimage.jpg" height=450 width=300 align="center">
 {% endif%}
 
 </td><td>&nbsp;&nbsp;&nbsp;</td>
-<td>
+<td style="background:url(https://images.mpic.ws/2017/05/07/original-size-3222-952-in-cinematic-early-days-the-roots-of-rock-JMsrQt-clipartbc07a.png); background-size:1580px; background-position-x:0px; ">
    <div class="test">     
 <table id="id_list_table" align="center" height="300px" width="50%">
 
@@ -187,7 +234,7 @@ window.onclick = function(e) {
 <tr><td>
 <b>&nbsp;&nbsp;Rate&emsp;  </b></td><td>
 <b>:</b></td><td> 
-&emsp;{% if movie_.rate != 0.0 %}  {{ movie_.rate }}/5
+&emsp;{% if movie_.rate != 0.0 %}  {{ movie_.rate }}/5  ({{movie_.viewer}}votes)
 {% else %}
 -
 {% endif%} </td></tr>
@@ -196,9 +243,9 @@ window.onclick = function(e) {
 <tr><td>
 </td><td>
 </td><td width=500px>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td></tr>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td></tr>
 </table>
-  </div>   
+  </div><!--endtest-->  
 </td>
 </tr >  
 </table>
@@ -207,8 +254,8 @@ window.onclick = function(e) {
 
 <br><br>
 <center>
-<div class="test" style="width:100% "  > 
-<table  style="width:90% " >
+<div class="test2" style="width:100%;"  > 
+<table  style="width:90%;" >
 <tr><td><br>
 <b style="font-size:20px;">Detail:&nbsp;&nbsp;&nbsp;&nbsp;</b>
 <br><br>
@@ -280,15 +327,8 @@ function showSlides() {
 
 
 
-{% if movie_.clip != "" %}
-<div class="cleaner h20"></div>
-<p align="center"><iframe width="720" height="480" src="{{ movie_.clip }}" >
-</iframe></p>
-{% endif%}
 
-
-
-<div id="bord">
+{% if user.is_authenticated and not user.is_superuser %}
   <form method="POST" action="/movie_detail/{{movie_.id}}/" align="center">
 <div class="stars">
     <input class="star star-5" id="star-5" type="radio" name="star" value=5 />
@@ -301,26 +341,30 @@ function showSlides() {
     <label class="star star-2" for="star-2"></label>
     <input class="star star-1" id="star-1" type="radio" name="star" value=1 />
     <label class="star star-1" for="star-1"></label>
-</div>
+</div><!--endstar-->
 
-            <input type="submit" value="rate"  class="btn2" id="id_rate" >
+            <input type="submit" value="rate"  class="rate" id="id_rate" >
             <input type="hidden" value="send_rate"  name="send_rate">
 	    <br>
             {% csrf_token %}
         </form>
+{% endif %}
 
-</div>
-</div>
+</div><!--endBOX-->
+
+
+
 <!-- Box -->
 <div class="box">
 
 <div class="cleaner h40"></div>
+        {% if movie_.countcom != 0 %}
 <div class="wTable">
+
 <table id="comment_text" align="center">
 
-        {% if movie_.countcom != 0 %}
-           <h2><span class="fa fa-comments " aria-hidden="true"></span> Comments</h2>
-            {% for comment in comments %}
+           <h2 style="color:#361227"><span class="fa fa-comments " aria-hidden="true"></span> Comments</h2>
+            {% for comment in contacts %}
            <tr id="comment_{{ comment.id }}_name"><td></br><b>Name: </b>{{ comment.user }}</td></tr>
            <tr id="comment_{{ comment.id }}_date"><td><span class="date"> date:{{ comment.date }}<br></span></td></tr>
            <tr id="comment_{{ comment.id }}_comment"><td>
@@ -337,42 +381,94 @@ function showSlides() {
 </div>
 
 </td></tr>
-           <tr id="comment_{{ comment.id }}_like"><td>
-<form method="POST" action="/movie_detail/{{movie_.id}}/">
+
+
+
+
+           <tr id="comment_{{ comment.id }}_like"><td>{% if user.is_authenticated and not user.is_superuser %}
+<form method="POST" action="/movie_detail/{{movie_.id}}/"style="float:left">
 <input type="image" name="submit" value="LIKE"      src="https://upload.wikimedia.org/wikipedia/commons/1/13/Facebook_like_thumb.png" height=20  tittle="Like" id="submit_like_{{ comment.id }}"  >
             <input type="hidden" value="submit_like"  name="send_like">
             <input type="hidden" value="{{ comment.id }}"  name="id_send_like">
  {% csrf_token %}
-   <b>{{ comment.like }} likes</b>
-        </form> 
+<b>{{ comment.like }} likes</b>
+   
+</form>
+{%else%}
+<b>{{ comment.like }} likes</b>
+{%endif%}
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+{% if user.is_authenticated and not user.is_superuser %}
+<form method="POST" action="/movie_detail/{{movie_.id}}/"style="float:left">
+<input type="image" name="submit" value="UNLIKE"      src="https://upload.wikimedia.org/wikipedia/commons/2/21/Not_facebook_dislike_thumbs_down.png" height=20  tittle="UnLike" id="submit_unlike_{{ comment.id }}"  >
+            <input type="hidden" value="submit_unlike"  name="send_unlike">
+            <input type="hidden" value="{{ comment.id }}"  name="id_send_unlike">
+ {% csrf_token %}
+<b>{{ comment.unlike }} unlikes</b>
+        </form>
+ {%else%}<b>{{ comment.unlike }} unlikes</b>{%endif%}
 </td></tr>
+
+
+
+
 <tr><td></td></tr>
 <tr><td></td></tr>
-<tr><td><div class="cleaner h20"></div> </td></tr>
+<tr class="border_bottom"><td><div class="cleaner h20"></div> </td></tr>
+
             {% endfor %}
-        {% endif%}
-</table>
+<tr><td>
+<div class="cleaner h10"></div>
+<div class="pagination" style="float:right;">
+    <span class="step-links">
+        {% if contacts.has_previous %}
+            <a href="?page={{ contacts.previous_page_number }}"><span class="fa fa-toggle-left" aria-hidden="true" ></span></a>
+        {% endif %}
+
+        <span class="current">
+            &nbsp;Page {{ contacts.number }} of {{ contacts.paginator.num_pages }}&nbsp;
+        </span>
+
+        {% if contacts.has_next %}
+            <a href="?page={{ contacts.next_page_number }}"><span class="fa fa-toggle-right" aria-hidden="true" ></span></a>
+        {% endif %}
+
+&nbsp;
+    </span>
 </div>
+<div class="cleaner h10"></div>
+</td></tr>
+
+
+</table>
+
+</div><!--endwTable-->
+
+        {% endif%}
+
+
+
 
 
 
 
 
 <div class="cleaner h40"></div>
+{% if user.is_authenticated %}
 <div id="comment_form">
 <h13>Comment <span class="fa fa-commenting " aria-hidden="true"></span></h13>
 <form method="POST" name="comment" action="/movie_detail/{{movie_.id}}/">
-{% if user.is_authenticated %}
+{% if user.is_superuser %}
+
+           <div class="form_row"> <label for="text">name<h style="color:red">*</h>: Admin({{ user.get_username }})</label><br/> 
+<input name="user_name" id="id_user_name_comment" value="Admin({{ user.get_username }})" type="hidden"></div>
+
+            <br/>
+{% elif user.is_authenticated %}
 
            <div class="form_row"> <label for="text">name<h style="color:red">*</h>: {{ user.get_username }}</label><br/> 
 <input name="user_name" id="id_user_name_comment" value="{{ user.get_username }}" type="hidden"></div>
-
-            <br/>
-{% else %}
-
-           <div class="form_row"> <label for="text">name<h style="color:red">*</h>:</label><br/> <input name="user_name" id="id_user_name_comment" placeholder="Your Name" required
-    oninvalid="this.setCustomValidity('Please Enter your name')"
-    oninput="setCustomValidity('')"/></div>
             <br/>
 {% endif%}
           <div class="form_row" >  <label for="text">Message<h style="color:red">*</h>:</label> <br/><textarea name="comment_text" id="id_comment_text" placeholder="Comment this movie" class="validate-email required input_field" required
@@ -385,13 +481,18 @@ function showSlides() {
             <input type="hidden" value="send_Comment"  name="send_comment">
             
             {% csrf_token %}
-</div>
+
 <br>
-        </form>
-
+      </form>
+ 
 </div>
+<!--end comment form-->
+{% endif%}
+ 
+</div>
+<!--endBOX-->
 
-
+<br><br>
 <footer>Copyright &copy; Cpr.E KMUTNB</footer>
         
         

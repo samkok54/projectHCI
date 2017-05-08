@@ -7,6 +7,8 @@
         <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js"></script>
     <link href="/static/style/style.css" rel="stylesheet" media="screen">
     <link href="/static/style/dropdown.css" rel="stylesheet" media="screen">
+<link rel="shortcut icon" type="image/png" href="https://cdn3.iconfinder.com/data/icons/movie-video/512/Icon_16-512.png"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
 
 	<script type="text/javascript" src="js/jquery-1.4.2.min.js"></script>
@@ -21,12 +23,9 @@
 
 <!-- Shell -->
 <div id="shell">
-        <h1>&nbsp;SKIN-APP&nbsp;<span class="fa fa-magnet" aria-hidden="true"></span></h1>
-
-<!-- Header -->
-	<div id="header">
-		
-{% if user.is_authenticated %}
+       <div class="logo">&nbsp;<br><br><br>
+      {% if user.is_authenticated %}
+        
         <form method="POST" action="/">
             <p align="right">Welcome, {{ user.get_username }}.
 {% if user.is_superuser %}
@@ -38,25 +37,31 @@
 
             
            {% endif %}
-            <input type="submit" value="logout" id="logout" >
+            <input class="regist" type="submit" value="logout" id="logout" >
             <input type="hidden" value="go_logout" name="submit_logout_page" >
             {% csrf_token %}
-        </form></p>
+        </p>
+</form>
 {% else %}
 
         <form method="POST" action="/accounts/registration/" style="float:right;">
-            <input type="submit" value="signup" id="registration" >
+            <input class="regist" type="submit" value="signup" id="registration" >
             <input type="hidden" value="go_regis" name="submit_regis_page" >
             {% csrf_token %}
         </form>
         <form method="POST" action="/accounts/login/" style="float:right;">
             Welcome, new user. Please 
-            <input type="submit" value="login" id="login" >
+            <input class="regist" type="submit" value="login" id="login" >
             <input type="hidden" value="go_login" name="submit_login_page" >
             {% csrf_token %}
             or &nbsp;
         </form>
-{% endif %}
+{% endif %}</div>
+
+
+<!-- Header -->
+	<div id="header">
+	
 	<!-- Sub-menu -->
 		<div id="sub-navigation">
 			<div class="container">
@@ -70,28 +75,13 @@
       <a href="/most_comment">MOST COMMENTED</a>
       <a href="/top_rate">TOP RATED</a>
     </div>
-  </div> 
+    </div> 
+    </div> 
    <a href="/movie_comming">COMING SOON</a>
 </div>
 			</div>
 <!-- end Sub-Menu -->
-<script>
-/* When the user clicks on the button, 
-toggle between hiding and showing the dropdown content */
-function myFunction() {
-    document.getElementById("myDropdown").classList.toggle("show");
-}
 
-// Close the dropdown if the user clicks outside of it
-window.onclick = function(e) {
-  if (!e.target.matches('.dropbtn')) {
-    var myDropdown = document.getElementById("myDropdown");
-      if (myDropdown.classList.contains('show')) {
-        myDropdown.classList.remove('show');
-      }
-  }
-}
-</script>
 </div>
 	<!-- end Header -->
 <h12 align="center">Edit -- {{ movie_.name }}</h12>
@@ -120,7 +110,7 @@ window.onclick = function(e) {
 
 <tr><td>
 <b>Name:</b>
-</td><td><input name="name_text" id="id_new_name" value="{{movie_.name}}"/>
+</td><td><input style="width:360px;"class="addm" name="name_text" id="id_new_name" value="{{movie_.name}}"/>
 </td></tr>
 
 <tr><td>
@@ -130,7 +120,7 @@ window.onclick = function(e) {
 
 <tr><td>
 <b>Release&nbsp;Date:&nbsp;&nbsp;&nbsp;</b> 
-</td><td><input name="date_text" id="id_new_date" value="{{movie_.release_date}}" />
+</td><td><input  style="width:160px;" class="addm" name="date_text" id="id_new_date" value="{{movie_.release_date}}" />
 </td></tr>
 
 <tr><td>
@@ -140,7 +130,7 @@ window.onclick = function(e) {
 
 <tr><td>
 <b>Lead&nbsp;Actors:</b>    
-</td><td><input name="actor_text" id="id_new_actor" value="{{movie_.lead_actors}}" />
+</td><td><input style="width:170px;" class="addm" name="actor_text" id="id_new_actor" value="{{movie_.lead_actors}}" />
 </td></tr>
 
 <tr><td>
@@ -150,7 +140,7 @@ window.onclick = function(e) {
 
 <tr><td>
 <b>Director:</b>    
-</td><td><input name="director_text" id="id_new_director" value="{{movie_.director}}" />
+</td><td><input style="width:170px;" class="addm" name="director_text" id="id_new_director" value="{{movie_.director}}" />
 </td></tr>
 
 <tr><td>
@@ -160,7 +150,7 @@ window.onclick = function(e) {
 
 <tr><td>
 <b>Genre:</b>    
-</td><td><input name="genre_text" id="id_new_genre" value="{{movie_.genre}}"  />
+</td><td><input class="addm" name="genre_text" id="id_new_genre" value="{{movie_.genre}}"  />
 </td></tr>
 
 <tr><td>
@@ -170,7 +160,7 @@ window.onclick = function(e) {
 
 <tr><td>
 <b>Detail:</b>   
-</td><td><textarea name="detail_text" id="id_new_detail" rows="7" cols="64">{{movie_.detail}}</textarea>
+</td><td><textarea class="addm" style="width:450px; resize:none;" name="detail_text" id="id_new_detail" rows="7" cols="64">{{movie_.detail}}</textarea>
 </td></tr>
 
 <tr><td>
@@ -180,7 +170,7 @@ window.onclick = function(e) {
 
 <tr><td>
 <b>Image&nbsp;URL:</b>    
-</td><td><input name="poster_url" id="id_new_pic" value="{{movie_.poster}}" />
+</td><td><input style="width:450px;" class="addm" name="poster_url" id="id_new_pic" value="{{movie_.poster}}" placeholder="Add Poster URL" />
 </td></tr>
 
 <tr><td>
@@ -190,7 +180,7 @@ window.onclick = function(e) {
 
 <tr><td>
 <b>Picture Detail:</b>   
-</td><td><textarea name="pic_url" id="id_new_picture"  rows="7" cols="64" >{{movie_.picture}}</textarea>
+</td><td><textarea class="addm" style="width:450px; height:65px; resize:none;" name="pic_url" id="id_new_picture"  rows="7" cols="64" >{{movie_.picture}}</textarea>
 </td></tr>
 
 <tr><td>
@@ -200,7 +190,7 @@ window.onclick = function(e) {
 
 <tr><td>
 <b>Clip&nbsp;URL:</b>  
-</td><td><input name="clip_url" id="id_new_clip" value="{{movie_.clip}}" />
+</td><td><input style="width:450px;" class="addm" name="clip_url" id="id_new_clip" value="{{movie_.clip}}" />
 </td></tr>
 
 <tr><td>
@@ -211,7 +201,7 @@ window.onclick = function(e) {
 <tr><td>
 
  <form method="POST" action="/">
-            <input type="submit" value="< Back"  class="btn2" id="back" >
+            <input type="submit" value="< Back"  class="rate" id="back" >
             <input type="hidden" value="Back_send" name="back_send" >
 	    <br>
             {% csrf_token %}
@@ -220,7 +210,7 @@ window.onclick = function(e) {
 </td><td>
 </td><td align="center">
 
-            <input type="submit" value="Update" class="btn2" id="submit_update_data" OnClick="return confirm('Do you want to update {{ movie.name }}?')"  >
+            <input type="submit" value="Update" class="rate" id="submit_update_data" OnClick="return confirm('Do you want to update {{ movie.name }}?')"  >
             <input type="hidden" value="submit_send_update"  name="Update_send_Detail">
             <input Type = "hidden" value ="{{ movie_.id }}" name = 'id_update'>
 	    <br>

@@ -7,6 +7,7 @@
         <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js"></script>
     <link href="/static/style/style.css" rel="stylesheet" media="screen">
     <link href="/static/style/dropdown.css" rel="stylesheet" media="screen">
+<link rel="shortcut icon" type="image/png" href="https://cdn3.iconfinder.com/data/icons/movie-video/512/Icon_16-512.png"/>
 <script type="text/javascript" src="js/jquery-1.4.2.min.js"></script>
 	<script type="text/javascript" src="js/jquery-func.js"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -22,12 +23,8 @@
 
 <!-- Shell -->
 <div id="shell">
-        <h1>&nbsp;SKIN-APP&nbsp;<span class="fa fa-magnet" aria-hidden="true"></span>
-
-<!-- Header -->
-	<div id="header">
-		
-{% if user.is_authenticated %}
+        <div class="logo">&nbsp;<br><br><br>{% if user.is_authenticated %}
+        
         <form method="POST" action="/">
             <p align="right">Welcome, {{ user.get_username }}.
 {% if user.is_superuser %}
@@ -39,25 +36,30 @@
 
             
            {% endif %}
-            <input type="submit" value="logout" id="logout" >
+            <input class="regist" type="submit" value="logout" id="logout" >
             <input type="hidden" value="go_logout" name="submit_logout_page" >
             {% csrf_token %}
-        </form></p>
+        </p>
+</form>
 {% else %}
 
         <form method="POST" action="/accounts/registration/" style="float:right;">
-            <input type="submit" value="signup" id="registration" >
+            <input class="regist" type="submit" value="signup" id="registration" >
             <input type="hidden" value="go_regis" name="submit_regis_page" >
             {% csrf_token %}
         </form>
         <form method="POST" action="/accounts/login/" style="float:right;">
             Welcome, new user. Please 
-            <input type="submit" value="login" id="login" >
+            <input class="regist" type="submit" value="login" id="login" >
             <input type="hidden" value="go_login" name="submit_login_page" >
             {% csrf_token %}
             or &nbsp;
         </form>
-{% endif %}
+{% endif %}</div>
+
+<!-- Header -->
+	<div id="header">
+
 	<!-- Sub-menu -->
 		<div id="sub-navigation">
 			<div class="container">
@@ -107,39 +109,39 @@ window.onclick = function(e) {
         <form method="POST" action="/">
 <table>
 <tr><td>Name<h style="color:red">*</h>:   
-</td><td><input name="name_text" id="id_new_name" placeholder="New Movie Name" required
+</td><td><input style="width:360px;"class="addm" name="name_text" id="id_new_name" placeholder="New Movie Name" required
     oninvalid="this.setCustomValidity('Please Enter the movie name')"
     oninput="setCustomValidity('')"/>
 </td></tr>
 
 <tr><td>
-<div class="cleaner h15"></div>  
-</td><td><div class="cleaner h15"></div> 
+<div class="cleaner h10"></div>  
+</td><td><div class="cleaner h10"></div> 
 </td></tr>
 
 <tr><td>
 Release&nbsp;Date:&nbsp;&nbsp;&nbsp; 
-</td><td><input name="date_text" id="id_new_date" placeholder="Add Release Date">
+</td><td><input style="width:160px;" class="addm" name="date_text" id="id_new_date" placeholder="Add Release Date">
 </td></tr>
 
 <tr><td>
-<div class="cleaner h20"></div>  
-</td><td><div class="cleaner h20"></div> 
+<div class="cleaner h10"></div>  
+</td><td><div class="cleaner h10"></div> 
 </td></tr>
 
 <tr><td>
 Lead&nbsp;Actors:    
-</td><td><input name="actor_text" id="id_new_actor" placeholder="Add Lead Actors" />
+</td><td><input style="width:170px;" class="addm" name="actor_text" id="id_new_actor" placeholder="Add Lead Actors" />
 </td></tr>
 
 <tr><td>
-<div class="cleaner h15"></div>  
-</td><td><div class="cleaner h15"></div> 
+<div class="cleaner h10"></div>  
+</td><td><div class="cleaner h10"></div> 
 </td></tr>
 
 <tr><td>
 Director:    
-</td><td><input name="director_text" id="id_new_director" placeholder="Add Director" />
+</td><td><input style="width:170px;" class="addm" name="director_text" id="id_new_director" placeholder="Add Director" />
 </td></tr>
 
 <tr><td>
@@ -149,7 +151,7 @@ Director:
 
 <tr><td>
 Genre:    
-</td><td><input name="genre_text" id="id_new_genre" placeholder="Add Type Of Movie" />
+</td><td><input class="addm" name="genre_text" id="id_new_genre" placeholder="Add Type Of Movie" />
 </td></tr>
 
 <tr><td>
@@ -159,47 +161,60 @@ Genre:
 
 <tr><td>
 Detail:    
-</td><td><br><textarea name="detail_text" id="id_new_detail" placeholder="Add Details" rows="7" cols="70"  /></textarea>
+</td><td><textarea class="addm" style="width:450px; resize:none;" name="detail_text" id="id_new_detail" placeholder="Tell about story" rows="7" cols="70"/></textarea>
 </td></tr>
 
 <tr><td>
-<div class="cleaner h20"></div>  
-</td><td><div class="cleaner h20"></div> 
+<div class="cleaner h10"></div>  
+</td><td><div class="cleaner h10"></div> 
 </td></tr>
 
 <tr><td>
 Image&nbsp;URL:    
-</td><td><input name="poster_url" id="id_new_pic" placeholder="Add Poster URL" />
+</td><td><input style="width:450px;" class="addm" name="poster_url" id="id_new_pic" placeholder="Add url format .jpg , .png , .gif"/>
 </td></tr>
 
 <tr><td>
-<div class="cleaner h15"></div>  
-</td><td><div class="cleaner h15"></div> 
+<div class="cleaner h10"></div>  
+</td><td><div class="cleaner h10"></div> 
+</td></tr>
+
+<tr><td>
+Picture Detail:  
+</td><td><textarea class="addm" style="width:450px; height:65px; resize:none;" name="pic_url" id="id_new_picture" placeholder="Add Picture url use spacebar for many picture eg. www.1.jpg www.2.jpg"  rows="7" cols="70" /></textarea>
+</td></tr>
+
+<tr><td>
+<div class="cleaner h10"></div>  
+</td><td><div class="cleaner h10"></div> 
 </td></tr>
 
 <tr><td>
 Clip&nbsp;URL:    
-</td><td><input name="clip_url" id="id_new_clip" placeholder="Add Clip URL" />
+</td><td><input style="width:450px;" class="addm"  name="clip_url" id="id_new_clip" placeholder="Trailer clip eg. https://www.youtube.com/embed/fis-9Zqu2Ro" />
 </td></tr>
 
 <tr><td>
-pic detail:    
-</td><td><br><textarea name="pic_url" id="id_new_picture" placeholder="Add Picture url use spacebar  "  rows="7" cols="70" /></textarea>
+<div class="cleaner h10"></div>  
+</td><td><div class="cleaner h10"></div> 
 </td></tr>
 
-
-</table>
-            <input type="submit" value="Add Detail"     class="btn2"   id="submit_data"  >
-            <input type="hidden" value="submit_send_data"  name="Add_send_Detail">
-	    <br>
-            {% csrf_token %}
-        </form>
-        <form method="POST" action="/">
-            <input type="submit" value="< Back"  class="btn2" id="back" >
+<tr><td>
+<form method="POST" action="/">
+            <input type="submit" value="< Back" class="rate" id="back" >
             <input type="hidden" value="Back_send" name="back_send" >
 	    <br>
             {% csrf_token %}
-        </form>
+        </form> 
+</td><td>  <input type="submit" value="Add Moive" class="rate" id="submit_data"  style="float:right;">
+            <input type="hidden" value="submit_send_data"  name="Add_send_Detail">
+	    <br>
+            {% csrf_token %} 
+</td></tr>
+
+</table>
+            
+        
 </center>
 {% else %}
 <br><br><br><br><br><br><br>
@@ -212,7 +227,8 @@ pic detail:
 
 
 </div>
-
+<br><br>
+<footer>Copyright &copy; Cpr.E KMUTNB</footer> 
 <!-- end Shell -->
     </body>
 </html>

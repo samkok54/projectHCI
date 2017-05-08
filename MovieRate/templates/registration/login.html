@@ -8,10 +8,13 @@
     <title>Login</title>
     <link href="/static/bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <link href="/static/base.css" rel="stylesheet">
+    <link href="/static/style/style.css" rel="stylesheet" media="screen">
+<link rel="shortcut icon" type="image/png" href="https://cdn3.iconfinder.com/data/icons/movie-video/512/Icon_16-512.png"/>
 </head>
 
 <body>
-<br><br><br><br><br><br><br><br>
+<div class="logo" style="background-position: center; ">&nbsp;</div>
+<br><br><br>
 <div class="container">
 
     <div class="row">
@@ -24,7 +27,7 @@
                 {% csrf_token %}
 
 <table class="table">
-<tr><td>
+<tr><td class="col-md-4">
 Username<h style="color:red">*</h>:
 </td><td>
 <input type="username" name="username" id="id_username" placeholder=""  required
@@ -41,18 +44,18 @@ Password<h style="color:red">*</h>:
        class="form-control input-sm"/>
 </td></tr>
 <tr><td colspan="2">
-                <input type="submit" value="Log in" id="login" style="float:center;"/>
+                <input class="rate" type="submit" value="Log in" id="login" style="float:right;"/>
                 <input type="hidden" name="send_login" value="send" />
                 </form>
 
-        <form method="POST" action="/" style="float:right;">
-            <input type="submit" value="Back" id="back" >
+    <form method="POST" action="/" style="float:left;">
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input class="rate" type="submit" value="Back" id="back" >
             <input type="hidden" value="Back_send" name="back_send" >
 	    <br>
             {% csrf_token %}
         </form>
 </td></tr>
-</table>
+</table>    
             </div>
         </div>
     </div>

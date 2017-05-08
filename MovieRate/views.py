@@ -39,11 +39,21 @@ def home_page(request):
         if request.GET['search_box'] != '':
             search = request.GET['search_box']
             for movie in movies:
-                 if movie.name.lower().find(search.lower()) != -1:
+                 checkcount=0
+                 if movie.name.lower().find(search.lower()) != -1: 
+                     checkcount=1
+                 elif movie.detail.lower().find(search.lower()) != -1:
+                     checkcount=1
+                 elif movie.director.lower().find(search.lower()) != -1:
+                     checkcount=1
+                 elif movie.lead_actors.lower().find(search.lower()) != -1:
+                     checkcount=1
+                 elif movie.genre.lower().find(search.lower()) != -1:
+                     checkcount=1
+                 if checkcount==1: 
                      movies_s.append(movie.id)
                      str_f=1
         if str_f != 1: str_f=2
-  
             
 
     if (request.method == 'POST' and request.POST.get(
@@ -123,6 +133,8 @@ def movie_detail_page(request, movie_id):
     movie_ = Movie.objects.get(id=movie_id)
     picdet = []
     details = movie_.detail.split("\n")
+
+
     if movie_.picture != '':
        picdet=movie_.picture.split(" ")
        
@@ -160,8 +172,28 @@ def movie_detail_page(request, movie_id):
         comment_.like = add_like
         comment_.save()
         return redirect('/movie_detail/%d' % int(movie_id))
+
+    if(request.method == 'POST' and request.POST.get(
+      'send_unlike', '') == 'submit_unlike'):
+        id_comment = request.POST['id_send_unlike']
+        comment_ = Comment.objects.get(id=id_comment)
+        add_unlike = int(comment_.unlike) + 1
+        comment_.unlike = add_unlike
+        comment_.save()
+        return redirect('/movie_detail/%d' % int(movie_id))
+
+    paginator = Paginator(comments, 5) # Show 25 contacts per page
+    page = request.GET.get('page')
+    try:
+        contacts = paginator.page(page)
+    except PageNotAnInteger:
+        # If page is not an integer, deliver first page.
+        contacts = paginator.page(1)
+    except EmptyPage:
+        # If page is out of range (e.g. 9999), deliver last page of results.
+        contacts = paginator.page(paginator.num_pages) 
     return render(request, 'detail.html', {
-                  'movie_': movie_, 'comments': comments, 'picdet':picdet , 'details':details})
+                  'movie_': movie_, 'comments': comments, 'picdet':picdet , 'details':details,'contacts':contacts})
 
 
 def login_page(request):
@@ -493,20 +525,14 @@ def most_comment(request):
     return render(request, 'mostcomment.html', {
         'movies': movies, 'IDcomm': IDcomm , 'contacts':contacts
                   })
-def listing(request):
-    contact_list = Movie.objects.all()
-    paginator = Paginator(contact_list, 20) # Show 25 contacts per page
-    page = request.GET.get('page')
-    try:
-        contacts = paginator.page(page)
-    except PageNotAnInteger:
-        # If page is not an integer, deliver first page.
-        contacts = paginator.page(1)
-    except EmptyPage:
-        # If page is out of range (e.g. 9999), deliver last page of results.
-        contacts = paginator.page(paginator.num_pages)
-
-    return render(request, 'list.html', {'contacts':contacts})
+def listing(request,search):
+    movies = Movie.objects.all()
+    for movie in movies:
+         if movie.name.lower().find(search.lower()) != -1:
+                movies_s.append(movie.id)
+                str_f=1
+    if str_f != 1: str_f=2
+    return render(request, 'list.html', {'str_f':str_f,'movies_s':movies_s,'movies':movies})
 
 #def search_titles(request):
  #   if request.method == "POST" :

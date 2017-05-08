@@ -1,30 +1,33 @@
+<!DOCTYPE html>
 <html>
     <head>
         <title>SKIN-APP</title>
 <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
     <link href="/static/style/style.css" rel="stylesheet" media="screen">
     <link href="/static/style/dropdown.css" rel="stylesheet" media="screen">
-	<script type="text/javascript" src="js/jquery-1.4.2.min.js"></script>
-	<script type="text/javascript" src="js/jquery-func.js"></script>
+
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<script data-require="jquery@*" data-semver="2.1.4" src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
+<link data-require="sweet-alert@*" data-semver="0.4.2" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/0.4.2/sweet-alert.min.css" /> 
+<script data-require="sweet-alert@*" data-semver="0.4.2" src="//cdnjs.cloudflare.com/ajax/libs/sweetalert/0.4.2/sweet-alert.min.js"></script>
+<link rel="shortcut icon" type="image/png" href="https://cdn3.iconfinder.com/data/icons/movie-video/512/Icon_16-512.png"/>
     </head>
     <body>
 <!-- Shell -->
 <div id="shell">
- <div class="logo">&nbsp;<br><br><br>{% if user.is_authenticated %}
+<div class="logo">&nbsp;<br><br><br>{% if user.is_authenticated %}
         
-        <form method="POST" action="/">
-            <p align="right">Welcome, {{ user.get_username }}.
+     <form method="POST" action="/">
+         <p align="right">Welcome, {{ user.get_username }}.
 {% if user.is_superuser %}
 <span class="tooltip"><a href="/add_movie"><span class="fa fa-plus btn3" aria-hidden="true" ></span></a>
   <span class="tooltiptext">Add movies</span>
 </span>
 &nbsp;
 
-
-            
-           {% endif %}
-            <input type="submit" value="logout" id="logout" >
+   
+     {% endif %}
+            <input class="regist" type="submit" value="logout" id="logout" >
             <input type="hidden" value="go_logout" name="submit_logout_page" >
             {% csrf_token %}
         </p>
@@ -32,13 +35,13 @@
 {% else %}
 
         <form method="POST" action="/accounts/registration/" style="float:right;">
-            <input type="submit" value="signup" id="registration" >
+            <input class="regist" type="submit" value="signup" id="registration" >
             <input type="hidden" value="go_regis" name="submit_regis_page" >
             {% csrf_token %}
         </form>
         <form method="POST" action="/accounts/login/" style="float:right;">
             Welcome, new user. Please 
-            <input type="submit" value="login" id="login" >
+            <input class="regist" type="submit" value="login" id="login" >
             <input type="hidden" value="go_login" name="submit_login_page" >
             {% csrf_token %}
             or &nbsp;
@@ -70,16 +73,6 @@
 </div>
 	<!-- end Header -->
 <br><br>
-
-
-
-<script type="text/javascript"> 
-
-function changeNavigation(id) 
-
-{document.getElementById('main').innerHTML=document.getElementById(id).innerHTML} 
-
-</script>
 
 
 
@@ -178,16 +171,16 @@ function changeNavigation(id)
 
 <span class="fa fa-comments icon2" aria-hidden="true" >&nbsp;{{ movie.countcom }}</span>
 
-             {% if user.is_superuser %}
-
-                  <FORM method="POST" action="/" align="right">
-                     <INPUT type="image" src="http://www.freeiconspng.com/uploads/remove-icon-png-25.png" width=15px height=15px alt="Delete"  id="button_d" value="delete" OnClick="return confirm('Do you want to delete {{ movie.name }}?')"  > 
-                     <INPUT Type = "hidden" value ="delete" name = 'delete'>
-                     <INPUT Type = "hidden" value ="{{ movie.id }}" name = 'id_delete'>
+              {% if user.is_superuser %}
+                  <FORM method="POST" action="/" align="right" >
+                      <INPUT type="image" src="http://www.freeiconspng.com/uploads/remove-icon-png-25.png" width=15px height=15px alt="Delete"   value="delete" OnClick="return confirm('Do you want to delete {{ movie.name }}?')"  >  
+                     <input type = "hidden" value ="delete" name = 'delete'>
+                     <input type = "hidden" value ="{{ movie.id }}" name = 'id_delete'>
                      {% csrf_token %}
                  </FORM>
 
-                 {% endif %}
+                 {% endif %}  
+
 <br><br>
                 </td>
            
@@ -232,5 +225,9 @@ function changeNavigation(id)
 <footer>Copyright &copy; Cpr.E KMUTNB</footer>
 </div>
 <!-- end Shell -->
+
+
     </body>
+
+
 </html>

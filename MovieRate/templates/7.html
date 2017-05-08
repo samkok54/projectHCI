@@ -8,17 +8,15 @@
 	<script type="text/javascript" src="js/jquery-1.4.2.min.js"></script>
 	<script type="text/javascript" src="js/jquery-func.js"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="shortcut icon" type="image/png" href="https://cdn3.iconfinder.com/data/icons/movie-video/512/Icon_16-512.png"/>
     </head>
 
     <body>
 <!-- Shell -->
 <div id="shell">
-                <h1>&nbsp;SKIN-APP&nbsp;<span class="fa fa-magnet" aria-hidden="true"></span></h1>
-
-<!-- Header -->
-	<div id="header">
-		
-{% if user.is_authenticated %}
+                <div class="logo">&nbsp;<br><br><br>
+       {% if user.is_authenticated %}
+        
         <form method="POST" action="/">
             <p align="right">Welcome, {{ user.get_username }}.
 {% if user.is_superuser %}
@@ -30,25 +28,31 @@
 
             
            {% endif %}
-            <input type="submit" value="logout" id="logout" >
+            <input class="regist" type="submit" value="logout" id="logout" >
             <input type="hidden" value="go_logout" name="submit_logout_page" >
             {% csrf_token %}
-        </form></p>
+        </p>
+</form>
 {% else %}
 
         <form method="POST" action="/accounts/registration/" style="float:right;">
-            <input type="submit" value="signup" id="registration" >
+            <input class="regist" type="submit" value="signup" id="registration" >
             <input type="hidden" value="go_regis" name="submit_regis_page" >
             {% csrf_token %}
         </form>
         <form method="POST" action="/accounts/login/" style="float:right;">
             Welcome, new user. Please 
-            <input type="submit" value="login" id="login" >
+            <input class="regist" type="submit" value="login" id="login" >
             <input type="hidden" value="go_login" name="submit_login_page" >
             {% csrf_token %}
             or &nbsp;
         </form>
-{% endif %}
+{% endif %}</div>
+
+
+<!-- Header -->
+	<div id="header">
+		
 		<!-- Sub-menu -->
 		<div id="sub-navigation">
 			<div class="container">

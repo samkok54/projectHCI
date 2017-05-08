@@ -1,6 +1,7 @@
+<!DOCTYPE html>
 <html>
     <head>
-        <title>Movie Rate App</title>
+        <title>SKIN-APP</title>
 <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <link href="/static/style/style.css" rel="stylesheet" media="screen">
@@ -8,6 +9,7 @@
     <link href="/static/style/input.css" rel="stylesheet" media="screen">
     <link href="/static/style/dropdown.css" rel="stylesheet" media="screen">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="shortcut icon" type="image/png" href="https://cdn3.iconfinder.com/data/icons/movie-video/512/Icon_16-512.png"/>
 <meta http-equiv="content-language" content="th" />
 <meta name="revisit-after" content="1 days" />
 <meta name="robots" content="index, follow" />
@@ -109,12 +111,12 @@ function showSlides() {
 
 <!-- Shell -->
 <div id="shell">
-<!-- Header -->
-	<div id="header">
-	  {% if user.is_authenticated %}
+ <div class="logo">&nbsp;<br><br><br>
+      {% if user.is_authenticated %}
+        
         <form method="POST" action="/">
-            <p align="right">Welcome, {{ user.get_username }}.&nbsp;
-           {% if user.is_superuser %}
+            <p align="right">Welcome, {{ user.get_username }}.
+{% if user.is_superuser %}
 <span class="tooltip"><a href="/add_movie"><span class="fa fa-plus btn3" aria-hidden="true" ></span></a>
   <span class="tooltiptext">Add movies</span>
 </span>
@@ -123,31 +125,29 @@ function showSlides() {
 
             
            {% endif %}
-
-            <input type="submit" value="logout" id="logout" >
+            <input class="regist" type="submit" value="logout" id="logout" >
             <input type="hidden" value="go_logout" name="submit_logout_page" >
-
             {% csrf_token %}
-
-
-
-            </p>
-        </form>
+        </p>
+</form>
 {% else %}
+
         <form method="POST" action="/accounts/registration/" style="float:right;">
-            <input type="submit" value="signup" id="registration" >
+            <input class="regist" type="submit" value="signup" id="registration" >
             <input type="hidden" value="go_regis" name="submit_regis_page" >
             {% csrf_token %}
         </form>
         <form method="POST" action="/accounts/login/" style="float:right;">
             Welcome, new user. Please 
-            <input type="submit" value="login" id="login" >
+            <input class="regist" type="submit" value="login" id="login" >
             <input type="hidden" value="go_login" name="submit_login_page" >
             {% csrf_token %}
             or &nbsp;
         </form>
-{% endif %}
-
+{% endif %}</div>
+<!-- Header -->
+	<div id="header">
+	 
 	<!-- Sub-menu -->
 		<div id="sub-navigation">
 			<div class="container">
@@ -188,9 +188,9 @@ window.onclick = function(e) {
 <div class="banner">
     	<div class="banner_block">
                 <ul class="banner_pad">
-                		                        <li><a target="_new" href="/news/1/"><img src="http://filmsoon.com/files/banner/0741a0af9dfa667a0aa2b06f959ba2b8.jpg" alt="เจมส์ กันน์เริ่มเขียนบท Guardians of the Galaxy Vol. 3 แล้ว"></a></li>
+                		                        <li><a target="_new" href="/news/1/"><img src="http://filmsoon.com/files/banner/0741a0af9dfa667a0aa2b06f959ba2b8.jpg" alt="เจมส์ กันน์เริ่มเขียนบท GOTG Vol. 3"></a></li>
                                                 <li><a target="_new" href="/news/2/"><img src="http://filmsoon.com/files/banner/07ff0187c164efd0bef6ad9a6eb12132.jpg" alt="ริดลี่ย์ สก็อตต์เผยว่าโปรเจค Alien 5 ถูกพับโครงการไปแล้ว"></a></li>
-                                                <li><a target="_new" href="/news/9/"><img src="http://filmsoon.com/files/banner/721972c3740aa2fa77f97a8a6ede0683.jpg" alt="ยูนิเวอร์แซลเตรียมสร้างภาคแยก Fast & Furious เดอะ ร็อคและเจสัน สเตแธมแสดงนำ"></a></li>
+                                                <li><a target="_new" href="/news/9/"><img src="http://filmsoon.com/files/banner/721972c3740aa2fa77f97a8a6ede0683.jpg" alt="ยูนิเวอร์แซลเตรียมสร้างภาคแยก Fast & Furious"></a></li>
                                                 <li><a target="_new" href="/news/10/"><img src="http://filmsoon.com/files/banner/c4ddcad27e56d143bf81dfce3fd92b78.jpg" alt="เดวิดฟินเชอร์และแบรด พิตต์กลับมาร่วมงานกันอีกครั้งใน World War Z 2"></a></li>
                                         </ul>
         </div>
@@ -220,7 +220,9 @@ $('.banner_pad').pgwSlider(
 {% for movie in movies %}
 {% for movie_s in movies_s %}
 {% if movie_s == movie.id%} 
-  <a class="nameM" href="/movie_detail/{{ movie.id }}/">{{ movie.name }} </a>
+ <span class="tooltip"> <a class="nameS" href="/movie_detail/{{ movie.id }}/">{{ movie.name }} </a>
+  <span class="tooltiptextS">{{ movie.name }}</span>
+</span>
 
 {% endif %}
 {% endfor %}
@@ -279,8 +281,7 @@ Read More...</a></p></td></tr>
 </td><td>&nbsp;&nbsp;&nbsp;&nbsp;</td><td>
 
   <a href="/news/5/" style="text-decoration:none"><h2>ตัวอย่างแรกของหนังสยองขวัญรีเมค IT</h2></a>
-  <p>เมื่อคืนนี้ทางนิวไลน์ ซีนีม่า ได้ออนไลน์ตัวอย่างซับไทยของหนังสยองขวัญรีเมค IT ออกมาทางยูทูปครับ ทีแรกผมก็ไม่ได้คิดอะไร กะว่าจะกดดูแบบผ่านๆ แต่เมื่อได้ดูตัวอย่างแล้วถึงกับตาสว่าง ขนลุกและรู้สึกหลอนก่อนนอนไปเลย เพราะเดิมทีผมไม่รู้จักหนังเรื่องนี้ในฉบับเก่า เห็นแค่ใบปิดผ่านๆและมันดูตลกเอามากๆ<a href="/news/5/">
-Read More...</a></p></td></tr>
+  <p>เมื่อคืนนี้ทางนิวไลน์ ซีนีม่า ได้ออนไลน์ตัวอย่างซับไทยของหนังสยองขวัญรีเมค IT ออกมาทางยูทูปครับ ทีแรกผมก็ไม่ได้คิดอะไร กะว่าจะกดดูแบบผ่านๆ แต่เมื่อได้ดูตัวอย่างแล้วถึงกับตาสว่าง ขนลุกและรู้สึกหลอนก่อนนอนไปเลย เพราะเดิมทีผมไม่รู้จักหนังเรื่องนี้ในฉบับเก่า เห็นแค่ใบปิดผ่านๆและมันดูตลกเอามากๆ <a href="/news/5/">Read More...</a></p></td></tr>
 <tr><td>&nbsp;&nbsp;</td><td>&nbsp;&nbsp;</td></tr>
 
 <tr><td>

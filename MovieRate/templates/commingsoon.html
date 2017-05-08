@@ -1,9 +1,11 @@
+<!DOCTYPE html>
+
 <html>
-    <head>
-        <title>Movie Rate App</title>
+    <head><title>SKIN-APP</title>
 <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
     <link href="/static/style/style.css" rel="stylesheet" media="screen">
     <link href="/static/style/dropdown.css" rel="stylesheet" media="screen">
+<link rel="shortcut icon" type="image/png" href="https://cdn3.iconfinder.com/data/icons/movie-video/512/Icon_16-512.png"/>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <script type="text/javascript" src="js/jquery-1.4.2.min.js"></script>
 	<script type="text/javascript" src="js/jquery-func.js"></script>
@@ -12,11 +14,9 @@
 
 <!-- Shell -->
 <div id="shell">
-        <h1>Movie Rate : Comming soon</h1>
-<!-- Header -->
-	<div id="header">
-		
-{% if user.is_authenticated %}
+        <div class="logo">&nbsp;<br><br><br>
+       {% if user.is_authenticated %}
+        
         <form method="POST" action="/">
             <p align="right">Welcome, {{ user.get_username }}.
 {% if user.is_superuser %}
@@ -28,25 +28,30 @@
 
             
            {% endif %}
-            <input type="submit" value="logout" id="logout" >
+            <input class="regist" type="submit" value="logout" id="logout" >
             <input type="hidden" value="go_logout" name="submit_logout_page" >
             {% csrf_token %}
-        </form></p>
+        </p>
+</form>
 {% else %}
 
         <form method="POST" action="/accounts/registration/" style="float:right;">
-            <input type="submit" value="signup" id="registration" >
+            <input class="regist" type="submit" value="signup" id="registration" >
             <input type="hidden" value="go_regis" name="submit_regis_page" >
             {% csrf_token %}
         </form>
         <form method="POST" action="/accounts/login/" style="float:right;">
             Welcome, new user. Please 
-            <input type="submit" value="login" id="login" >
+            <input class="regist" type="submit" value="login" id="login" >
             <input type="hidden" value="go_login" name="submit_login_page" >
             {% csrf_token %}
             or &nbsp;
         </form>
-{% endif %}
+{% endif %}</div>
+
+<!-- Header -->
+	<div id="header">
+	
 		<!-- Sub-menu -->
 		<div id="sub-navigation">
 			<div class="container">
@@ -162,8 +167,8 @@
 
                  {% if user.is_superuser %}
 
-                  <FORM method="POST" action="/">
-                     <INPUT Type="submit" VALUE="delete" class="btn2" id="button_d" OnClick="return confirm('Do you want to delete {{ movie.name }}?')" >      
+                  <FORM method="POST" action="/" align="right">
+                    <INPUT type="image" src="http://www.freeiconspng.com/uploads/remove-icon-png-25.png" width=15px height=15px alt="Delete"  id="button_d" value="delete" OnClick="return confirm('Do you want to delete {{ movie.name }}?')"  >   
                      <INPUT Type = "hidden" value ="delete" name = 'delete'>
                      <INPUT Type = "hidden" value ="{{ movie.id }}" name = 'id_delete'>
                      {% csrf_token %}
